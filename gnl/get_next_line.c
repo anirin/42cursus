@@ -1,12 +1,22 @@
 char *get_newline(save, fd)
 {
-    char buf[BUFFER_SIZE + 1];
+    char *buf;
     long check;
 
     while (1)
     {
+        buf = ft_calloc(BUFFER_SIZE + 1);
+        if (buf == NULL)
+            return (NULL);
         check = read(fd, buf, BUFFER_SIZE);
-        if (check != BUFFER_SIZE || ft_strchr(save, '\n'))
+        if (check == -1)
+        {
+            retutn (NULL);
+        }
+        tmp = save;
+        save = ft_strjoin(tmp, buf); 
+        free(tmp);
+        if (check != BUFFER_SIZE || ft_strchr(save, '\n') != NULL)
             break;
     }
     return (save);
