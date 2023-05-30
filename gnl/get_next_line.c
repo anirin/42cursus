@@ -4,12 +4,14 @@ char	*ft_gnljoin(char const *s1, char const *s2, int check)
 {
 	char	*result;
 	size_t	s1_len;
-	size_t	s2_len;
 
 	if (s1 == NULL)
-		s1_len = 0;
-	else
-		s1_len = ft_strlen(s1);
+    {
+        s1 = ft_calloc(1, 1);
+        if (s1 == NULL)
+            return (NULL);
+    }
+	s1_len = ft_strlen(s1);
 	if (s2 == NULL)
 		check = 0;
 	if (s1_len == 0 && check == 0)
@@ -22,21 +24,28 @@ char	*ft_gnljoin(char const *s1, char const *s2, int check)
 	return (result);
 }
 
-char *get_newline(save, fd)
+char *get_newline(char *save, int fd)
 {
     char buf[BUFFER_SIZE + 1];
     long check;
+    char *tmp;
 
+    check = 0;
     while (1)
     {
-        check = read(fd, buf, BUFFER_SIZE);
-        if (check == -1)
-            retutn (NULL);
-        tmp = save;
-        save = ft_gnljoin(tmp, buf, check); 
-        free(tmp);
-        if (save == NULL)
-            return (NULL);
+        if (save == NULL || strchr(save, '\n') == NULL)
+        {
+            check = read(fd, buf, BUFFER_SIZE);
+            //printf("check=%ld, buf=%s, save=%s\n",check, buf, save);
+            if (check == -1)
+                return (NULL);
+            buf[check] = '\0';
+            tmp = save;
+            save = ft_gnljoin(tmp, buf, check); 
+            free(tmp);
+            if (save == NULL)
+                return (NULL);
+        }
         if (check != BUFFER_SIZE || ft_strchr(save, '\n') != NULL)
             break;
     }
@@ -47,15 +56,21 @@ char *get_next_line(int fd)
 {
     static char *save;
     char *tmp;
+    char *newline;
 
     save = get_newline(save, fd);
-    if (ft_strchr(save, '\n'))
+    if (save == NULL)
+        return (NULL);
+    if (ft_strchr(save, '\n') == NULL) //file end
     {
-        return (save);
+        newline = ft_substr(save, 0, ft_strlen(save));
+        free(save);
+        save = NULL;
+        return (newline);
     }
     tmp = save;
     newline = ft_substr(tmp, 0, ft_strchr(tmp, '\n') - tmp);
-    save = ft_substr(tmp, ft_strchr(tmp, '\n') - tmp, ft_strlen(tmp)); 
+    save = ft_substr(tmp, ft_strchr(tmp, '\n') - tmp + 1, ft_strlen(tmp)); 
     free(tmp);
     return (newline);
 }

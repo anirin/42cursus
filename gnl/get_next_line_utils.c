@@ -4,6 +4,8 @@ size_t	ft_strlen(const char *str)
 {
 	size_t	n;
 
+	if (str == NULL)
+		return (0); //add
 	n = 0;
 	while (*str != 0)
 	{
@@ -11,6 +13,21 @@ size_t	ft_strlen(const char *str)
 		str++;
 	}
 	return (n);
+}
+
+void	*ft_memset(void *buf, int ch, size_t n)
+{
+	size_t			i;
+	unsigned char	*p;
+
+	p = buf;
+	i = 0;
+	while (i < n)
+	{
+		*p++ = (unsigned char)ch;
+		i++;
+	}
+	return (buf);
 }
 
 void	*ft_calloc(size_t num, size_t size)
