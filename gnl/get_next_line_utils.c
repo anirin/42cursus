@@ -26,6 +26,19 @@ void	*ft_calloc(size_t num, size_t size)
 	return (ret);
 }
 
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s != 0)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if (c == 0)
+		return ((char *)s);
+	return (NULL);
+}
+
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
@@ -70,26 +83,4 @@ size_t	ft_strlcat(char *dest, const char *src, size_t size)
 	}
 	*dest = '\0';
 	return (s_len + d_len);
-}
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char	*result;
-	size_t	s1_len;
-	size_t	s2_len;
-
-	if (s1 == NULL && s2 == NULL)
-		return (NULL);
-	if (s1 == NULL)
-		return ((char *)s2);
-	if (s2 == NULL)
-		return ((char *)s1);
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	result = ft_calloc(s1_len + s2_len + 1, 1);
-	if (result == NULL)
-		return (NULL);
-	ft_strlcat(result, (char *)s1, s1_len + 1);
-	ft_strlcat(result, (char *)s2, s1_len + s2_len + 1);
-	return (result);
 }
