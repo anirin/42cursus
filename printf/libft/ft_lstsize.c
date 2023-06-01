@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/27 16:28:34 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/29 16:26:48 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+int	ft_lstsize(t_list *lst)
 {
-	int	len;
+	int	count;
 
-	len = 1;
-	if (num < 0)
+	if (lst == NULL)
+		return (0);
+	count = 0;
+	while (lst != NULL)
 	{
-		num *= -1;
-		len++;
+		lst = lst->next;
+		count++;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	return (count);
 }

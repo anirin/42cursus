@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/17 12:45:52 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/23 16:38:37 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+int	ft_memcmp(const void *buf1, const void *buf2, size_t n)
 {
-	int	len;
+	const unsigned char	*p1;
+	const unsigned char	*p2;
 
-	len = 1;
-	if (num < 0)
+	p1 = buf1;
+	p2 = buf2;
+	while (n--)
 	{
-		num *= -1;
-		len++;
+		if (*p1 != *p2)
+			return (*p1 - *p2);
+		p1++;
+		p2++;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	return (0);
 }

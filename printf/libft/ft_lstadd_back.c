@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/20 16:49:33 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/29 22:04:21 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int	len;
+	t_list	*last;
 
-	len = 1;
-	if (num < 0)
+	if (lst == NULL || new == NULL)
+		return ;
+	if (*lst == NULL)
 	{
-		num *= -1;
-		len++;
+		*lst = new;
+		return ;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	last = ft_lstlast(*lst);
+	if (last == NULL)
+		return ;
+	last->next = new;
 }

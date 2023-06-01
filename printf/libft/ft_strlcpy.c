@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/03/14 20:27:54 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/22 17:37:13 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	int	len;
+	size_t	i;
+	size_t	len;
 
-	len = 1;
-	if (num < 0)
+	i = 0;
+	len = ft_strlen((const char *)src);
+	if (size == 0)
+		return (len);
+	while (i < len && i < size - 1)
 	{
-		num *= -1;
-		len++;
+		dest[i] = src[i];
+		i++;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
+	if (i < size)
+		dest[i] = 0;
 	return (len);
 }

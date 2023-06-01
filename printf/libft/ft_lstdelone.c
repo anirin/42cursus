@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/27 19:09:09 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/29 16:27:48 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	int	len;
-
-	len = 1;
-	if (num < 0)
-	{
-		num *= -1;
-		len++;
-	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	if (lst == NULL || del == NULL)
+		return ;
+	del(lst->content);
+	free(lst);
 }

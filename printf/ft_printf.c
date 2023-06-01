@@ -6,102 +6,68 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:24:30 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 11:34:19 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/01 23:24:11 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libc.h>
+#include "ft_printf.h"
+#include "libft.h"
 
-void print(const char* format, ...);
-int c_case(va_list args);
-int d_case(va_list args);
-int s_case(va_list args);
-int lf_case(va_list args);
-int ft_putchar(char c);
-
-int main(void)
+format_func	*set_func(void)
 {
-    print("%d-%d-%c-%d", 10, 20, 'x', 30);
-    print("%s-%s", "abc", "def");
-    print("%d-%f-%c", 50, 3.3, 'Z');
+	format_func	*case_func;
+
+	case_func = malloc(sizeof(case_func) * 9);
+	case_func[0] = c_format;
+	case_func[1] = s_format;
+	case_func[2] = p_format;
+	case_func[3] = d_format;
+	case_func[4] = i_format;
+	case_func[5] = u_format;
+	case_func[6] = lo_x_format;
+	case_func[7] = up_x_format;
+	case_func[8] = per_format;
+	return (case_func);
 }
 
-int get_func(char c)
+int	get_func(char c)
 {
-    char format[5] = "csdf";
-    int  i;
+	char	format[9];
+	int		i;
 
-    i = 0;
-    while(format[i] != '\0') 
-    {
-        if (format[i] == c)
-            return(i);
-        i++; 
-    }
-    return(-1);
+	format[9] = "cspdiuxX%";
+	i = 0;
+	while (format[i] != '\0')
+	{
+		if (format[i] == c)
+			return (i);
+		i++;
+	}
+	return (-1);
 }
 
-void print(const char* format, ...)
+int	ft_printf(const char *format, ...)
 {
-    va_list args;
-    va_start(args, format);
+	va_list		args;
+	size_t		count;
+	format_func	*case_func;
 
-    int (*case_func[4])(va_list args);
-
-    case_func[0] = c_case;
-    case_func[1] = s_case;
-    case_func[2] = d_case;
-    case_func[3] = lf_case;
-    
-    while (*format != '\0')
-    {
-    //for (const char* p = format; *p != '\0'; ++p) {
-        if (*format == '%' && get_func(*(format + 1)) != -1)
-        {
-            format++;
-            case_func[get_func(*format)](args);
-            format++;
-        }
-        ft_putchar(*format);
-        format++;
-    }
-    printf("\n");
-
-    va_end(args);
-}
-
-int ft_putchar(char c)
-{
-    printf("%c", c);
-    return 0; 
-}
-
-int c_case(va_list args)
-{
-    printf("%c", va_arg(args, char));
-    return 0;
-}
-
-int d_case(va_list args)
-{
-    printf("%d", va_arg(args, int));
-    return 0;
-}
-
-int lf_case(va_list args)
-{
-    printf("%lf", va_arg(args, double));
-    return 0;
-}
-
-int s_case(va_list args)
-{
-    printf("%s", va_arg(args, char *));
-    return 0;
-}
-
-int s_case(va_list args)
-{
-    printf("%s", va_arg(args, char *));
-    return 0;
+	va_start(args, format);
+	case_func = set_func();
+	count = 0;
+	while (*format != '\0')
+	{
+		if (*format == '%' && get_func(*(format + 1)) != -1)
+		{
+			format++;
+			count += case_func[get_func(*format)](args);
+			format++;
+		}
+		ft_putchar_fd(*format, FD);
+		format++;
+		count++;
+	}
+	va_end(args);
+	free(case_func);
+	return (count);
 }

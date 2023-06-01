@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/17 10:46:04 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/22 22:09:26 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+void	*ft_memmove(void *buf1, const void *buf2, size_t n)
 {
-	int	len;
+	unsigned char		*p1;
+	const unsigned char	*p2;
 
-	len = 1;
-	if (num < 0)
+	if (buf1 == NULL && buf2 == NULL)
+		return (NULL);
+	p1 = buf1;
+	p2 = buf2;
+	if (buf1 <= buf2)
 	{
-		num *= -1;
-		len++;
+		while (n--)
+			*p1++ = *p2++;
 	}
-	while (num > 0)
+	else
 	{
-		num /= 10;
-		len++;
+		p1 += n - 1;
+		p2 += n - 1;
+		while (n--)
+			*p1-- = *p2--;
 	}
-	return (len);
+	return (buf1);
 }

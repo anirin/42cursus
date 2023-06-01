@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/19 13:36:40 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/23 16:25:04 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int	len;
+	unsigned int	l;
+	unsigned int	i;
+	char			*r;
 
-	len = 1;
-	if (num < 0)
+	if (s == NULL || f == NULL)
+		return (NULL);
+	i = 0;
+	l = ft_strlen(s);
+	r = malloc(l + 1);
+	if (r == NULL)
+		return (NULL);
+	while (i < l)
 	{
-		num *= -1;
-		len++;
+		r[i] = (*f)(i, s[i]);
+		i++;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	r[i] = 0;
+	return (r);
 }

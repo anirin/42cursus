@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/19 13:39:18 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/25 22:25:16 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+static void	ft_putnbr_fd_sub(long n, int fd)
 {
-	int	len;
+	if (n / 10 != 0)
+		ft_putnbr_fd_sub(n / 10, fd);
+	ft_putchar_fd(n % 10 + '0', fd);
+}
 
-	len = 1;
-	if (num < 0)
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	tmp;
+
+	tmp = (long)n;
+	if (tmp < 0)
 	{
-		num *= -1;
-		len++;
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd_sub(-tmp, fd);
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	else
+		ft_putnbr_fd_sub(tmp, fd);
 }

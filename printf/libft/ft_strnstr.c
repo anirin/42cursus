@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/17 13:42:16 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/29 16:26:30 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+char	*ft_strnstr(const char *big, const char *little, size_t n)
 {
-	int	len;
-
-	len = 1;
-	if (num < 0)
+	if (ft_strlen(little) == 0)
+		return ((char *)big);
+	while (n && *big != '\0')
 	{
-		num *= -1;
-		len++;
+		if (ft_strncmp(big, little, ft_strlen(little)) == 0
+			&& ft_strlen(little) <= n)
+			return ((char *)big);
+		big++;
+		n--;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	return (NULL);
 }
+
+/*
+int	main(void)
+{
+	printf("%s\n", strnstr("test", "", 1));
+}
+*/

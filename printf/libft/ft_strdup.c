@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/03/20 19:00:22 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/25 22:09:49 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+char	*ft_strdup(const char *src)
 {
-	int	len;
+	char	*dest;
+	size_t	len;
 
-	len = 1;
-	if (num < 0)
-	{
-		num *= -1;
-		len++;
-	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	len = ft_strlen(src);
+	dest = malloc(sizeof(char) * (len + 1));
+	if (dest == NULL)
+		return (NULL);
+	ft_strlcpy(dest, src, len + 1);
+	return (dest);
 }

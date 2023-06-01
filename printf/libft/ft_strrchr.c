@@ -1,32 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/17 13:14:24 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/29 16:26:17 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+char	*ft_strrchr(const char *s, int c)
 {
-	int	len;
+	size_t	len;
 
-	len = 1;
-	if (num < 0)
+	len = ft_strlen(s);
+	while (len >= 0)
 	{
-		num *= -1;
-		len++;
+		if (s[len] == (char)c)
+			return ((char *)&s[len]);
+		if (len == 0)
+			break ;
+		len--;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	return (NULL);
 }
+
+/*
+int	main(void)
+{
+	char	*s;
+
+	s = "libft-test-tokyo";
+	printf("ft:%s ori:%s\n", ft_strrchr(s, 'a'), strrchr(s, 'a'));
+	printf("ft:%s ori:%s\n", ft_strrchr(s, '~'), strrchr(s, '~'));
+	return (0);
+}
+*/

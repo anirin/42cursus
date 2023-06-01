@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/20 16:39:06 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/29 16:27:00 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+t_list	*ft_lstnew(void *content)
 {
-	int	len;
+	t_list	*p;
 
-	len = 1;
-	if (num < 0)
-	{
-		num *= -1;
-		len++;
-	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	p = malloc(sizeof(t_list));
+	if (p == NULL)
+		return (NULL);
+	p->content = content;
+	p->next = NULL;
+	return (p);
 }

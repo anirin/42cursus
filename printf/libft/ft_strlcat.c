@@ -1,32 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/03/15 14:33:29 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/25 22:00:18 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	int	len;
+	size_t	d_len;
+	size_t	s_len;
+	size_t	n;
 
-	len = 1;
-	if (num < 0)
+	if (dest == NULL && size == 0)
+		return (ft_strlen(src));
+	d_len = ft_strlen(dest);
+	s_len = ft_strlen(src);
+	if (size <= d_len)
+		return (size + s_len);
+	n = size - d_len;
+	dest += d_len;
+	while (n--)
 	{
-		num *= -1;
-		len++;
+		if (*src == '\0' || n == 0)
+			break ;
+		*dest++ = *src++;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	*dest = '\0';
+	return (s_len + d_len);
 }

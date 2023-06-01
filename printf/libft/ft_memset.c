@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:43 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/17 10:46:10 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/23 13:41:22 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+void	*ft_memset(void *buf, int ch, size_t n)
 {
-	int	len;
+	size_t			i;
+	unsigned char	*p;
 
-	len = 1;
-	if (num < 0)
+	p = buf;
+	i = 0;
+	while (i < n)
 	{
-		num *= -1;
-		len++;
+		*p++ = (unsigned char)ch;
+		i++;
 	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	return (buf);
 }
