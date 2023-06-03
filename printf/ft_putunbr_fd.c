@@ -1,49 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_numlen.c                                    :+:      :+:    :+:   */
+/*   ft_putunbr_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/02 22:02:28 by atokamot         ###   ########.fr       */
+/*   Created: 2023/06/02 21:58:20 by atokamot          #+#    #+#             */
+/*   Updated: 2023/06/02 22:06:30 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-int	ft_get_numlen(long num)
+void	ft_putunbr_fd(unsigned int n, int fd)
 {
-	int	len;
-
-	len = 0;
-	if (num == 0)
-		len = 1;
-	if (num < 0)
-	{
-		num *= -1;
-		len++;
-	}
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
-}
-
-int	ft_get_unumlen(unsigned int num)
-{
-	int	len;
-
-	len = 0;
-	if (num == 0)
-		len = 1;
-	while (num > 0)
-	{
-		num /= 10;
-		len++;
-	}
-	return (len);
+	if (n / 10 != 0)
+		ft_putunbr_fd(n / 10, fd);
+	ft_putchar_fd(n % 10 + '0', fd);
 }

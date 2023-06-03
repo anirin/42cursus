@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:24:30 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:24:11 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/02 16:59:46 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ format_func	*set_func(void)
 
 int	get_func(char c)
 {
-	char	format[9];
-	int		i;
+    int      i;
+	const char	format[] = "cspdiuxX%";
 
-	format[9] = "cspdiuxX%";
 	i = 0;
 	while (format[i] != '\0')
 	{
@@ -63,9 +62,12 @@ int	ft_printf(const char *format, ...)
 			count += case_func[get_func(*format)](args);
 			format++;
 		}
-		ft_putchar_fd(*format, FD);
-		format++;
-		count++;
+		else
+		{
+			ft_putchar_fd(*format, FD);
+			format++;
+			count++;
+		}
 	}
 	va_end(args);
 	free(case_func);

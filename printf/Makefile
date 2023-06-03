@@ -6,7 +6,8 @@ PSRCS = ft_format1.c\
 	ft_format2.c\
 	ft_get_numlen.c\
 	ft_tohex.c\
-	ft_printf.c
+	ft_printf.c\
+	ft_putunbr_fd.c
 INCLUDE = -I ./libft
 
 

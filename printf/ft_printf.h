@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 17:28:53 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:25:03 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:04:13 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+#include <sys/types.h>
 
 typedef size_t	(*format_func)(va_list args);
 
@@ -38,10 +39,12 @@ size_t			lo_x_format(va_list ap);
 size_t			up_x_format(va_list ap);
 size_t			per_format(va_list ap);
 char			*rev_arry(char *s);
-char			*tohex(long num, const char *hex);
+char			*tohex(unsigned long num, const char *hex);
 int				get_func(char c);
 int				ft_get_numlen(long num);
 format_func		*set_func(void);
+int	ft_get_unumlen(unsigned int num);
+void	ft_putunbr_fd(unsigned int n, int fd);
 int				ft_printf(const char *format, ...);
 
 #endif

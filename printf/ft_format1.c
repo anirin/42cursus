@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:39:10 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/01 23:23:50 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/02 22:13:01 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,23 @@ size_t	s_format(va_list ap)
 	char	*s;
 
 	s = va_arg(ap, char *);
+	if (s == NULL)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
 	ft_putstr_fd(s, FD);
 	return (ft_strlen(s));
 }
 
 size_t	p_format(va_list ap)
 {
-	long		p;
+	unsigned long		p;
 	char		*s;
-	const char	hex[];
+	const char	hex[] = "0123456789abcdef";;
 	size_t		len;
 	size_t		i;
 
-	hex[] = "0123456789abcdef";
 	i = 0;
 	p = va_arg(ap, long);
 	s = tohex(p, hex);
