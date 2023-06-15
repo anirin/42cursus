@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tohex.c                                         :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 22:04:09 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/03 20:04:42 by atokamot         ###   ########.fr       */
+/*   Created: 2023/03/20 19:00:22 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/25 22:09:49 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-void	put_hex(unsigned long num, const char *hex)
+char	*ft_strdup(const char *src)
 {
-	if (num > 15)
-		put_hex(num / 16, hex);
-	ft_putchar_fd(hex[num % 16], FD);
+	char	*dest;
+	size_t	len;
+
+	len = ft_strlen(src);
+	dest = malloc(sizeof(char) * (len + 1));
+	if (dest == NULL)
+		return (NULL);
+	ft_strlcpy(dest, src, len + 1);
+	return (dest);
 }

@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:39:10 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/02 22:13:01 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/03 20:39:26 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,13 @@ size_t	s_format(va_list ap)
 
 size_t	p_format(va_list ap)
 {
-	unsigned long		p;
-	char		*s;
-	const char	hex[] = "0123456789abcdef";;
-	size_t		len;
-	size_t		i;
+	unsigned long	p;
+	const char		hex[] = "0123456789abcdef";
 
-	i = 0;
-	p = va_arg(ap, long);
-	s = tohex(p, hex);
-	s = rev_arry(s);
+	p = (unsigned long)va_arg(ap, void *);
 	ft_putstr_fd("0x", FD);
-	ft_putstr_fd(s, FD);
-	len = ft_strlen(s);
-	free(s);
-	return (len + 2);
+	put_hex(p, hex);
+	return (ft_get_hexlen(p) + 2);
 }
 
 size_t	d_format(va_list ap)

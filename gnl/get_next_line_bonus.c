@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 09:51:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/12 12:45:26 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:22:25 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
@@ -41,8 +41,6 @@ char	*ft_gnljoin(char const *s1, char const *s2, int check)
 	char	*result;
 	size_t	s1_len;
 
-	// if (save == NULL)
-	// 	save = ft_calloc(1, 1);
 	if (s1 == NULL)
 		return (NULL);
 	s1_len = ft_strlen(s1);
@@ -70,8 +68,8 @@ char	*get_newline(char *save, int fd)
 			if (check == -1)
 				return (NULL);
 			buf[check] = '\0';
-			// if (save == NULL)
-			// 	save = ft_calloc(1, 1);
+			if (save == NULL)
+				save = ft_calloc(1, 1);
 			tmp = save;
 			save = ft_gnljoin(tmp, buf, check);
 			free(tmp);
@@ -86,25 +84,27 @@ char	*get_newline(char *save, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char	*save;
+	static char	*save[OPEN_MAX];
 	char		*tmp;
 	char		*newline;
 
-	save = get_newline(save, fd);
-	if (save == NULL)
+	if (fd < 0)
 		return (NULL);
-	if (ft_strchr(save, '\n') == NULL)
+	save[fd] = get_newline(save[fd], fd);
+	if (save[fd] == NULL)
+		return (NULL);
+	if (ft_strchr(save[fd], '\n') == NULL)
 	{
-		newline = ft_substr(save, 0, ft_strlen(save));
-		free(save);
-		save = NULL;
+		newline = ft_substr(save[fd], 0, ft_strlen(save[fd]));
+		free(save[fd]);
+		save[fd] = NULL;
 		return (newline);
 	}
-	tmp = save;
+	tmp = save[fd];
 	newline = ft_substr(tmp, 0, ft_strchr(tmp, '\n') - tmp + 1);
-	save = ft_substr(tmp, ft_strchr(tmp, '\n') - tmp + 1, ft_strlen(tmp));
+	save[fd] = ft_substr(tmp, ft_strchr(tmp, '\n') - tmp + 1, ft_strlen(tmp));
 	free(tmp);
-	if (save == NULL)
+	if (save[fd] == NULL)
 		return (NULL);
 	return (newline);
 }

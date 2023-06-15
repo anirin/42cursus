@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tohex.c                                         :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 22:04:09 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/03 20:04:42 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/17 10:46:10 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/23 13:41:22 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-void	put_hex(unsigned long num, const char *hex)
+void	*ft_memset(void *buf, int ch, size_t n)
 {
-	if (num > 15)
-		put_hex(num / 16, hex);
-	ft_putchar_fd(hex[num % 16], FD);
+	size_t			i;
+	unsigned char	*p;
+
+	p = buf;
+	i = 0;
+	while (i < n)
+	{
+		*p++ = (unsigned char)ch;
+		i++;
+	}
+	return (buf);
 }

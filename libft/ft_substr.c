@@ -1,70 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/31 09:51:40 by atokamot          #+#    #+#             */
-/*   Updated: 2023/05/31 09:51:41 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/17 16:26:35 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/26 10:56:29 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-size_t	ft_strlen(const char *str)
-{
-	size_t	n;
-
-	n = 0;
-	while (*str != 0)
-	{
-		n++;
-		str++;
-	}
-	return (n);
-}
-
-void	*ft_memset(void *buf, int ch, size_t n)
-{
-	size_t			i;
-	unsigned char	*p;
-
-	p = buf;
-	i = 0;
-	while (i < n)
-	{
-		*p++ = (unsigned char)ch;
-		i++;
-	}
-	return (buf);
-}
-
-void	*ft_calloc(size_t num, size_t size)
-{
-	void	*ret;
-
-	if (size != 0 && num > SIZE_MAX / size)
-		return (NULL);
-	ret = malloc(num * size);
-	if (ret == NULL)
-		return (NULL);
-	ft_memset(ret, 0, num * size);
-	return (ret);
-}
-
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s != 0)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if (c == 0)
-		return ((char *)s);
-	return (NULL);
-}
+#include "libft.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
@@ -74,6 +20,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (s == NULL)
 		return (NULL);
+	if ((unsigned int)ft_strlen(s) < start + 1)
+		return (ft_strdup(""));
 	if (len <= ft_strlen(s))
 		substr = ft_calloc(len + 1, 1);
 	else
@@ -87,3 +35,19 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	return (substr);
 }
+
+/*
+#include <stdio.h>
+
+int	main(void)
+{
+	char const		s[];
+	unsigned int	start;
+	size_t			len;
+
+	s[] = "abcdefg";
+	start = 4;
+	len = 40;
+	printf("%s\n", ft_substr(s, start, len));
+}
+*/

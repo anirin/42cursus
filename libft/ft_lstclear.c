@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tohex.c                                         :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 22:04:09 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/03 20:04:42 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/27 19:15:51 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/29 16:28:55 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-void	put_hex(unsigned long num, const char *hex)
+void	ft_lstclear(t_list **lst, void (*del)(void *))
 {
-	if (num > 15)
-		put_hex(num / 16, hex);
-	ft_putchar_fd(hex[num % 16], FD);
+	t_list	*tmp;
+
+	if (lst == NULL || del == NULL || *lst == NULL)
+		return ;
+	while ((*lst) != NULL)
+	{
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = tmp;
+	}
+	*lst = NULL;
 }

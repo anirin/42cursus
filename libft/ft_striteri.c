@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tohex.c                                         :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 22:04:09 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/03 20:04:42 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/19 13:37:24 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/25 16:54:13 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-void	put_hex(unsigned long num, const char *hex)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
-	if (num > 15)
-		put_hex(num / 16, hex);
-	ft_putchar_fd(hex[num % 16], FD);
+	unsigned int	len;
+	unsigned int	i;
+
+	i = 0;
+	if (s == NULL || f == NULL)
+		return ;
+	len = ft_strlen(s);
+	while (i < len)
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
 }

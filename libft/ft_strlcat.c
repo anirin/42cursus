@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tohex.c                                         :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 22:04:09 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/03 20:04:42 by atokamot         ###   ########.fr       */
+/*   Created: 2023/03/15 14:33:29 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/25 22:00:18 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-void	put_hex(unsigned long num, const char *hex)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	if (num > 15)
-		put_hex(num / 16, hex);
-	ft_putchar_fd(hex[num % 16], FD);
+	size_t	d_len;
+	size_t	s_len;
+	size_t	n;
+
+	if (dest == NULL && size == 0)
+		return (ft_strlen(src));
+	d_len = ft_strlen(dest);
+	s_len = ft_strlen(src);
+	if (size <= d_len)
+		return (size + s_len);
+	n = size - d_len;
+	dest += d_len;
+	while (n--)
+	{
+		if (*src == '\0' || n == 0)
+			break ;
+		*dest++ = *src++;
+	}
+	*dest = '\0';
+	return (s_len + d_len);
 }

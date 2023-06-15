@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tohex.c                                         :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 22:04:09 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/03 20:04:42 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/17 10:46:04 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/22 22:09:26 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-void	put_hex(unsigned long num, const char *hex)
+void	*ft_memmove(void *buf1, const void *buf2, size_t n)
 {
-	if (num > 15)
-		put_hex(num / 16, hex);
-	ft_putchar_fd(hex[num % 16], FD);
+	unsigned char		*p1;
+	const unsigned char	*p2;
+
+	if (buf1 == NULL && buf2 == NULL)
+		return (NULL);
+	p1 = buf1;
+	p2 = buf2;
+	if (buf1 <= buf2)
+	{
+		while (n--)
+			*p1++ = *p2++;
+	}
+	else
+	{
+		p1 += n - 1;
+		p2 += n - 1;
+		while (n--)
+			*p1-- = *p2--;
+	}
+	return (buf1);
 }

@@ -6,16 +6,16 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 11:24:30 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/02 16:59:46 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/04 00:32:52 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include "libft.h"
 
-format_func	*set_func(void)
+t_format_func	*set_func(void)
 {
-	format_func	*case_func;
+	t_format_func	*case_func;
 
 	case_func = malloc(sizeof(case_func) * 9);
 	case_func[0] = c_format;
@@ -32,7 +32,7 @@ format_func	*set_func(void)
 
 int	get_func(char c)
 {
-    int      i;
+	int			i;
 	const char	format[] = "cspdiuxX%";
 
 	i = 0;
@@ -47,9 +47,9 @@ int	get_func(char c)
 
 int	ft_printf(const char *format, ...)
 {
-	va_list		args;
-	size_t		count;
-	format_func	*case_func;
+	va_list			args;
+	size_t			count;
+	t_format_func	*case_func;
 
 	va_start(args, format);
 	case_func = set_func();

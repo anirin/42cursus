@@ -1,21 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tohex.c                                         :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 22:04:09 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/03 20:04:42 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/17 10:46:01 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/22 22:19:21 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-void	put_hex(unsigned long num, const char *hex)
+void	*ft_memcpy(void *buf1, const void *buf2, size_t n)
 {
-	if (num > 15)
-		put_hex(num / 16, hex);
-	ft_putchar_fd(hex[num % 16], FD);
+	unsigned char	*p1;
+	unsigned char	*p2;
+
+	if (buf1 == NULL && buf2 == NULL)
+		return (NULL);
+	p1 = (unsigned char *)buf1;
+	p2 = (unsigned char *)buf2;
+	while (n--)
+		*p1++ = *p2++;
+	return ((void *)buf1);
 }
+
+/*
+int	main(void)
+{
+	char	buf[];
+
+	buf[] = "test";
+	printf("%s\n", memcpy(buf, NULL, 4));
+}
+*/

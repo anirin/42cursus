@@ -1,21 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tohex.c                                         :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 22:04:09 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/03 20:04:42 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/19 13:36:40 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/23 16:25:04 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-void	put_hex(unsigned long num, const char *hex)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (num > 15)
-		put_hex(num / 16, hex);
-	ft_putchar_fd(hex[num % 16], FD);
+	unsigned int	l;
+	unsigned int	i;
+	char			*r;
+
+	if (s == NULL || f == NULL)
+		return (NULL);
+	i = 0;
+	l = ft_strlen(s);
+	r = malloc(l + 1);
+	if (r == NULL)
+		return (NULL);
+	while (i < l)
+	{
+		r[i] = (*f)(i, s[i]);
+		i++;
+	}
+	r[i] = 0;
+	return (r);
 }

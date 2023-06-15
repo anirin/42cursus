@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 12:46:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/02 22:02:28 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/03 20:04:24 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,21 @@ int	ft_get_unumlen(unsigned int num)
 	while (num > 0)
 	{
 		num /= 10;
+		len++;
+	}
+	return (len);
+}
+
+int	ft_get_hexlen(unsigned long num)
+{
+	int	len;
+
+	len = 0;
+	if (num == 0)
+		len = 1;
+	while (num > 0)
+	{
+		num /= 16;
 		len++;
 	}
 	return (len);

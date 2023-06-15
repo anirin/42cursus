@@ -1,21 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tohex.c                                         :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/01 22:04:09 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/03 20:04:42 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/19 13:39:18 by atokamot          #+#    #+#             */
+/*   Updated: 2023/05/25 22:25:16 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
 #include "libft.h"
 
-void	put_hex(unsigned long num, const char *hex)
+static void	ft_putnbr_fd_sub(long n, int fd)
 {
-	if (num > 15)
-		put_hex(num / 16, hex);
-	ft_putchar_fd(hex[num % 16], FD);
+	if (n / 10 != 0)
+		ft_putnbr_fd_sub(n / 10, fd);
+	ft_putchar_fd(n % 10 + '0', fd);
+}
+
+void	ft_putnbr_fd(int n, int fd)
+{
+	long	tmp;
+
+	tmp = (long)n;
+	if (tmp < 0)
+	{
+		ft_putchar_fd('-', fd);
+		ft_putnbr_fd_sub(-tmp, fd);
+	}
+	else
+		ft_putnbr_fd_sub(tmp, fd);
 }
