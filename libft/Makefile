@@ -48,22 +48,17 @@ ft_lstnew.c\
 ft_lstsize.c\
 ft_lstmap.c
 
-$(NAME): $(OBJCS)
-	$(AR) $@ $^
-
-
-# ifeq ($(MAKEGAOLD), bonus)
-# 	SRCS += BSRCS
-# endif
 ifdef WITH_BONUS
-SRCS+=$(BSRCS)
+	SRCS+=$(BSRCS)
 endif
 
 all: $(NAME)
 
-# bonus : $(BOBJCS) $(OBJCS)
+$(NAME): $(OBJCS)
+	$(AR) $@ $^
+
 bonus:
-	make WITH_BONUS=1 ${NAME}
+	make WITH_BONUS=1
 
 clean:
 	$(RM) $(BOBJCS) $(OBJCS) 
