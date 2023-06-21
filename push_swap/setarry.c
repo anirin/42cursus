@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   setarry.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/27 19:15:51 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:30:59 by atokamot         ###   ########.fr       */
+/*   Created: 2023/06/21 14:35:08 by atokamot          #+#    #+#             */
+/*   Updated: 2023/06/21 14:53:55 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void sort_arry(int *arry)
 {
-	if (lst == NULL || del == NULL)
-		return ;
-	del(lst->content);
-	free(lst);
+    
 }
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+int *set_arry(t_list *list)
 {
-	t_list	*tmp;
+    int i;
+    int arry[ft_lstsize(list)]; //もしむりならmax_size を事前に定義する
 
-	if (lst == NULL || del == NULL || *lst == NULL)
-		return ;
-	while ((*lst) != NULL)
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = tmp;
-	}
-	*lst = NULL;
+    i = 0;
+    while (list != NULL)
+    {
+        arry[i++] = (int)list->content;
+        list = list->next;
+    }
+    return (arry);
 }

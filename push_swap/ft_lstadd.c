@@ -1,36 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstclear.c                                      :+:      :+:    :+:   */
+/*   ft_lstadd.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/27 19:15:51 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:30:59 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/20 16:49:33 by atokamot          #+#    #+#             */
+/*   Updated: 2023/06/21 14:30:32 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_lstdelone(t_list *lst, void (*del)(void *))
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
-	if (lst == NULL || del == NULL)
+	if (lst == NULL || new == NULL)
 		return ;
-	del(lst->content);
-	free(lst);
+	new->next = *lst;
+	*lst = new;
 }
 
-void	ft_lstclear(t_list **lst, void (*del)(void *))
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_list	*tmp;
+	t_list	*last;
 
-	if (lst == NULL || del == NULL || *lst == NULL)
+	if (lst == NULL || new == NULL)
 		return ;
-	while ((*lst) != NULL)
+	if (*lst == NULL)
 	{
-		tmp = (*lst)->next;
-		ft_lstdelone(*lst, del);
-		*lst = tmp;
+		*lst = new;
+		return ;
 	}
-	*lst = NULL;
+	last = ft_lstlast(*lst);
+	if (last == NULL)
+		return ;
+	last->next = new;
 }

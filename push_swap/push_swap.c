@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:24:31 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:36:36 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int main(int argc, char *argv[])
     t_list *list_a;
     t_list *list_b;
     
+    list_a = NULL;
+    list_b = NULL;
     if (check_error(argc, argv) == NG)
     {
         write(STDERR_FILENO, "error", 6);
