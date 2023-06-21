@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:24:29 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:02:39 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:15:34 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,17 @@ int check_list(t_list **list)
 void swap(t_list **list)
 {
     t_list *tmp;
+    t_list *p1;
+    t_list *p2;
 
     if (check_list(list) == NG)
         return ;
     tmp = *list;
-    tmp->next = tmp->next->next;
-    tmp->next->next = tmp;
-    *list = tmp->next->next;
+    p1 = tmp;
+    p2 = tmp->next;
+    p1->next = p2->next;
+    p2->next = p1;
+    *list = p2;
     return ;
 }
 

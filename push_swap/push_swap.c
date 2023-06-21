@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:01:33 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:08:31 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,12 +74,7 @@ int main(int argc, char *argv[])
     printf("----------\n");
     print_list(list_a);
     printf("----------\n");
-    push(&list_a, &list_b);
-    push(&list_a, &list_b);
-    push(&list_a, &list_b);
-    push(&list_a, &list_b);
+    swap(&list_a);
     print_list(list_a);
-    printf("----------\n");
-    print_list(list_b);
     return 0;
 }
