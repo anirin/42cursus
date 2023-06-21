@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 21:26:35 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:49:31 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,9 +78,10 @@ int main(int argc, char *argv[])
     set_arry(list_a, arry);
     //print_arry(arry, argc - 1);
 
-    //push_b
-    push_all(&list_a, &list_b, arry);
-    print_list(list_b);
+    //plan push_b!!
+    sort_push(&list_a, &list_b, arry);
+    all_push(&list_a, &list_b);
+    //print_list(list_a);
 
     //end
     free(arry);

@@ -6,11 +6,17 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:15:51 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:30:59 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/21 22:18:16 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void del(void *content)
+{
+    (void)content;
+    return ;   
+}
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {

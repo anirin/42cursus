@@ -46,7 +46,8 @@ void rev_rotate(t_list **list, int flag);
 
 //algorithm
 void find_rotate(t_list **list_a, long num);
-void push_all(t_list **list_a, t_list **list_b, int *arry);
+void sort_push(t_list **list_a, t_list **list_b, int *arry);
+void all_push(t_list **list_a, t_list **list_b);
 
 
 #endif
