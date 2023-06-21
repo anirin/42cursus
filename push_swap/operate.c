@@ -6,16 +6,11 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:24:29 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:15:34 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:23:44 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int check_list(t_list **list)
-{
-    return (OK);
-} 
 
 void swap(t_list **list)
 {
@@ -23,7 +18,7 @@ void swap(t_list **list)
     t_list *p1;
     t_list *p2;
 
-    if (check_list(list) == NG)
+    if (ft_lstsize(*list) < 2)
         return ;
     tmp = *list;
     p1 = tmp;
@@ -40,13 +35,15 @@ void push(t_list **list_a, t_list **list_b) //Interchange a and b as the case
 
     if (ft_lstsize(*list_a) == 1)
     {
-       ft_lstadd_back(list_b, ft_lstlast(*list_a));
-       *list_a = NULL;
-       return ; 
+        ft_lstadd_back(list_b, ft_lstlast(*list_a));
+        *list_a = NULL;
     }
-    ft_lstadd_back(list_b, ft_lstlast(*list_a));
-    lst = ft_lstseclast(*list_a);
-    lst->next = NULL;
+    else
+    {
+        ft_lstadd_back(list_b, ft_lstlast(*list_a));
+        lst = ft_lstseclast(*list_a);
+        lst->next = NULL;
+    }
 }
 
 void rotate(t_list **list)
@@ -54,6 +51,11 @@ void rotate(t_list **list)
     t_list *p1;
     t_list *p2;
 
+    if (ft_lstsize(*list) <= 2)
+    {
+        swap(list);
+        return ;
+    }
     p1 = ft_lstseclast(*list);
     p2 = ft_lstlast(*list);
     p1->next = NULL;
@@ -67,6 +69,11 @@ void rev_rotate(t_list **list)
     t_list *p2;
     t_list *head;
 
+    if (ft_lstsize(*list) <= 2)
+    {
+        swap(list);
+        return ;
+    }
     head = *list;
     p1 = ft_lstlast(*list);
     p2 = head->next;

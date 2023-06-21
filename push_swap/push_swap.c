@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:08:31 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/21 14:24:31 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
     printf("----------\n");
     print_list(list_a);
     printf("----------\n");
-    swap(&list_a);
+    rotate(&list_a);
     print_list(list_a);
     return 0;
 }
