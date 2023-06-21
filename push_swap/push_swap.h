@@ -3,6 +3,10 @@
 
 #define OK 1
 #define NG 0
+#define A 0
+#define B 1
+#define C 2
+#define R 3
 # define IS_SEP 1
 # define NOT_SEP 0
 # define HEAD 1
@@ -27,12 +31,22 @@ t_list	*ft_lstnew(void *content);
 int	ft_lstsize(t_list *lst);
 void del(void *content);
 
+//swap
+void swap_arry(int *a, int *b);
+void bsort_arry(int *arry, int size);
+void set_arry(t_list *list, int *arry);
+void print_arry(int *arry, int size); //delete
+
 //operate
 int check_list(t_list **list);
-void swap(t_list **list);
-void push(t_list **list_a, t_list **list_b);
-void rotate(t_list **list);
-void rev_rotate(t_list **list);
+void swap(t_list **list, int flag);
+void push(t_list **list_a, t_list **list_b, int flag);
+void rotate(t_list **list, int flag);
+void rev_rotate(t_list **list, int flag);
+
+//algorithm
+void find_rotate(t_list **list_a, long num);
+void push_all(t_list **list_a, t_list **list_b, int *arry);
 
 
 #endif

@@ -6,18 +6,22 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:24:29 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:23:44 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/21 20:55:37 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void swap(t_list **list)
+void swap(t_list **list, int flag)
 {
     t_list *tmp;
     t_list *p1;
     t_list *p2;
 
+    if (flag == A)
+        printf("sa\n");
+    if (flag == B)
+        printf("sb\n");
     if (ft_lstsize(*list) < 2)
         return ;
     tmp = *list;
@@ -29,10 +33,14 @@ void swap(t_list **list)
     return ;
 }
 
-void push(t_list **list_a, t_list **list_b) //Interchange a and b as the case
+void push(t_list **list_a, t_list **list_b, int flag) //Interchange a and b as the case
 {
     t_list *lst;
 
+    if (flag == A)
+        printf("pa\n");
+    if (flag == B)
+        printf("pb\n");
     if (ft_lstsize(*list_a) == 1)
     {
         ft_lstadd_back(list_b, ft_lstlast(*list_a));
@@ -46,14 +54,18 @@ void push(t_list **list_a, t_list **list_b) //Interchange a and b as the case
     }
 }
 
-void rotate(t_list **list)
+void rotate(t_list **list, int flag)
 {
     t_list *p1;
     t_list *p2;
 
+    if (flag == A)
+        printf("ra\n");
+    if (flag == B)
+        printf("rb\n");
     if (ft_lstsize(*list) <= 2)
     {
-        swap(list);
+        swap(list, C);
         return ;
     }
     p1 = ft_lstseclast(*list);
@@ -63,15 +75,19 @@ void rotate(t_list **list)
     *list = p2;
 }
 
-void rev_rotate(t_list **list)
+void rev_rotate(t_list **list, int flag)
 {
     t_list *p1;
     t_list *p2;
     t_list *head;
 
+    if (flag == A)
+        printf("rra\n");
+    if (flag == B)
+        printf("rrb\n");
     if (ft_lstsize(*list) <= 2)
     {
-        swap(list);
+        swap(list, C);
         return ;
     }
     head = *list;

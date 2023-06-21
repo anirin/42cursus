@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 14:36:36 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/21 21:26:35 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int main(int argc, char *argv[])
 {
     t_list *list_a;
     t_list *list_b;
+    int *arry;
     
     list_a = NULL;
     list_b = NULL;
@@ -71,12 +72,17 @@ int main(int argc, char *argv[])
         return (NG);
     }
     list_a = set_list(argc, argv);
-    // print_list(list_a);
-    //operate test
-    printf("----------\n");
-    print_list(list_a);
-    printf("----------\n");
-    rotate(&list_a);
-    print_list(list_a);
+
+    //arry
+    arry = malloc(sizeof(int) * ft_lstsize(list_a));
+    set_arry(list_a, arry);
+    //print_arry(arry, argc - 1);
+
+    //push_b
+    push_all(&list_a, &list_b, arry);
+    print_list(list_b);
+
+    //end
+    free(arry);
     return 0;
 }
