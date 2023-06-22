@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 20:40:22 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 21:48:45 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/22 15:01:35 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,9 @@ void find_rotate(t_list **list_a, long num)
     t_list *tmp;
 
     i = 0;
-    // while (1)
-    while (i < 10)
+    while (1)
     {
-        tmp = ft_lstlast(*list_a);
+        tmp = *list_a;
         if (tmp->content == (void *)num)
             break ;
         rotate(list_a, A);

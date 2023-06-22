@@ -36,6 +36,7 @@ void swap(t_list **list, int flag)
 void push(t_list **list_a, t_list **list_b, int flag) //Interchange a and b as the case
 {
     t_list *lst;
+    t_list *tmp;
 
     if (flag == A)
         printf("pa\n");
@@ -43,14 +44,14 @@ void push(t_list **list_a, t_list **list_b, int flag) //Interchange a and b as t
         printf("pb\n");
     if (ft_lstsize(*list_a) == 1)
     {
-        ft_lstadd_back(list_b, ft_lstlast(*list_a));
+        ft_lstadd_front(list_b, *list_a);
         *list_a = NULL;
     }
     else
     {
-        ft_lstadd_back(list_b, ft_lstlast(*list_a));
-        lst = ft_lstseclast(*list_a);
-        lst->next = NULL;
+        tmp = (*list_a)->next;
+        ft_lstadd_front(list_b, *list_a);
+        *list_a = tmp;
     }
 }
 
@@ -58,6 +59,7 @@ void rotate(t_list **list, int flag)
 {
     t_list *p1;
     t_list *p2;
+    t_list *head;
 
     if (flag == A)
         printf("ra\n");
@@ -68,10 +70,11 @@ void rotate(t_list **list, int flag)
         swap(list, C);
         return ;
     }
-    p1 = ft_lstseclast(*list);
-    p2 = ft_lstlast(*list);
-    p1->next = NULL;
-    p2->next = *list;
+    head = *list;
+    p1 = ft_lstlast(*list);
+    p2 = head->next;
+    p1->next = head;
+    head->next = NULL;
     *list = p2;
 }
 
@@ -79,7 +82,6 @@ void rev_rotate(t_list **list, int flag)
 {
     t_list *p1;
     t_list *p2;
-    t_list *head;
 
     if (flag == A)
         printf("rra\n");
@@ -90,10 +92,9 @@ void rev_rotate(t_list **list, int flag)
         swap(list, C);
         return ;
     }
-    head = *list;
-    p1 = ft_lstlast(*list);
-    p2 = head->next;
-    p1->next = head;
-    head->next = NULL;
+    p1 = ft_lstseclast(*list);
+    p2 = ft_lstlast(*list);
+    p1->next = NULL;
+    p2->next = *list;
     *list = p2;
 }

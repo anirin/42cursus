@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 21:49:31 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/22 14:50:58 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int main(int argc, char *argv[])
         return (NG);
     }
     list_a = set_list(argc, argv);
+    //print_list(list_a);
 
     //arry
     arry = malloc(sizeof(int) * ft_lstsize(list_a));
@@ -80,10 +81,12 @@ int main(int argc, char *argv[])
 
     //plan push_b!!
     sort_push(&list_a, &list_b, arry);
+    //print_list(list_b);
     all_push(&list_a, &list_b);
     //print_list(list_a);
 
     //end
     free(arry);
+    ft_lstclear(&list_a, &del);
     return 0;
 }
