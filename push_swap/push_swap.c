@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/22 18:29:04 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:09:40 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,27 @@ int main(int argc, char *argv[])
     set_arry(list_a, arry_info.arry);
     arry_info.size = argc - 1;
     //print_arry(arry, argc - 1);
+    print_list(list_a);
     
-    //b
-    sort_push(&list_a, &list_b, arry_info);
-    all_push(&list_a, &list_b);
-    // print_list(list_a);
+    half_push(&list_a, &list_b, A, UNDER);
+    while (1)
+    {
+        printf("------------\n");
+        print_list(list_a);
+        printf("-\n");
+        print_list(list_b);
+        printf("------------\n");
+        if(ft_lstsize(list_b) <= 2)
+            break;
+        half_push(&list_b, &list_a, B, OVER);
+    }
+    /*
+    printf("------------\n");
+    print_list(list_a);
+    printf("-\n");
+    print_list(list_b);
+    printf("------------\n");
+    */
 
     //end
     free(arry_info.arry);

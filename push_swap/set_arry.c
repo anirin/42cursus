@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   setarry.c                                          :+:      :+:    :+:   */
+/*   set_arry.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:35:08 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/21 20:14:02 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:02:45 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,29 @@ void set_arry(t_list *list, int *arry)
         tmp = tmp->next;
     }
     bsort_arry(arry, ft_lstsize(list));
+}
+
+int check_half_arry(t_list *list, t_arry arry_info, int flag)
+{
+    int start;
+    int end;
+
+    if (flag == UNDER)
+    {
+        start = 0;
+        end = arry_info.size / 2;
+    }
+    else
+    {
+        start = arry_info.size / 2;
+        end = arry_info.size;
+    }
+    while (start < end)
+    {
+        if ((int)list->content == arry_info.arry[start++])
+            return (OK);
+    }
+    return (NG);
 }
 
 void print_arry(int *arry, int size)

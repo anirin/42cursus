@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 20:40:22 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/22 18:45:31 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/23 20:04:25 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,32 @@ void num_min_rotate(t_list **list, long num, t_arry arry_info, int flag)
     }
 }
 
+void half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag) //interchange list_a list_b
+{
+    int count;
+    t_arry arry_info;
+    
+
+    count = 0;
+    arry_info.size = ft_lstsize(*list_1);
+    arry_info.arry = malloc(sizeof(int) * arry_info.size);
+    if (arry_info.arry == NULL)
+        return ;
+    set_arry(*list_1, arry_info.arry);
+    print_arry(arry_info.arry, arry_info.size);
+    while (count < arry_info.size / 2)
+    {
+        if (check_half_arry(*list_1, arry_info, flag) == OK)
+        {
+            push(list_1, list_2, rev_flag(alpha_flag));
+            count++;
+        }
+        rotate(list_1, alpha_flag);
+    }
+    free(arry_info.arry);
+}
+
+/*
 void sort_push(t_list **list_a, t_list **list_b, t_arry arry_info)
 {
     int size;
@@ -60,7 +86,9 @@ void sort_push(t_list **list_a, t_list **list_b, t_arry arry_info)
         arry_info.size--;
     }
 }
+*/
 
+/*
 void all_push(t_list **list_a, t_list **list_b)
 {
     int size;
@@ -71,6 +99,7 @@ void all_push(t_list **list_a, t_list **list_b)
         push(list_b, list_a, A);
     }
 }
+*/
 
 // void find_rotate(t_list **list_a, long num)
 // {
