@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/22 14:50:58 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/22 18:29:04 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 {
     t_list *list_a;
     t_list *list_b;
-    int *arry;
+    t_arry arry_info;
     
     list_a = NULL;
     list_b = NULL;
@@ -75,18 +75,18 @@ int main(int argc, char *argv[])
     //print_list(list_a);
 
     //arry
-    arry = malloc(sizeof(int) * ft_lstsize(list_a));
-    set_arry(list_a, arry);
+    arry_info.arry = malloc(sizeof(int) * ft_lstsize(list_a));
+    set_arry(list_a, arry_info.arry);
+    arry_info.size = argc - 1;
     //print_arry(arry, argc - 1);
-
-    //plan push_b!!
-    sort_push(&list_a, &list_b, arry);
-    //print_list(list_b);
+    
+    //b
+    sort_push(&list_a, &list_b, arry_info);
     all_push(&list_a, &list_b);
-    //print_list(list_a);
+    // print_list(list_a);
 
     //end
-    free(arry);
+    free(arry_info.arry);
     ft_lstclear(&list_a, &del);
     return 0;
 }
