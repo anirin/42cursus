@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 20:40:22 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/23 20:04:25 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/24 07:46:51 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,18 @@ void num_min_rotate(t_list **list, long num, t_arry arry_info, int flag)
     }
 }
 
-void half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag) //interchange list_a list_b
+void half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag)
 {
     int count;
     t_arry arry_info;
     
-
     count = 0;
     arry_info.size = ft_lstsize(*list_1);
     arry_info.arry = malloc(sizeof(int) * arry_info.size);
     if (arry_info.arry == NULL)
         return ;
     set_arry(*list_1, arry_info.arry);
-    print_arry(arry_info.arry, arry_info.size);
+    //print_arry(arry_info.arry, arry_info.size);
     while (count < arry_info.size / 2)
     {
         if (check_half_arry(*list_1, arry_info, flag) == OK)

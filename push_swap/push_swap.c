@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/23 20:09:40 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/24 08:23:19 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,22 +84,24 @@ int main(int argc, char *argv[])
     half_push(&list_a, &list_b, A, UNDER);
     while (1)
     {
+        /*
         printf("------------\n");
         print_list(list_a);
         printf("-\n");
         print_list(list_b);
         printf("------------\n");
-        if(ft_lstsize(list_b) <= 2)
+        */
+        if(ft_lstsize(list_b) <= 3)
             break;
         half_push(&list_b, &list_a, B, OVER);
     }
-    /*
+    sort_three(&list_b, B);
+
     printf("------------\n");
     print_list(list_a);
     printf("-\n");
     print_list(list_b);
     printf("------------\n");
-    */
 
     //end
     free(arry_info.arry);
