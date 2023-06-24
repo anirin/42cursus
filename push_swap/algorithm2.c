@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:19:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/24 10:47:16 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/24 12:05:30 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,25 @@ void recursive_push(t_list **list_a, t_list **list_b)
     int count;
 
     count = half_push(list_b, list_a, B, OVER);
+
+    //result print
+    // printf("------------\n");
+    // print_list(*list_a);
+    // printf("-\n");
+    // print_list(*list_b);
+    // printf("------------\n");
+
     if (finish_condition(list_a, list_b) == NG)
         recursive_push(list_a, list_b);
     half_push_back(list_a, list_b, B, count);
+
+    //result print
+    // printf("------------\n");
+    // print_list(*list_a);
+    // printf("-\n");
+    // print_list(*list_b);
+    // printf("------------\n");
+    
     if (finish_condition(list_a, list_b) == NG)
         recursive_push(list_a, list_b);
 }

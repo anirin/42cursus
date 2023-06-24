@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:53:00 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/24 10:48:41 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/24 12:05:54 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,28 @@ int main(int argc, char *argv[])
     set_arry(list_a, arry_info.arry);
     arry_info.size = argc - 1;
     //print_arry(arry, argc - 1);
-    print_list(list_a);
+    //print_list(list_a);
     
     //algorithm
     half_push(&list_a, &list_b, A, UNDER);
     recursive_push(&list_a, &list_b);
+
+    //result print
+    // printf("------------\n");
+    // print_list(list_a);
+    // printf("-\n");
+    // print_list(list_b);
+    // printf("------------\n");
+    
     half_push(&list_a, &list_b, A, OVER);
     recursive_push(&list_a, &list_b);
 
     //result print
-    printf("------------\n");
-    print_list(list_a);
-    printf("-\n");
-    print_list(list_b);
-    printf("------------\n");
+    // printf("------------\n");
+    // print_list(list_a);
+    // printf("-\n");
+    // print_list(list_b);
+    // printf("------------\n");
 
     //end
     free(arry_info.arry);

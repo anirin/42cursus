@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 20:40:22 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/24 10:31:51 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/24 10:31:51 atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void num_min_rotate(t_list **list, long num, t_arry arry_info, int flag)
 int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag) //while rotate 1 push 1 to 2
 {
     int count;
+    int half_size;
     t_arry arry_info;
     
     count = 0;
@@ -56,15 +57,19 @@ int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag) //whil
     if (arry_info.arry == NULL)
         return (-1);
     set_arry(*list_1, arry_info.arry);
-    //print_arry(arry_info.arry, arry_info.size);
-    while (count < arry_info.size / 2)
+    half_size = arry_info.size / 2;
+    //if (arry_info.size % 2 == 0)
+    //    half_size += 1;
+    //printf("push--half_size = %d\n", half_size);
+    while (count < half_size)
     {
         if (check_half_arry(*list_1, arry_info, flag) == OK)
         {
             push(list_1, list_2, rev_flag(alpha_flag));
             count++;
         }
-        rotate(list_1, alpha_flag);
+        else
+            rotate(list_1, alpha_flag);
     }
     free(arry_info.arry);
     return (count);
@@ -72,6 +77,7 @@ int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag) //whil
 
 void half_push_back(t_list **list_1, t_list **list_2, int alpha_flag, int count)
 {
+    //printf("push_back--count = %d\n", count);
     while(count--)
     {
         push(list_1, list_2, alpha_flag);
