@@ -78,7 +78,9 @@ int check_error(int argc, char **argv);
 int rev_flag(int flag);
 
 //sort
-void sort_three(t_list **list, int flag);
-void sort_two(t_list **list, int flag);
+void sort_two_b(t_list **list, int flag);
+void sort_two_a(t_list **list, int flag);
+void sort_three_b(t_list **list, int flag);
+void sort_three_a(t_list **list, int flag);
 
 #endif

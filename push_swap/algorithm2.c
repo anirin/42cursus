@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:19:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/24 12:05:30 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/24 14:37:51 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int finish_condition(t_list **list_a, t_list **list_b)
 {
     if(ft_lstsize(*list_b) == 3)
-        sort_three(list_b, B);
+        sort_three_b(list_b, B);
     if(ft_lstsize(*list_b) == 2)
-        sort_two(list_b, B);
+        sort_two_b(list_b, B);
     if (ft_lstsize(*list_b) == 3 || ft_lstsize(*list_b) == 2)
     {
         all_push_rotate(list_a, list_b);
@@ -31,6 +31,8 @@ void recursive_push(t_list **list_a, t_list **list_b)
 {
     int count;
 
+    if (finish_condition(list_a, list_b) == OK)
+        return ;
     count = half_push(list_b, list_a, B, OVER);
 
     //result print
