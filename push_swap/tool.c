@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 18:37:36 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/23 19:43:55 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/24 08:55:20 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,11 @@ int rev_flag(int flag)
         return (B);
     else
         return (A);
+}
+
+int check_error(int argc, char **argv)
+{
+    (void)argc;
+    (void)argv;
+    return (OK);
 }

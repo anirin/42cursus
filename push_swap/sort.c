@@ -12,6 +12,15 @@
 
 #include "push_swap.h"
 
+void sort_two(t_list **list, int flag)
+{
+    int arry[2];
+
+    set_arry(*list, arry);
+    if (((int)(*list)->content == arry[0]) && ((int)(*list)->next->content == arry[1]))
+        swap(list, flag);
+}
+
 void sort_three(t_list **list, int flag)
 {
     int arry[3];
