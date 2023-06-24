@@ -28,17 +28,24 @@ typedef struct s_arry
 
 #include <libc.h>
 
+//libft
 int	ft_atoi(const char *str);
+char	**ft_split(char const *s, char c);
+
+//list
 void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstadd_front(t_list **lst, t_list *new);
-char	**ft_split(char const *s, char c);
 t_list	*ft_lstlast(t_list *lst);
 t_list	*ft_lstseclast(t_list *lst);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 t_list	*ft_lstnew(void *content);
 int	ft_lstsize(t_list *lst);
+
+//list add
 void del(void *content);
+t_list  *set_list(int argc, char **argv);
+void print_list(t_list *list);
 
 //arry
 void swap_arry(int *a, int *b);
@@ -60,9 +67,18 @@ typedef void t_operate(t_list **list, int flag);
 //algorithm
 int get_location(long num, t_arry arry_info);
 void num_min_rotate(t_list **list, long num, t_arry arry_info, int flag);
-void half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag);
+int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag);
+void half_push_back(t_list **list_1, t_list **list_2, int alpha_flag, int count);
+void all_push_rotate(t_list **list_a, t_list **list_b);
+int finish_condition(t_list **list_a, t_list **list_b);
+void recursive_push(t_list **list_a, t_list **list_b);
 
 //tool
+int check_error(int argc, char **argv);
 int rev_flag(int flag);
+
+//sort
+void sort_three(t_list **list, int flag);
+void sort_two(t_list **list, int flag);
 
 #endif
