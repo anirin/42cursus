@@ -53,6 +53,7 @@ void bsort_arry(int *arry, int size);
 void set_arry(t_list *list, int *arry);
 void print_arry(int *arry, int size); //delete
 int check_half_arry(t_list *list, t_arry arry_info, int flag);
+int check_num_arry(t_list *list, t_arry arry_info, int num);
 
 //operate
 int check_list(t_list **list);
@@ -82,5 +83,7 @@ void sort_two_b(t_list **list, int flag);
 void sort_two_a(t_list **list, int flag);
 void sort_three_b(t_list **list, int flag);
 void sort_three_a(t_list **list, int flag);
+int sort_four_a(t_list **list_1, t_list **list_2, int alpha_flag);
+int sort_five_a(t_list **list_1, t_list **list_2, int alpha_flag);
 
 #endif
