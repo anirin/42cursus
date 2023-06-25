@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:35:08 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/24 11:16:39 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:13:11 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,16 +66,12 @@ int check_half_arry(t_list *list, t_arry arry_info, int flag)
     {
         start = 0;
         end = arry_info.size / 2;
-        /*
-        if (arry_info.size % 2 != 0)
+        if (arry_info.size % 2 == 1)
             end += 1;
-        */
     }
     else
     {
         start = arry_info.size / 2;
-        if (arry_info.size % 2 != 0)
-            start += 1;
         end = arry_info.size;
     }
     while (start < end)

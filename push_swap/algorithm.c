@@ -58,8 +58,8 @@ int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag) //whil
         return (-1);
     set_arry(*list_1, arry_info.arry);
     half_size = arry_info.size / 2;
-    //if (arry_info.size % 2 == 0)
-    //    half_size += 1;
+    if (arry_info.size % 2 == 1)
+        half_size += 1;
     //printf("push--half_size = %d\n", half_size);
     while (count < half_size)
     {
@@ -137,3 +137,4 @@ void sort_push(t_list **list_a, t_list **list_b, t_arry arry_info)
 //         i++;
 //     }
 // }
+

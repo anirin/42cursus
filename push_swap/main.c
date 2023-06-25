@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:53:00 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/24 14:44:03 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/25 14:27:53 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,29 @@ int main(int argc, char *argv[])
     //print_list(list_a);
     
     //algorithm
-    if (ft_lstsize(list_a) <= 3)
-    {
-        if(ft_lstsize(list_a) == 3)
-            sort_three_a(&list_a, A);
-        if(ft_lstsize(list_a) == 2)
-            sort_two_a(&list_a, A);
-    }
+    if(ft_lstsize(list_a) == 2)
+        sort_two_a(&list_a, A);
+    if(ft_lstsize(list_a) == 3)
+        sort_three_a(&list_a, A);
     else
     {
         half_push(&list_a, &list_b, A, UNDER);
-        recursive_push(&list_a, &list_b);
+        if(ft_lstsize(list_a) == 2)
+        {
+            sort_two_a(&list_a, A);
+            recursive_push(&list_a, &list_b);
+        }
+        else if(ft_lstsize(list_a) == 3)
+        {
+            sort_three_a(&list_a, A);
+            recursive_push(&list_a, &list_b);
+        }
+        else
+        {
+            recursive_push(&list_a, &list_b);
+            half_push(&list_a, &list_b, A, OVER);
+            recursive_push(&list_a, &list_b);
+        }
     
         //result print
         // printf("------------\n");
@@ -54,10 +66,6 @@ int main(int argc, char *argv[])
         // printf("-\n");
         // print_list(list_b);
         // printf("------------\n");
-        
-        half_push(&list_a, &list_b, A, OVER);
-        recursive_push(&list_a, &list_b);
-    
     }
         //result print
         // printf("------------\n");
@@ -72,4 +80,10 @@ int main(int argc, char *argv[])
     ft_lstclear(&list_a, &del);
 
     return 0;
+}
+
+__attribute__((destructor))
+static void    end()
+{
+    system("leaks -q push_swap");
 }
