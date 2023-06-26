@@ -35,6 +35,7 @@ int sort_four_a(t_list **list_1, t_list **list_2, int alpha_flag, int size)
     }
     sort_three_a(list_1, A);
     push(list_2, list_1, A);
+    rotate(list_1, A);
     return (count);
 }
 
@@ -42,13 +43,12 @@ int sort_four_b(t_list **list_1, t_list **list_2, int alpha_flag, int size)
 {
     int count;
     int half_size;
+    int arry[size];
     t_arry arry_info;
     
     count = 0;
-    arry_info.size = ft_lstsize(*list_1);
-    arry_info.arry = malloc(sizeof(int) * arry_info.size);
-    if (arry_info.arry == NULL)
-        return (-1);
+    arry_info.size = size;
+    arry_info.arry = arry;
     set_arry(*list_1, arry_info.arry);
     while (count < 1)
     {
@@ -60,7 +60,6 @@ int sort_four_b(t_list **list_1, t_list **list_2, int alpha_flag, int size)
         else
             rotate(list_1, alpha_flag);
     }
-    free(arry_info.arry);
     sort_three_b(list_1, B);
     push(list_2, list_1, B);
     return (count);
@@ -70,13 +69,12 @@ int sort_five_a(t_list **list_1, t_list **list_2, int alpha_flag, int size)
 {
     int count;
     int half_size;
+    int arry[size];
     t_arry arry_info;
     
     count = 0;
-    arry_info.size = ft_lstsize(*list_1);
-    arry_info.arry = malloc(sizeof(int) * arry_info.size);
-    if (arry_info.arry == NULL)
-        return (-1);
+    arry_info.size = size;
+    arry_info.arry = arry;
     set_arry(*list_1, arry_info.arry);
     while (count < 2)
     {
@@ -88,7 +86,6 @@ int sort_five_a(t_list **list_1, t_list **list_2, int alpha_flag, int size)
         else
             rotate(list_1, alpha_flag);
     }
-    free(arry_info.arry);
     sort_three_a(list_1, A);
     sort_two_b(list_2, B);
     push(list_2, list_1, A);
@@ -103,13 +100,12 @@ int sort_five_b(t_list **list_1, t_list **list_2, int alpha_flag, int size)
 {
     int count;
     int half_size;
+    int arry[size];
     t_arry arry_info;
     
     count = 0;
-    arry_info.size = ft_lstsize(*list_1);
-    arry_info.arry = malloc(sizeof(int) * arry_info.size);
-    if (arry_info.arry == NULL)
-        return (-1);
+    arry_info.size = size;
+    arry_info.arry = arry;
     set_arry(*list_1, arry_info.arry);
     while (count < 2)
     {
@@ -121,7 +117,6 @@ int sort_five_b(t_list **list_1, t_list **list_2, int alpha_flag, int size)
         else
             rotate(list_1, alpha_flag);
     }
-    free(arry_info.arry);
     sort_three_b(list_1, B);
     sort_two_a(list_2, A);
     push(list_2, list_1, B); //なんとかしろ

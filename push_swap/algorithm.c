@@ -45,22 +45,20 @@ void num_min_rotate(t_list **list, long num, t_arry arry_info, int flag)
     }
 }
 
-int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag) //while rotate 1 push 1 to 2
+int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag, int size) //while rotate 1 push 1 to 2
 {
     int count;
     int half_size;
+    int arry[size];
     t_arry arry_info;
     
     count = 0;
-    arry_info.size = ft_lstsize(*list_1);
-    arry_info.arry = malloc(sizeof(int) * arry_info.size);
-    if (arry_info.arry == NULL)
-        return (-1);
+    arry_info.size = size;
+    arry_info.arry = arry;
     set_arry(*list_1, arry_info.arry);
     half_size = arry_info.size / 2;
     if (arry_info.size % 2 == 1)
         half_size += 1;
-    //printf("push--half_size = %d\n", half_size);
     while (count < half_size)
     {
         if (check_half_arry(*list_1, arry_info, flag) == OK)
@@ -71,13 +69,11 @@ int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag) //whil
         else
             rotate(list_1, alpha_flag);
     }
-    free(arry_info.arry);
     return (count);
 }
 
 void half_push_back(t_list **list_1, t_list **list_2, int alpha_flag, int count)
 {
-    //printf("push_back--count = %d\n", count);
     while(count--)
     {
         push(list_1, list_2, alpha_flag);
@@ -103,38 +99,3 @@ void all_push_rotate(t_list **list_a, t_list **list_b)
         i++;
     }
 }
-
-/*
-void sort_push(t_list **list_a, t_list **list_b, t_arry arry_info)
-{
-    int size;
-    int i;
-
-    size = ft_lstsize(*list_a);
-    i = 0;
-    while (i < size)
-    {
-        num_min_rotate(list_a, (long)arry_info.arry[i], arry_info, A);
-        push(list_a, list_b, B);
-        i++;
-        arry_info.size--;
-    }
-}
-*/
-
-// void find_rotate(t_list **list_a, long num)
-// {
-//     int i;
-//     t_list *tmp;
-
-//     i = 0;
-//     while (1)
-//     {
-//         tmp = *list_a;
-//         if (tmp->content == (void *)num)
-//             break ;
-//         rotate(list_a, A);
-//         i++;
-//     }
-// }
-

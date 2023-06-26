@@ -19,9 +19,9 @@ void swap(t_list **list, int flag)
     t_list *p2;
 
     if (flag == A)
-        printf("sa\n");
+        ft_printf("sa\n");
     if (flag == B)
-        printf("sb\n");
+        ft_printf("sb\n");
     if (ft_lstsize(*list) < 2)
         return ;
     tmp = *list;
@@ -33,15 +33,15 @@ void swap(t_list **list, int flag)
     return ;
 }
 
-void push(t_list **list_a, t_list **list_b, int flag) //a->b B
+void push(t_list **list_a, t_list **list_b, int flag)
 {
     t_list *lst;
     t_list *tmp;
 
     if (flag == A)
-        printf("pa\n");
+        ft_printf("pa\n");
     if (flag == B)
-        printf("pb\n");
+        ft_printf("pb\n");
     if (ft_lstsize(*list_a) == 1)
     {
         ft_lstadd_front(list_b, *list_a);
@@ -62,9 +62,9 @@ void rotate(t_list **list, int flag)
     t_list *head;
 
     if (flag == A)
-        printf("ra\n");
+        ft_printf("ra\n");
     if (flag == B)
-        printf("rb\n");
+        ft_printf("rb\n");
     if (ft_lstsize(*list) <= 2)
     {
         swap(list, C);
@@ -84,9 +84,9 @@ void rev_rotate(t_list **list, int flag)
     t_list *p2;
 
     if (flag == A)
-        printf("rra\n");
+        ft_printf("rra\n");
     if (flag == B)
-        printf("rrb\n");
+        ft_printf("rrb\n");
     if (ft_lstsize(*list) <= 2)
     {
         swap(list, C);

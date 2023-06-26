@@ -68,7 +68,7 @@ typedef void t_operate(t_list **list, int flag);
 //algorithm
 int get_location(long num, t_arry arry_info);
 void num_min_rotate(t_list **list, long num, t_arry arry_info, int flag);
-int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag);
+int half_push(t_list **list_1, t_list **list_2, int alpha_flag, int flag, int size);
 void half_push_back(t_list **list_1, t_list **list_2, int alpha_flag, int count);
 void all_push_rotate(t_list **list_a, t_list **list_b);
 int finish_condition(t_list **list_a, t_list **list_b);
@@ -83,9 +83,9 @@ void sort_two_b(t_list **list, int flag);
 void sort_two_a(t_list **list, int flag);
 void sort_three_b(t_list **list, int flag);
 void sort_three_a(t_list **list, int flag);
-int sort_four_a(t_list **list_1, t_list **list_2, int alpha_flag);
-int sort_four_b(t_list **list_1, t_list **list_2, int alpha_flag);
-int sort_five_a(t_list **list_1, t_list **list_2, int alpha_flag);
-int sort_five_b(t_list **list_1, t_list **list_2, int alpha_flag);
+int sort_four_a(t_list **list_1, t_list **list_2, int alpha_flag, int size);
+int sort_four_b(t_list **list_1, t_list **list_2, int alpha_flag, int size);
+int sort_five_a(t_list **list_1, t_list **list_2, int alpha_flag, int size);
+int sort_five_b(t_list **list_1, t_list **list_2, int alpha_flag, int size);
 
 #endif
