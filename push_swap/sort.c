@@ -14,39 +14,30 @@
 
 void sort_two_b(t_list **list, int flag)
 {
-    int arry[2];
-
-    set_arry(*list, arry);
-    if (((int)(*list)->content == arry[0]) && ((int)(*list)->next->content == arry[1]))
+    if ((int)(*list)->content < (int)(*list)->next->content)
         swap(list, flag);
 }
 
 void sort_two_a(t_list **list, int flag)
 {
-    int arry[2];
-
-    set_arry(*list, arry);
-    if (((int)(*list)->content == arry[1]) && ((int)(*list)->next->content == arry[0]))
+    if ((int)(*list)->content > (int)(*list)->next->content)
         swap(list, flag);
 }
 
 void sort_three_b(t_list **list, int flag)
 {
-    int arry[3];
-    
-    set_arry(*list, arry);
-    if (((int)(*list)->content == arry[0]) && ((int)(*list)->next->content == arry[1]) && ((int)(*list)->next->next->content == arry[2])) 
+    if ((int)(*list)->content < (int)(*list)->next->content < (int)(*list)->next->next->content) 
     {
         rotate(list, flag);
         swap(list, flag);
     }
-    if (((int)(*list)->content == arry[0]) && ((int)(*list)->next->content == arry[2]) && ((int)(*list)->next->next->content == arry[1])) 
+    if ((int)(*list)->content < (int)(*list)->next->next->content < (int)(*list)->next->content) 
         rotate(list, flag);
-    if (((int)(*list)->content == arry[1]) && ((int)(*list)->next->content == arry[0]) && ((int)(*list)->next->next->content == arry[2])) 
+    if ((int)(*list)->next->content < (int)(*list)->content < (int)(*list)->next->next->content) 
         rev_rotate(list, flag);
-    if (((int)(*list)->content == arry[1]) && ((int)(*list)->next->content == arry[2]) && ((int)(*list)->next->next->content == arry[0])) 
+    if ((int)(*list)->next->content < (int)(*list)->next->next->content < (int)(*list)->content) 
         swap(list, flag);
-    if (((int)(*list)->content == arry[2]) && ((int)(*list)->next->content == arry[0]) && ((int)(*list)->next->next->content == arry[1])) 
+    if ((int)(*list)->next->next->content < (int)(*list)->content < (int)(*list)->next->content) 
     {
         swap(list, flag);
         rotate(list, flag);
@@ -55,21 +46,18 @@ void sort_three_b(t_list **list, int flag)
 
 void sort_three_a(t_list **list, int flag)
 {
-    int arry[3];
-    
-    set_arry(*list, arry);
-    if (((int)(*list)->content == arry[0]) && ((int)(*list)->next->content == arry[2]) && ((int)(*list)->next->next->content == arry[1])) 
+    if ((int)(*list)->content < (int)(*list)->next->next->content < (int)(*list)->next->content) 
     {
         swap(list, flag);
         rotate(list, flag);
     }
-    if (((int)(*list)->content == arry[1]) && ((int)(*list)->next->content == arry[0]) && ((int)(*list)->next->next->content == arry[2])) 
+    if ((int)(*list)->next->content < (int)(*list)->content < (int)(*list)->next->next->content) 
         swap(list, flag);
-    if (((int)(*list)->content == arry[1]) && ((int)(*list)->next->content == arry[2]) && ((int)(*list)->next->next->content == arry[0])) 
+    if ((int)(*list)->next->content < (int)(*list)->next->next->content < (int)(*list)->content) 
         rev_rotate(list, flag);
-    if (((int)(*list)->content == arry[2]) && ((int)(*list)->next->content == arry[0]) && ((int)(*list)->next->next->content == arry[1])) 
+    if ((int)(*list)->next->next->content < (int)(*list)->content < (int)(*list)->next->content) 
         rotate(list, flag);
-    if (((int)(*list)->content == arry[2]) && ((int)(*list)->next->content == arry[1]) && ((int)(*list)->next->next->content == arry[0])) 
+    if ((int)(*list)->next->next->content < (int)(*list)->next->content < (int)(*list)->content) 
     {
         swap(list, flag);
         rev_rotate(list, flag);

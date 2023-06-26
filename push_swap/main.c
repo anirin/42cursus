@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:53:00 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/25 19:02:12 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:02:15 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,23 +47,20 @@ int main(int argc, char *argv[])
     else
     {
         half_push(&list_a, &list_b, A, UNDER);
+        
         recursive_push(&list_a, &list_b);
+        
         half_push(&list_a, &list_b, A, OVER);
+        
         recursive_push(&list_a, &list_b);
-    
-        //result print
-        // printf("------------\n");
-        // print_list(list_a);
-        // printf("-\n");
-        // print_list(list_b);
-        // printf("------------\n");
     }
-        //result print
-        // printf("------------\n");
-        // print_list(list_a);
-        // printf("-\n");
-        // print_list(list_b);
-        // printf("------------\n");
+    //result print
+
+    // printf("------------\n");
+    // print_list(list_a);
+    // printf("-\n");
+    // print_list(list_b);
+    // printf("------------\n");
 
 
     //end

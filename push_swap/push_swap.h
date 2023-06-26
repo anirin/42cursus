@@ -84,6 +84,8 @@ void sort_two_a(t_list **list, int flag);
 void sort_three_b(t_list **list, int flag);
 void sort_three_a(t_list **list, int flag);
 int sort_four_a(t_list **list_1, t_list **list_2, int alpha_flag);
+int sort_four_b(t_list **list_1, t_list **list_2, int alpha_flag);
 int sort_five_a(t_list **list_1, t_list **list_2, int alpha_flag);
+int sort_five_b(t_list **list_1, t_list **list_2, int alpha_flag);
 
 #endif

@@ -33,7 +33,7 @@ void swap(t_list **list, int flag)
     return ;
 }
 
-void push(t_list **list_a, t_list **list_b, int flag) //Interchange a and b as the case
+void push(t_list **list_a, t_list **list_b, int flag) //a->b B
 {
     t_list *lst;
     t_list *tmp;

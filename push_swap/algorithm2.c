@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 09:19:55 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/24 14:37:51 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/26 12:40:09 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,15 @@
 
 int finish_condition(t_list **list_a, t_list **list_b)
 {
-    if(ft_lstsize(*list_b) == 3)
-        sort_three_b(list_b, B);
     if(ft_lstsize(*list_b) == 2)
         sort_two_b(list_b, B);
-    if (ft_lstsize(*list_b) == 3 || ft_lstsize(*list_b) == 2)
+    if(ft_lstsize(*list_b) == 3)
+        sort_three_b(list_b, B);
+    if(ft_lstsize(*list_b) == 4)
+        sort_four_b(list_b, list_a, B);
+    if(ft_lstsize(*list_b) == 5)
+        sort_five_b(list_b, list_a, B);
+    if (ft_lstsize(*list_b) == 5 || ft_lstsize(*list_b) == 4 || ft_lstsize(*list_b) == 3 || ft_lstsize(*list_b) == 2)
     {
         all_push_rotate(list_a, list_b);
         return (OK);
