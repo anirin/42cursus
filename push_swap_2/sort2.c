@@ -28,12 +28,11 @@ void sort_four_b(t_list **list_a, t_list **list_b)
 {
     int arry[4];
     
-    if (set_arry(*list_a, arry) == OK)
-        return ;
+    set_arry(*list_b, arry);
     num_min_rotate(list_b, arry[3], arry, 4, B);
-    push(list_a, list_b, A);
-    sort_three_b(list_a);
-    push(list_b, list_a, B);
+    push(list_b, list_a, A);
+    sort_three_b(list_b);
+    push(list_a, list_b, B);
 }
 
 void sort_five_a(t_list **list_a, t_list **list_b)
@@ -56,13 +55,12 @@ void sort_five_b(t_list **list_a, t_list **list_b)
 {
     int arry[5];
     
-    if(set_arry(*list_b, arry) == OK)
-        return ;
+    set_arry(*list_b, arry);
     num_min_rotate(list_b, arry[4], arry, 4, B);
-    push(list_a, list_b, A);
+    push(list_b, list_a, A);
     num_min_rotate(list_b, arry[3], arry, 4, B);
-    push(list_a, list_b, A);
-    sort_three_a(list_a);
-    push(list_b, list_a, B);
-    push(list_b, list_a, B);
+    push(list_b, list_a, A);
+    sort_three_b(list_b);
+    push(list_a, list_b, B);
+    push(list_a, list_b, B);
 }

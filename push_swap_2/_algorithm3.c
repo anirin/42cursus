@@ -12,12 +12,30 @@
 
 #include "push_swap.h"
 
-void one_third_push(t_list **list_a, t_list **list_b, int pivot, int push_num)
+void get_pivot(t_list **list, int size, int *pivot)
+{
+    int arry[size];
+
+    set_arry(*list, arry);
+    *pivot = arry[size / 2 - 1];
+}
+
+void get_three_pivot(t_list **list, int size, int *pivot)
+{
+    int arry[size];
+
+    set_arry(*list, arry);
+    pivot[0] = arry[(size / 4) - 1];
+    pivot[1] = arry[(size / 4) * 2 - 1];
+    pivot[2] = arry[(size / 4) * 3 - 1];
+}
+
+void half_push(t_list **list_a, t_list **list_b, int pivot, int size)
 {
     int count;
 
     count = 0;
-    while(count < push_num)
+    while(count < size)
     {
         if ((int)(*list_b)->content > pivot)
         {
@@ -29,49 +47,71 @@ void one_third_push(t_list **list_a, t_list **list_b, int pivot, int push_num)
     }
 }
 
-void first_one_third_push(t_list **list_a, t_list **list_b, int pivot, int push_num)
+void half_push_back(t_list **list_a, t_list **list_b, int size)
 {
     int count;
 
     count = 0;
-    while(count < push_num)
-    {
-        if ((int)(*list_b)->content <= pivot)
-        {
-            push(list_b, list_a, A);
-            count++;
-        }
-        else
-            rotate(list_b, B);
-    }
-}
-
-void one_third_push_back(t_list **list_a, t_list **list_b, int push_back_num)
-{
-    int count;
-
-    count = 0;
-    while(count < push_back_num)
+    while(count < size)
     {
         push(list_a, list_b, B);
         count++;
     }
 }
 
-void get_pivot(t_list **list, int size, int *pivot)
-{
-    int arry[size];
 
-    set_arry(*list, arry);
-    pivot[0] = arry[size / 3 - 1];
-    pivot[1] = arry[(size / 3) * 2 - 1];
+void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
+{
+    int count;
+
+    count = 0;
+    while(count < size / 4)
+    {
+        if ((int)(*list_a)->content <= pivot[0])
+        {
+            push(list_a, list_b, B);
+            count++;
+        }
+        else
+            rotate(list_a, A);
+    }
+    count = 0;
+    while(count < size / 4)
+    {
+        if ((int)(*list_a)->content <= pivot[1])
+        {
+            push(list_a, list_b, B);
+            count++;
+        }
+        else
+            rotate(list_a, A);
+    }
 }
 
-void two_third_push(t_list **list_a, t_list **list_b, int size)
+void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
 {
-    int pivot[2];
+    int count;
 
-    get_pivot(list_b, size, pivot);
-    one_third_push(list_a, list_b, pivot[1], size - (size / 3) * 2);
-    one_third_push(list_a, list_b, pivot[0], size / 3);
+    count = 0;
+    while(count < size / 4)
+    {
+        if ((int)(*list_a)->content > pivot[1] && (int)(*list_a)->content <= pivot[2])
+        {
+            push(list_a, list_b, B);
+            count++;
+        }
+        else
+            rotate(list_a, A);
+    }
+    count = 0;
+    while(count < size - (size / 4) * 3)
+    {
+        if ((int)(*list_a)->content > pivot[2])
+        {
+            push(list_a, list_b, B);
+            count++;
+        }
+        else
+            rotate(list_a, A);
+    }
 }

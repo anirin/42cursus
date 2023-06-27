@@ -64,20 +64,20 @@ void rev_rotate(t_list **list, int flag);
 typedef void t_operate(t_list **list, int flag);
 
 //algorithm
-int get_location(int num, int *arry, int size);
+int get_location(t_list *list, int num, int size);
 void num_min_rotate(t_list **list, int num, int *arry, int size, int flag);
 void all_push_rotate(t_list **list_a, t_list **list_b);
 int first_finish_condition(t_list **list_a, t_list **list_b);
 int finish_condition(t_list **list_a, t_list **list_b);
-//algorithm one third
-void one_third_push(t_list **list_a, t_list **list_b, int pivot, int push_num);
-void first_one_third_push(t_list **list_a, t_list **list_b, int pivot, int push_num);
-void one_third_push_back(t_list **list_a, t_list **list_b, int push_back_num);
 void get_pivot(t_list **list, int size, int *pivot);
-void two_third_push(t_list **list_a, t_list **list_b, int size);
-void first_one_third(t_list **list_a, t_list **list_b);
-void recursive_one_third(t_list **list_a, t_list **list_b);
-
+void get_three_pivot(t_list **list, int size, int *pivot);
+//algorithm half
+void half_push(t_list **list_a, t_list **list_b, int pivot, int size);
+void half_push_back(t_list **list_a, t_list **list_b, int size);
+void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size);
+void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size);
+void half_recursive_push(t_list **list_a, t_list **list_b);
+void push_swap(t_list **list_a, t_list **list_b);
 
 //tool
 int check_error(int argc, char **argv);

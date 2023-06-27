@@ -36,9 +36,9 @@ int finish_condition(t_list **list_a, t_list **list_b)
     if(ft_lstsize(*list_b) == 3)
         sort_three_b(list_b);
     if(ft_lstsize(*list_b) == 4)
-        sort_four_b(list_b, list_a);
+        sort_four_b(list_a, list_b);
     if(ft_lstsize(*list_b) == 5)
-        sort_five_b(list_b, list_a);
+        sort_five_b(list_a, list_b);
     if (ft_lstsize(*list_b) <= 5)
     {
         all_push_rotate(list_a, list_b);
@@ -48,59 +48,44 @@ int finish_condition(t_list **list_a, t_list **list_b)
         return (NG);
 }
 
-void recursive_one_third(t_list **list_a, t_list **list_b)
+void half_recursive_push(t_list **list_a, t_list **list_b)
 {
     int size;
+    int pivot;
 
     if (finish_condition(list_a, list_b) == OK)
         return ;
     size = ft_lstsize(*list_b);
-    two_third_push(list_a, list_b, size);
+    get_pivot(list_b, size, &pivot);
+
+    half_push(list_a, list_b, pivot, size - (size / 2));
     if (finish_condition(list_a, list_b) == NG)
-        recursive_one_third(list_a, list_b);
-    one_third_push_back(list_a, list_b, size / 3);
+        half_recursive_push(list_a, list_b);
+
+    half_push_back(list_a, list_b, size - (size / 2));
     if (finish_condition(list_a, list_b) == NG)
-        recursive_one_third(list_a, list_b);
-    one_third_push_back(list_a, list_b, size - (size / 3) * 2);
-    if (finish_condition(list_a, list_b) == NG)
-        recursive_one_third(list_a, list_b);
+        half_recursive_push(list_a, list_b);
 }
 
-void first_one_third(t_list **list_a, t_list **list_b)
+void push_swap(t_list **list_a, t_list **list_b)
 {
     int size;
-    int pivod[2];
-
+    int pivot[3];
 
     if (first_finish_condition(list_a, list_b) == OK)
         return ;
     size = ft_lstsize(*list_a);
-    get_pivot(list_a, ft_lstsize(*list_a), pivod);
-    first_one_third_push(list_b, list_a, pivod[0], size / 3);
-    recursive_one_third(list_a, list_b);
-    first_one_third_push(list_b, list_a, pivod[1], size / 3);
-    recursive_one_third(list_a, list_b);
-    one_third_push(list_b, list_a, pivod[1], size - (size / 3) * 2);
-    recursive_one_third(list_a, list_b);
+    get_three_pivot(list_a, size, pivot);
+
+    // printf("pivoit = %d\n", pivot[0]);
+    // printf("pivoit = %d\n", pivot[1]);
+    // printf("pivoit = %d\n", pivot[2]);
+
+    //first
+    first_half_push(list_a, list_b, pivot, size);
+    half_recursive_push(list_a, list_b);
+
+    //second
+    second_half_push(list_a, list_b, pivot, size);
+    half_recursive_push(list_a, list_b);
 }
-
-/*----------------------------------
-    if (finish_condition() == NG)
-        return ;
-    two_third_push(size); 2/3 push
-        if (finish_condition() == NG)
-            recursive_one_third(); 1/3 sort
-    one_third_push_back(size / 3); middle 1/3 push back
-        if (finish_condition() == NG)
-            recursive_one_third(); middle 1/3 sort
-    one_third_push_back(size - (size / 3) * 2); big 1/3 + a
-        if (finish_condition() == NG)
-            recursive_one_third(); big 1/3 sort
-
-----------------------------------
-
-    two_third_push(size)
-        get_pivot(size) //remainder becareful
-        big_one_third_push(pivot[2])
-        middle_one_third_push(pivot[1])
-----------------------------------*/

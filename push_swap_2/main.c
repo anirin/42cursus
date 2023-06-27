@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/24 08:53:00 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/27 12:25:16 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/27 19:57:24 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,15 @@ int main(int argc, char *argv[])
     list_a = set_list(argc, argv);
     arry = malloc(sizeof(int) * ft_lstsize(list_a));
     if (set_arry(list_a, arry) == NG)
-        first_one_third(&list_a, &list_b);
+        push_swap(&list_a, &list_b);
+
+    //result print
+    // printf("------------\n");
+    // print_list(list_a);
+    // printf("-\n");
+    // print_list(list_b);
+    // printf("------------\n");
+
     ft_lstclear(&list_a, &del);
     free(arry);
     return 0;
