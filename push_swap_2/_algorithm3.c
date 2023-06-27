@@ -65,22 +65,13 @@ void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
     int count;
 
     count = 0;
-    while(count < size / 4)
-    {
-        if ((int)(*list_a)->content <= pivot[0])
-        {
-            push(list_a, list_b, B);
-            count++;
-        }
-        else
-            rotate(list_a, A);
-    }
-    count = 0;
-    while(count < size / 4)
+    while(count < size / 2)
     {
         if ((int)(*list_a)->content <= pivot[1])
         {
             push(list_a, list_b, B);
+            if ((int)(*list_a)->content <= pivot[0])
+                rotate(list_b, B);
             count++;
         }
         else
@@ -93,22 +84,13 @@ void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
     int count;
 
     count = 0;
-    while(count < size / 4)
+    while(count < size - (size / 2))
     {
-        if ((int)(*list_a)->content > pivot[1] && (int)(*list_a)->content <= pivot[2])
+        if ((int)(*list_a)->content > pivot[1])
         {
             push(list_a, list_b, B);
-            count++;
-        }
-        else
-            rotate(list_a, A);
-    }
-    count = 0;
-    while(count < size - (size / 4) * 3)
-    {
-        if ((int)(*list_a)->content > pivot[2])
-        {
-            push(list_a, list_b, B);
+            if ((int)(*list_a)->content <= pivot[2])
+                rotate(list_b, B);
             count++;
         }
         else
