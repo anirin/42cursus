@@ -51,18 +51,18 @@ int finish_condition(t_list **list_a, t_list **list_b)
 void half_recursive_push(t_list **list_a, t_list **list_b)
 {
     int size;
-    int pivot;
+    int pivot[3];
 
     if (finish_condition(list_a, list_b) == OK)
         return ;
     size = ft_lstsize(*list_b);
-    get_pivot(list_b, size, &pivot);
+    get_three_pivot(list_b, size, pivot);
 
-    half_push(list_a, list_b, pivot, size - (size / 2));
+    half_push(list_a, list_b, pivot, size);
     if (finish_condition(list_a, list_b) == NG)
         half_recursive_push(list_a, list_b);
 
-    half_push_back(list_a, list_b, size - (size / 2));
+    half_push_back(list_a, list_b, size);
     if (finish_condition(list_a, list_b) == NG)
         half_recursive_push(list_a, list_b);
 }

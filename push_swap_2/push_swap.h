@@ -72,7 +72,7 @@ int finish_condition(t_list **list_a, t_list **list_b);
 void get_pivot(t_list **list, int size, int *pivot);
 void get_three_pivot(t_list **list, int size, int *pivot);
 //algorithm half
-void half_push(t_list **list_a, t_list **list_b, int pivot, int size);
+void half_push(t_list **list_a, t_list **list_b, int *pivot, int size);
 void half_push_back(t_list **list_a, t_list **list_b, int size);
 void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size);
 void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size);
