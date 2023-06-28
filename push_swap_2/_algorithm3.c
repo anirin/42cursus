@@ -47,15 +47,32 @@ void half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
     }
 }
 
-void half_push_back(t_list **list_a, t_list **list_b, int size)
+void half_push_back(t_list **list_a, t_list **list_b, int *pivot, int size, int *arry)
 {
     int count;
 
     count = 0;
     while(count < size - size / 2)
     {
-        push(list_a, list_b, B);
-        count++;
+        if (is_next_list(arry, *list_a) == OK)
+        {
+            rotate(list_a, A);
+            count++;
+        }
+        else if (is_swap_next_list(arry, *list_a) == OK)
+        {
+            swap(list_a, A);
+            rotate(list_a, A);
+            rotate(list_a, A);
+            count += 2;
+        }
+        else
+        {
+            push(list_a, list_b, B);
+            if ((int)(*list_b)->content < pivot[2])
+                rotate(list_b, B);
+            count++;
+        }
     }
 }
 
@@ -79,14 +96,26 @@ void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
     }
 }
 
-void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
+void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size, int *arry)
 {
     int count;
 
     count = 0;
     while(count < size - (size / 2))
     {
-        if ((int)(*list_a)->content > pivot[1])
+        if (is_next_list(arry, *list_a) == OK)
+        {
+            rotate(list_a, A);
+            count++;
+        }
+        else if (is_swap_next_list(arry, *list_a) == OK)
+        {
+            swap(list_a, A);
+            rotate(list_a, A);
+            rotate(list_a, A);
+            count += 2;
+        }
+        else if ((int)(*list_a)->content > pivot[1])
         {
             push(list_a, list_b, B);
             if ((int)(*list_b)->content <= pivot[2])

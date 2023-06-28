@@ -48,7 +48,7 @@ int finish_condition(t_list **list_a, t_list **list_b)
         return (NG);
 }
 
-void half_recursive_push(t_list **list_a, t_list **list_b)
+void half_recursive_push(t_list **list_a, t_list **list_b, int *arry)
 {
     int size;
     int pivot[3];
@@ -60,22 +60,25 @@ void half_recursive_push(t_list **list_a, t_list **list_b)
 
     half_push(list_a, list_b, pivot, size);
     if (finish_condition(list_a, list_b) == NG)
-        half_recursive_push(list_a, list_b);
+        half_recursive_push(list_a, list_b, arry);
 
-    half_push_back(list_a, list_b, size);
+    half_push_back(list_a, list_b, pivot, size, arry);
     if (finish_condition(list_a, list_b) == NG)
-        half_recursive_push(list_a, list_b);
+        half_recursive_push(list_a, list_b, arry);
 }
 
 void push_swap(t_list **list_a, t_list **list_b)
 {
     int size;
     int pivot[3];
+    int arry[ft_lstsize(*list_a)];
 
     if (first_finish_condition(list_a, list_b) == OK)
         return ;
     size = ft_lstsize(*list_a);
     get_three_pivot(list_a, size, pivot);
+
+    set_arry(*list_a, arry);
 
     // printf("pivoit = %d\n", pivot[0]);
     // printf("pivoit = %d\n", pivot[1]);
@@ -83,9 +86,9 @@ void push_swap(t_list **list_a, t_list **list_b)
 
     //first
     first_half_push(list_a, list_b, pivot, size);
-    half_recursive_push(list_a, list_b);
+    half_recursive_push(list_a, list_b, arry);
 
     //second
-    second_half_push(list_a, list_b, pivot, size);
-    half_recursive_push(list_a, list_b);
+    second_half_push(list_a, list_b, pivot, size, arry);
+    half_recursive_push(list_a, list_b, arry);
 }

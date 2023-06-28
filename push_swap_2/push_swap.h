@@ -52,6 +52,9 @@ void swap_arry(int *a, int *b);
 int bsort_arry(int *arry, int size);
 int set_arry(t_list *list, int *arry);
 void print_arry(int *arry, int size);
+int get_arry_index(int *arry, int num);
+int is_next_list(int *arry, t_list *list_a);
+int is_swap_next_list(int *arry, t_list *list_a);
 
 //operate
 int check_list(t_list **list);
@@ -73,10 +76,10 @@ void get_pivot(t_list **list, int size, int *pivot);
 void get_three_pivot(t_list **list, int size, int *pivot);
 //algorithm half
 void half_push(t_list **list_a, t_list **list_b, int *pivot, int size);
-void half_push_back(t_list **list_a, t_list **list_b, int size);
+void half_push_back(t_list **list_a, t_list **list_b, int *pivot, int size, int *arry);
 void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size);
-void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size);
-void half_recursive_push(t_list **list_a, t_list **list_b);
+void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size, int *arry);
+void half_recursive_push(t_list **list_a, t_list **list_b, int *arry);
 void push_swap(t_list **list_a, t_list **list_b);
 
 //tool
