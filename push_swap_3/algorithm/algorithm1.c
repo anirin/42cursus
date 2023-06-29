@@ -1,0 +1,111 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algorithm1.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/29 16:58:07 by atokamot          #+#    #+#             */
+/*   Updated: 2023/06/29 22:34:19 by atokamot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header/ft_lst.h"
+#include "../header/operate.h"
+#include "../header/sort.h"
+#include "../header/push_swap.h"
+#include "../header/algorithm.h"
+
+void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
+{
+    int i;
+
+    i = 0;
+    while (i < size)
+    {
+        if ((int)(*list_a)->content <= pivot[1])
+        {
+            push(list_a, list_b, B);
+            // if ((int)(*list_b)->content > pivot[2])
+            //     rotate(list_b, B);
+            i++;
+        }
+        else
+        {
+            rotate(list_a, A);
+        }
+    }
+}
+
+void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
+{
+    int i;
+
+    i = 0;
+    while (i < size)
+    {
+        if (can_rotate(list_a) == OK)
+            i++;
+        else if (can_swap_rotate(list_a) == OK)
+            i += 2;
+        else if ((int)(*list_a)->content > pivot[1])
+        {
+            if (!(*list_b == NULL && i == size - 1))
+            {
+                push(list_a, list_b, B);
+                // if ((int)(*list_b)->content > pivot[2])
+                //     rotate(list_b, B);
+            }
+            i++;
+        }
+        else
+            rotate(list_a, A);
+    }
+}
+
+void recursive_half_push(t_list **list_a, t_list **list_b)
+{
+    int pivot[3];
+    int size;
+
+    if (finish_condition(list_a, list_b) == OK)
+        return ;
+    size = ft_lstsize(*list_b);
+    get_three_pivot(list_b, size, pivot);
+    
+    //print
+    // printf("size = %d\n", size);
+    // printf("pivot[1] = %d\n", pivot[1]);
+
+    half_push_to_a(list_a, list_b, pivot, size - (size / 2));
+    if (finish_condition(list_a, list_b) == NG)
+        recursive_half_push(list_a, list_b);
+
+    half_push_back_to_b(list_a, list_b, size - (size / 2));
+    if (finish_condition(list_a, list_b) == NG)
+        recursive_half_push(list_a, list_b);
+}
+
+void push_swap(t_list **list_a, t_list **list_b)
+{
+    int pivot[3];
+    int size;
+
+    if (first_finish_condition(list_a, list_b) == OK)
+        return ;
+ 
+    size = ft_lstsize(*list_a);
+    get_three_pivot(list_a, size, pivot);
+    // printf("pivot[0] = %d\n", pivot[0]);
+    // printf("pivot[1] = %d\n", pivot[1]);
+    // printf("pivot[2] = %d\n", pivot[2]);
+    // printf("size / 2 = %d\n", size / 2);
+
+    first_half_push(list_a, list_b, pivot, size / 2);
+    if (finish_condition(list_a, list_b) == NG)
+        recursive_half_push(list_a, list_b);
+
+    second_half_push(list_a, list_b, pivot, size - (size / 2));
+    if (finish_condition(list_a, list_b) == NG)
+        recursive_half_push(list_a, list_b);
+}

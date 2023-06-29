@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/24 07:53:51 by atokamot          #+#    #+#             */
+/*   Updated: 2023/06/24 08:11:16atokamot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../header/ft_lst.h"
+#include "../header/operate.h"
+#include "../header/sort.h"
+
+void sort_two_a(t_list **list)
+{
+    if ((int)(*list)->content > (int)(*list)->next->content)
+        swap(list, A);
+}
+
+
+void sort_three_a(t_list **list)
+{
+    if ((int)(*list)->content < (int)(*list)->next->next->content  && (int)(*list)->next->next->content < (int)(*list)->next->content) 
+    {
+        swap(list, A);
+        rotate(list, A);
+    }
+    else if ((int)(*list)->next->content < (int)(*list)->content  && (int)(*list)->content < (int)(*list)->next->next->content) 
+        swap(list, A);
+    else if ((int)(*list)->next->content < (int)(*list)->next->next->content && (int)(*list)->next->next->content  < (int)(*list)->content) 
+        rotate(list, A);
+    else if ((int)(*list)->next->next->content < (int)(*list)->content && (int)(*list)->content < (int)(*list)->next->content) 
+        rev_rotate(list, A);
+    else if ((int)(*list)->next->next->content < (int)(*list)->next->content && (int)(*list)->next->content < (int)(*list)->content) 
+    {
+        swap(list, A);
+        rev_rotate(list, A);
+    }
+}
+
