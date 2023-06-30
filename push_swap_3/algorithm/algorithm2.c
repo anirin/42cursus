@@ -16,24 +16,24 @@
 #include "../header/push_swap.h"
 #include "../header/algorithm.h"
 
-int can_rotate(t_list **list)
+int can_rotate(t_list **list, t_list **swap_result)
 {
     if ((int)(*list)->content == (int)ft_lstlast(*list)->content + 1)
     {
-        rotate(list, A);
+        rotate(list, A, swap_result);
         return (OK);
     }
     else
         return (NG);
 }
 
-int can_swap_rotate(t_list **list)
+int can_swap_rotate(t_list **list, t_list **swap_result)
 {
     if ( ((int)(*list)->content == (int)ft_lstlast(*list)->content + 2) && ((int)(*list)->content == (int)(*list)->next->content + 1) )
     {
-        swap(list, A);
-        rotate(list, A);
-        rotate(list, A);
+        swap(list, A, swap_result);
+        rotate(list, A, swap_result);
+        rotate(list, A, swap_result);
         return (OK);
     }
     else

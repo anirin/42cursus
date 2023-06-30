@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 09:25:06 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/29 22:05:47 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/30 14:56:04 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,58 +16,58 @@
 #include "../header/push_swap.h"
 
 //recursive A (3~ ok)
-void sort_recursive_a(t_list **list_a, t_list **list_b, int size)
+void sort_recursive_a(t_list **list_a, t_list **list_b, int size, t_list **swap_result)
 {
     int flag;
 
     if (size == 2)
     {
-        sort_two_a(list_a);
+        sort_two_a(list_a, swap_result);
         return ;
     }
     if (size == 3)
     {
-        sort_three_a(list_a);
+        sort_three_a(list_a, swap_result);
         return ;
     }
-    flag = rotate_max_or_min(list_a, size , A); //1 give priority MIN 
-    push(list_a, list_b, B);
+    flag = rotate_max_or_min(list_a, size , A, swap_result); //1 give priority MIN 
+    push(list_a, list_b, B, swap_result);
     if (flag == BIG)
     {
-        sort_recursive_a(list_a, list_b, size - 1);
-        push(list_b, list_a, A);
-        rotate(list_a, A);
+        sort_recursive_a(list_a, list_b, size - 1, swap_result);
+        push(list_b, list_a, A, swap_result);
+        rotate(list_a, A, swap_result);
     }
     if (flag == SMALL)
     {
-        sort_recursive_a(list_a, list_b, size - 1);
-        push(list_b, list_a, A);
+        sort_recursive_a(list_a, list_b, size - 1, swap_result);
+        push(list_b, list_a, A, swap_result);
     }
 }
 
 //recursive B (1~ ok)
-void sort_recursive_b(t_list **list_a, t_list **list_b, int size)
+void sort_recursive_b(t_list **list_a, t_list **list_b, int size, t_list **swap_result)
 {
     int flag;
 
     if (size == 1)
     {
-        push(list_b, list_a, A);
-        rotate(list_a, A);
+        push(list_b, list_a, A, swap_result);
+        rotate(list_a, A, swap_result);
         return ;
     }
-    flag = rotate_max_or_min(list_b, size, B); //1
+    flag = rotate_max_or_min(list_b, size, B, swap_result); //1
     if (flag == BIG)
     {
-        push(list_b, list_a, A);
-        sort_recursive_b(list_a, list_b, size - 1);
-        rotate(list_a, A);
+        push(list_b, list_a, A, swap_result);
+        sort_recursive_b(list_a, list_b, size - 1, swap_result);
+        rotate(list_a, A, swap_result);
     }
     if (flag == SMALL)
     {
-        push(list_b, list_a, A);
-        rotate(list_a, A);
-        sort_recursive_b(list_a, list_b, size - 1);
+        push(list_b, list_a, A, swap_result);
+        rotate(list_a, A, swap_result);
+        sort_recursive_b(list_a, list_b, size - 1, swap_result);
     }
 }
 
@@ -100,7 +100,7 @@ t_location get_location(t_list *list, int size)
     return (location);
 }
 
-int rotate_max_or_min(t_list **list, int size, int flag)
+int rotate_max_or_min(t_list **list, int size, int flag, t_list **swap_result)
 {
     t_location location;
     int i;
@@ -117,7 +117,7 @@ int rotate_max_or_min(t_list **list, int size, int flag)
         {
             while (i < get_min(location.min, size))
             {
-                rotate(list, flag);
+                rotate(list, flag, swap_result);
                 i++; 
             }
         }
@@ -125,7 +125,7 @@ int rotate_max_or_min(t_list **list, int size, int flag)
         {
             while (i < get_min(location.min, size))
             {
-                rev_rotate(list, flag);
+                rev_rotate(list, flag, swap_result);
                 i++; 
             }
         }
@@ -137,7 +137,7 @@ int rotate_max_or_min(t_list **list, int size, int flag)
         {
             while (i < get_min(location.max, size))
             {
-                rotate(list, flag);
+                rotate(list, flag, swap_result);
                 i++; 
             }
         }
@@ -145,7 +145,7 @@ int rotate_max_or_min(t_list **list, int size, int flag)
         {
             while (i < get_min(location.max, size))
             {
-                rev_rotate(list, flag);
+                rev_rotate(list, flag, swap_result);
                 i++; 
             }
         }

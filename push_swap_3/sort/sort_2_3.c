@@ -14,30 +14,30 @@
 #include "../header/operate.h"
 #include "../header/sort.h"
 
-void sort_two_a(t_list **list)
+void sort_two_a(t_list **list, t_list **swap_result)
 {
     if ((int)(*list)->content > (int)(*list)->next->content)
-        swap(list, A);
+        swap(list, A, swap_result);
 }
 
 
-void sort_three_a(t_list **list)
+void sort_three_a(t_list **list, t_list **swap_result)
 {
     if ((int)(*list)->content < (int)(*list)->next->next->content  && (int)(*list)->next->next->content < (int)(*list)->next->content) 
     {
-        swap(list, A);
-        rotate(list, A);
+        swap(list, A, swap_result);
+        rotate(list, A, swap_result);
     }
     else if ((int)(*list)->next->content < (int)(*list)->content  && (int)(*list)->content < (int)(*list)->next->next->content) 
-        swap(list, A);
+        swap(list, A, swap_result);
     else if ((int)(*list)->next->content < (int)(*list)->next->next->content && (int)(*list)->next->next->content  < (int)(*list)->content) 
-        rotate(list, A);
+        rotate(list, A, swap_result);
     else if ((int)(*list)->next->next->content < (int)(*list)->content && (int)(*list)->content < (int)(*list)->next->content) 
-        rev_rotate(list, A);
+        rev_rotate(list, A, swap_result);
     else if ((int)(*list)->next->next->content < (int)(*list)->next->content && (int)(*list)->next->content < (int)(*list)->content) 
     {
-        swap(list, A);
-        rev_rotate(list, A);
+        swap(list, A, swap_result);
+        rev_rotate(list, A, swap_result);
     }
 }
 
