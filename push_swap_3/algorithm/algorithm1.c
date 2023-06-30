@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:58:07 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/29 22:34:19 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/30 12:59:56 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,19 @@ void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size)
         if ((int)(*list_a)->content <= pivot[1])
         {
             push(list_a, list_b, B);
-            // if ((int)(*list_b)->content > pivot[2])
-            //     rotate(list_b, B);
             i++;
         }
         else
         {
-            rotate(list_a, A);
+            if (*list_b != NULL && (int)(*list_b)->content <= pivot[0])
+            {
+                // printf("-------RR----------\n");
+                rotate(list_a, R);
+                rotate(list_b, C);
+            }
+            else
+                rotate(list_a, A);
+            // rotate(list_a, A);
         }
     }
 }

@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:22:51 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/29 19:31:23 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/30 11:26:14 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ int first_finish_condition(t_list **list_a, t_list **list_b);
 int finish_condition(t_list **list_a, t_list **list_b);
 void half_push_to_a(t_list **list_a, t_list **list_b, int *pivot, int size);
 void half_push_back_to_b(t_list **list_a, t_list **list_b, int size);
+int rotate_nmax_and_nmin(t_list *list, int *sorted_arry, int size, int n);
 
 #endif

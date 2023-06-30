@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:35:08 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/29 19:22:07 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/30 10:48:59 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,18 @@ void set_arry_num(int *arry, t_list *list)
 
     i = 0;
     while (list != NULL)
+    {
+        arry[i++] = (int)list->content;
+        list = list->next;
+    }
+}
+
+void set_arry_num_by_size(int *arry, t_list *list, int size)
+{
+    int i;
+
+    i = 0;
+    while (i < size)
     {
         arry[i++] = (int)list->content;
         list = list->next;
