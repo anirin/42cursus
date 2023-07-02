@@ -6,11 +6,15 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:15:23 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 15:59:49 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:30:54 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/push_swap.h"
+#include "../header/algorithm.h"
 #include "../header/ft_lst.h"
+#include "../header/operate.h"
+#include "../header/sort.h"
 
 static long	get_min_result(const char *str)
 {

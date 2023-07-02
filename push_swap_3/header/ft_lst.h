@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:58:38 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 16:14:50 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:20:15 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,6 @@
 # define NOT_SEP 0
 # define HEAD 1
 # define NOT_HEAD 0
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}					t_list;
 
 int					ft_atoi(const char *str);
 void				ft_lstadd_front(t_list **lst, t_list *new);

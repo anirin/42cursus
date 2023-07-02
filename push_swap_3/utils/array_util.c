@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array.c                                            :+:      :+:    :+:   */
+/*   array_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:35:08 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 16:13:39 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:22:28 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/push_swap.h"
+#include "../header/algorithm.h"
 #include "../header/ft_lst.h"
 #include "../header/operate.h"
-#include "../header/push_swap.h"
 #include "../header/sort.h"
 
 void	swap_array(int *a, int *b)

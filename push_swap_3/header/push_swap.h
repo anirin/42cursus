@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:51:34 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 16:15:04 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:19:54 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include <libc.h>
 
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;	
+
 typedef struct s_three_lists
 {
 	t_list	*sub_list_a;
@@ -22,7 +28,6 @@ typedef struct s_three_lists
 	t_list	*sub_swap_result;
 }			t_three_lists;
 
-//array
 void		swap_array(int *a, int *b);
 int			bub_sort_array(int *array, int size);
 void		set_array(int *array, int size, char **argv);

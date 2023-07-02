@@ -6,11 +6,15 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 16:28:34 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/29 11:18:18 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:31:11 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/push_swap.h"
+#include "../header/algorithm.h"
 #include "../header/ft_lst.h"
+#include "../header/operate.h"
+#include "../header/sort.h"
 
 int	ft_lstsize(t_list *lst)
 {

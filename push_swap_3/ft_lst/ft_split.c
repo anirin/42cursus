@@ -6,11 +6,15 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:39:47 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 16:01:21 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:31:14 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/push_swap.h"
+#include "../header/algorithm.h"
 #include "../header/ft_lst.h"
+#include "../header/operate.h"
+#include "../header/sort.h"
 
 static size_t	get_word_num(char const *s, char c)
 {

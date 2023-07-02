@@ -6,14 +6,14 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:09:10 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 16:10:01 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:22:32 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/push_swap.h"
 #include "../header/algorithm.h"
 #include "../header/ft_lst.h"
 #include "../header/operate.h"
-#include "../header/push_swap.h"
 #include "../header/sort.h"
 
 void	set_main_lists(t_three_lists *three_lists, int size, int *array)
@@ -26,15 +26,17 @@ void	set_main_lists(t_three_lists *three_lists, int size, int *array)
 int	*set_main_array(int size, char **argv)
 {
 	int	*array;
-	int	sorted_array[size];
+	int	*sorted_array;
 
 	array = malloc(sizeof(int) * size);
-	if (array == NULL)
-		return (NULL);
+	sorted_array = malloc(sizeof(int) * size);
+	if (array == NULL || sorted_array == NULL)
+		exit(1);
 	set_array(array, size, argv);
 	set_array(sorted_array, size, argv);
 	bub_sort_array(sorted_array, size);
 	compress_array(array, sorted_array, size);
+	free(sorted_array);
 	return (array);
 }
 

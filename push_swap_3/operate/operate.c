@@ -6,10 +6,12 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:24:29 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 16:02:38 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:33:54 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/push_swap.h"
+#include "../header/algorithm.h"
 #include "../header/ft_lst.h"
 #include "../header/operate.h"
 #include "../header/sort.h"

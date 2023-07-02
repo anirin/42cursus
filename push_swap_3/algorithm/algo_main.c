@@ -1,48 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithm1.c                                       :+:      :+:    :+:   */
+/*   algo_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:58:07 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 15:55:15 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:21:21 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/push_swap.h"
 #include "../header/algorithm.h"
 #include "../header/ft_lst.h"
 #include "../header/operate.h"
-#include "../header/push_swap.h"
 #include "../header/sort.h"
 
-void	first_half_push(t_three_lists *three_lists, int *pivot, int size)
+void	first_half_push(t_three_lists *lsts, int *pivot, int size)
 {
 	int		i;
-	t_list	**list_a;
-	t_list	**list_b;
 	t_list	**swap_result;
 
-	list_a = &three_lists->sub_list_a;
-	list_b = &three_lists->sub_list_b;
-	swap_result = &three_lists->sub_swap_result;
+	swap_result = &lsts->sub_swap_result;
 	i = 0;
 	while (i < size)
 	{
-		if ((int)(*list_a)->content <= pivot[1])
+		if ((int)(lsts->sub_list_a)->content <= pivot[1])
 		{
-			push(list_a, list_b, B, swap_result);
+			push(&lsts->sub_list_a, &lsts->sub_list_b, B, swap_result);
 			i++;
 		}
 		else
 		{
-			if (*list_b != NULL && (int)(*list_b)->content <= pivot[0])
+			if (lsts->sub_list_b != NULL
+				&& (int)(lsts->sub_list_b)->content <= pivot[0])
 			{
-				rotate(list_a, R, swap_result);
-				rotate(list_b, C, swap_result);
+				rotate(&lsts->sub_list_a, R, swap_result);
+				rotate(&lsts->sub_list_b, C, swap_result);
 			}
 			else
-				rotate(list_a, A, swap_result);
+				rotate(&lsts->sub_list_a, A, swap_result);
 		}
 	}
 }

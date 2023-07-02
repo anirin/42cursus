@@ -6,13 +6,14 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 09:25:06 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 16:07:20 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:22:23 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/push_swap.h"
+#include "../header/algorithm.h"
 #include "../header/ft_lst.h"
 #include "../header/operate.h"
-#include "../header/push_swap.h"
 #include "../header/sort.h"
 
 void	sort_recursive_a(t_list **list_a, t_list **list_b, int size,
@@ -81,10 +82,13 @@ int	get_min(int i, int size)
 
 t_location	get_location(t_list *list, int size)
 {
-	int			array[size];
+	int			*array;
 	int			i;
 	t_location	location;
 
+	array = malloc(sizeof(int) * size);
+	if (array == NULL)
+		exit(1);
 	i = 0;
 	set_array_num(array, list);
 	bub_sort_array(array, size);
@@ -97,54 +101,6 @@ t_location	get_location(t_list *list, int size)
 		list = list->next;
 		i++;
 	}
+	free(array);
 	return (location);
-}
-
-int	rotate_max_or_min(t_list **list, int size, int flag, t_list **swap_result)
-{
-	t_location	location;
-	int			i;
-
-	location = get_location(*list, size);
-	i = 0;
-	if (get_min(location.min, size) <= get_min(location.max, size))
-	{
-		if (location.min < size / 2 + 1)
-		{
-			while (i < get_min(location.min, size))
-			{
-				rotate(list, flag, swap_result);
-				i++;
-			}
-		}
-		else
-		{
-			while (i < get_min(location.min, size))
-			{
-				rev_rotate(list, flag, swap_result);
-				i++;
-			}
-		}
-		return (SMALL);
-	}
-	else
-	{
-		if (location.max < size / 2 + 1)
-		{
-			while (i < get_min(location.max, size))
-			{
-				rotate(list, flag, swap_result);
-				i++;
-			}
-		}
-		else
-		{
-			while (i < get_min(location.max, size))
-			{
-				rev_rotate(list, flag, swap_result);
-				i++;
-			}
-		}
-		return (BIG);
-	}
 }

@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   array2.c                                           :+:      :+:    :+:   */
+/*   set_array.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 16:12:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 16:14:11 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 22:22:43 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../header/push_swap.h"
+#include "../header/algorithm.h"
 #include "../header/ft_lst.h"
 #include "../header/operate.h"
-#include "../header/push_swap.h"
 #include "../header/sort.h"
 
 void	set_array(int *array, int size, char **argv)
