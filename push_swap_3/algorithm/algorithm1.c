@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 16:58:07 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/30 14:49:46 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 13:20:54 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@
 #include "../header/push_swap.h"
 #include "../header/algorithm.h"
 
-void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size, t_list **swap_result)
+void first_half_push(t_three_lists *three_lists, int *pivot, int size)
 {
     int i;
+    t_list **list_a;
+    t_list **list_b;
+    t_list **swap_result;
 
+    list_a = three_lists->sub_list_a;
+    list_b = three_lists->sub_list_b;
+    swap_result = three_lists->sub_swap_result;
     i = 0;
     while (i < size)
     {
@@ -32,36 +38,36 @@ void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size, t_l
         {
             if (*list_b != NULL && (int)(*list_b)->content <= pivot[0])
             {
-                // printf("-------RR----------\n");
                 rotate(list_a, R, swap_result);
                 rotate(list_b, C, swap_result);
             }
             else
                 rotate(list_a, A, swap_result);
-            // rotate(list_a, A);
         }
     }
 }
 
-void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size, t_list **swap_result)
+void second_half_push(t_three_lists *three_lists, int *pivot, int size)
 {
     int i;
+    t_list **list_a;
+    t_list **list_b;
+    t_list **swap_result;
 
+    list_a = three_lists->sub_list_a;
+    list_b = three_lists->sub_list_b;
+    swap_result = three_lists->sub_swap_result;
     i = 0;
     while (i < size)
     {
-        if (can_rotate(list_a, swap_result) == OK)
+        if (can_rotate(three_lists) == OK)
             i++;
-        else if (can_swap_rotate(list_a, swap_result) == OK)
+        else if (can_swap_rotate(three_lists) == OK)
             i += 2;
         else if ((int)(*list_a)->content > pivot[1])
         {
             if (!(*list_b == NULL && i == size - 1))
-            {
                 push(list_a, list_b, B, swap_result);
-                // if ((int)(*list_b)->content > pivot[2])
-                //     rotate(list_b, B);
-            }
             i++;
         }
         else
@@ -69,49 +75,41 @@ void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size, t_
     }
 }
 
-void recursive_half_push(t_list **list_a, t_list **list_b, t_list **swap_result)
+void recursive_half_push(t_three_lists *three_lists)
 {
     int pivot[3];
     int size;
 
-    if (finish_condition(list_a, list_b, swap_result) == OK)
+    if (finish_condition(three_lists) == OK)
         return ;
-    size = ft_lstsize(*list_b);
-    get_three_pivot(list_b, size, pivot);
-    
-    //print
-    // printf("size = %d\n", size);
-    // printf("pivot[1] = %d\n", pivot[1]);
+    size = ft_lstsize(*three_lists->sub_list_b);
+    get_three_pivot(three_lists->sub_list_b, size, pivot);
 
-    half_push_to_a(list_a, list_b, pivot, size - (size / 2), swap_result);
-    if (finish_condition(list_a, list_b, swap_result) == NG)
-        recursive_half_push(list_a, list_b, swap_result);
+    half_push_to_a(three_lists, pivot, size - (size / 2));
+    if (finish_condition(three_lists) == NG)
+        recursive_half_push(three_lists);
 
-    half_push_back_to_b(list_a, list_b, size - (size / 2), swap_result);
-    if (finish_condition(list_a, list_b, swap_result) == NG)
-        recursive_half_push(list_a, list_b, swap_result);
+    half_push_back_to_b(three_lists, size - (size / 2));
+    if (finish_condition(three_lists) == NG)
+        recursive_half_push(three_lists);
 }
 
-void push_swap(t_list **list_a, t_list **list_b, t_list **swap_result)
+void push_swap(t_three_lists *three_lists)
 {
     int pivot[3];
     int size;
 
-    if (first_finish_condition(list_a, list_b, swap_result) == OK)
+    if (first_finish_condition(three_lists) == OK)
         return ;
  
-    size = ft_lstsize(*list_a);
-    get_three_pivot(list_a, size, pivot);
-    // printf("pivot[0] = %d\n", pivot[0]);
-    // printf("pivot[1] = %d\n", pivot[1]);
-    // printf("pivot[2] = %d\n", pivot[2]);
-    // printf("size / 2 = %d\n", size / 2);
+    size = ft_lstsize(*three_lists->sub_list_a);
+    get_three_pivot(three_lists->sub_list_a, size, pivot);
 
-    first_half_push(list_a, list_b, pivot, size / 2, swap_result);
-    if (finish_condition(list_a, list_b, swap_result) == NG)
-        recursive_half_push(list_a, list_b, swap_result);
+    first_half_push(three_lists, pivot, size / 2);
+    if (finish_condition(three_lists) == NG)
+        recursive_half_push(three_lists);
 
-    second_half_push(list_a, list_b, pivot, size - (size / 2), swap_result);
-    if (finish_condition(list_a, list_b, swap_result) == NG)
-        recursive_half_push(list_a, list_b, swap_result);
+    second_half_push(three_lists, pivot, size - (size / 2));
+    if (finish_condition(three_lists) == NG)
+        recursive_half_push(three_lists);
 }

@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 11:05:59 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/30 15:05:34 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/30 23:19:50 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ void swap(t_list **list, int flag, t_list **swap_result);
 void push(t_list **list_a, t_list **list_b, int flag, t_list **swap_result);
 void rotate(t_list **list, int flag, t_list **swap_result);
 void rev_rotate(t_list **list, int flag, t_list **swap_result);
+void swap_result_exit(t_list **swap_result, int flag);
 
 #endif

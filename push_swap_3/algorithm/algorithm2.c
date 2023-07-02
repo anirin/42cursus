@@ -16,24 +16,38 @@
 #include "../header/push_swap.h"
 #include "../header/algorithm.h"
 
-int can_rotate(t_list **list, t_list **swap_result)
+int can_rotate(t_three_lists *three_lists)
 {
-    if ((int)(*list)->content == (int)ft_lstlast(*list)->content + 1)
+    t_list **list_a;
+    t_list **list_b;
+    t_list **swap_result;
+
+    list_a = three_lists->sub_list_a;
+    list_b = three_lists->sub_list_b;
+    swap_result = three_lists->sub_swap_result;
+    if ((int)(*list_a)->content == (int)ft_lstlast(*list_a)->content + 1)
     {
-        rotate(list, A, swap_result);
+        rotate(list_a, A, swap_result);
         return (OK);
     }
     else
         return (NG);
 }
 
-int can_swap_rotate(t_list **list, t_list **swap_result)
+int can_swap_rotate(t_three_lists *three_lists)
 {
-    if ( ((int)(*list)->content == (int)ft_lstlast(*list)->content + 2) && ((int)(*list)->content == (int)(*list)->next->content + 1) )
+    t_list **list_a;
+    t_list **list_b;
+    t_list **swap_result;
+
+    list_a = three_lists->sub_list_a;
+    list_b = three_lists->sub_list_b;
+    swap_result = three_lists->sub_swap_result;
+    if ( ((int)(*list_a)->content == (int)ft_lstlast(*list_a)->content + 2) && ((int)(*list_a)->content == (int)(*list_a)->next->content + 1) )
     {
-        swap(list, A, swap_result);
-        rotate(list, A, swap_result);
-        rotate(list, A, swap_result);
+        swap(list_a, A, swap_result);
+        rotate(list_a, A, swap_result);
+        rotate(list_a, A, swap_result);
         return (OK);
     }
     else

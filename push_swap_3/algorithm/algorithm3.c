@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 18:21:28 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/30 14:53:19 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 13:26:08 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@
 #include "../header/push_swap.h"
 #include "../header/algorithm.h"
 
-int first_finish_condition(t_list **list_a, t_list **list_b, t_list **swap_result)
+int first_finish_condition(t_three_lists *three_lists)
 {
     int finish_size;
+    t_list **list_a;
+    t_list **list_b;
+    t_list **swap_result;
 
+    list_a = three_lists->sub_list_a;
+    list_b = three_lists->sub_list_b;
+    swap_result = three_lists->sub_swap_result;
     finish_size = 30; //change here
     
     if (ft_lstsize(*list_a) <= finish_size)
@@ -31,9 +37,16 @@ int first_finish_condition(t_list **list_a, t_list **list_b, t_list **swap_resul
         return (NG);
 }
 
-int finish_condition(t_list **list_a, t_list **list_b, t_list **swap_result)
+int finish_condition(t_three_lists *three_lists)
 {
     int finish_size;
+    t_list **list_a;
+    t_list **list_b;
+    t_list **swap_result;
+
+    list_a = three_lists->sub_list_a;
+    list_b = three_lists->sub_list_b;
+    swap_result = three_lists->sub_swap_result;
 
     finish_size = 25; //change here
     
@@ -48,9 +61,16 @@ int finish_condition(t_list **list_a, t_list **list_b, t_list **swap_result)
         return (NG);
 }
 
-void half_push_to_a(t_list **list_a, t_list **list_b, int *pivot, int size, t_list **swap_result)
+void half_push_to_a(t_three_lists *three_lists, int *pivot, int size)
 {
     int i;
+    t_list **list_a;
+    t_list **list_b;
+    t_list **swap_result;
+
+    list_a = three_lists->sub_list_a;
+    list_b = three_lists->sub_list_b;
+    swap_result = three_lists->sub_swap_result;
 
     i = 0;
     while (i < size) 
@@ -65,30 +85,35 @@ void half_push_to_a(t_list **list_a, t_list **list_b, int *pivot, int size, t_li
     }
 }
 
-void half_push_back_to_b(t_list **list_a, t_list **list_b, int size, t_list **swap_result)
+void half_push_back_to_b(t_three_lists *three_lists, int size)
 {
     int i;
     int sorted_arry[size];
+    t_list **list_a;
+    t_list **list_b;
+    t_list **swap_result;
+
+    list_a = three_lists->sub_list_a;
+    list_b = three_lists->sub_list_b;
+    swap_result = three_lists->sub_swap_result;
 
     i = 0;
     set_arry_num_by_size(sorted_arry, *list_a, size); //size < list size
     bub_sort_arry(sorted_arry, size);
     while (i < size)
     {
-        if (can_rotate(list_a, swap_result) == OK)
+        if (can_rotate(three_lists) == OK)
             i++;
-        else if (can_swap_rotate(list_a, swap_result) == OK)
+        else if (can_swap_rotate(three_lists) == OK)
             i += 2;
         else
         {
             if (!(*list_b == NULL && i == size - 1))
             {
                 push(list_a, list_b, B, swap_result);
-                // printf("---------OK------------\n");
                 if (rotate_nmax_and_nmin(*list_b, sorted_arry, size, i) == OK)
                 {
                     rotate(list_b, B, swap_result);
-                    // printf("-------ROTATE------------\n");
                 }
             }
             i++;

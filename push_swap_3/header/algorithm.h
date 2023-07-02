@@ -6,26 +6,26 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:22:51 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/30 15:06:27 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/01 19:35:41 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALGORITHM_H
 #define ALGORITHM_H
 
-void first_half_push(t_list **list_a, t_list **list_b, int *pivot, int size, t_list **swap_result);
-void second_half_push(t_list **list_a, t_list **list_b, int *pivot, int size, t_list **swap_result);
-void recursive_half_push(t_list **list_a, t_list **list_b, t_list **swap_result);
-void push_swap(t_list **list_a, t_list **list_b, t_list **swap_result);
+void first_half_push(t_three_lists *three_lists, int *pivot, int size);
+void second_half_push(t_three_lists *three_lists, int *pivot, int size);
+void recursive_half_push(t_three_lists *three_lists);
+void push_swap(t_three_lists *three_lists);
 
-int can_rotate(t_list **list, t_list **swap_result);
-int can_swap_rotate(t_list **list, t_list **swap_result);
+int can_rotate(t_three_lists *three_lists);
+int can_swap_rotate(t_three_lists *three_lists);
 void get_three_pivot(t_list **list, int size, int *pivot);
 
-int first_finish_condition(t_list **list_a, t_list **list_b, t_list **swap_result);
-int finish_condition(t_list **list_a, t_list **list_b, t_list **swap_result);
-void half_push_to_a(t_list **list_a, t_list **list_b, int *pivot, int size, t_list **swap_result);
-void half_push_back_to_b(t_list **list_a, t_list **list_b, int size, t_list **swap_result);
-int rotate_nmax_and_nmin(t_list *list, int *sorted_arry, int size, int n);
+int first_finish_condition(t_three_lists *three_lists);
+int finish_condition(t_three_lists *three_lists);
+void half_push_to_a(t_three_lists *three_lists, int *pivot, int size);
+void half_push_back_to_b(t_three_lists *three_lists, int size);
+int rotate_nmax_and_nmin(t_list *list, int *sorted_arry, int size, int i);
 
 #endif
