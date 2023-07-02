@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 18:21:28 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 13:26:08 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 13:43:45 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void half_push_to_a(t_three_lists *three_lists, int *pivot, int size)
 void half_push_back_to_b(t_three_lists *three_lists, int size)
 {
     int i;
-    int sorted_arry[size];
+    int sorted_array[size];
     t_list **list_a;
     t_list **list_b;
     t_list **swap_result;
@@ -98,8 +98,8 @@ void half_push_back_to_b(t_three_lists *three_lists, int size)
     swap_result = three_lists->sub_swap_result;
 
     i = 0;
-    set_arry_num_by_size(sorted_arry, *list_a, size); //size < list size
-    bub_sort_arry(sorted_arry, size);
+    set_array_num_by_size(sorted_array, *list_a, size); //size < list size
+    bub_sort_array(sorted_array, size);
     while (i < size)
     {
         if (can_rotate(three_lists) == OK)
@@ -111,7 +111,7 @@ void half_push_back_to_b(t_three_lists *three_lists, int size)
             if (!(*list_b == NULL && i == size - 1))
             {
                 push(list_a, list_b, B, swap_result);
-                if (rotate_nmax_and_nmin(*list_b, sorted_arry, size, i) == OK)
+                if (rotate_nmax_and_nmin(*list_b, sorted_array, size, i) == OK)
                 {
                     rotate(list_b, B, swap_result);
                 }
@@ -121,7 +121,7 @@ void half_push_back_to_b(t_three_lists *three_lists, int size)
     }
 }
 
-int rotate_nmax_and_nmin(t_list *list, int *sorted_arry, int size, int i)
+int rotate_nmax_and_nmin(t_list *list, int *sorted_array, int size, int i)
 {
     int finish_size_1;
     int finish_size_2;
@@ -132,7 +132,7 @@ int rotate_nmax_and_nmin(t_list *list, int *sorted_arry, int size, int i)
     n = 3; //change !! n 1~ n 3 max!!
     if (ft_lstsize(list) <= finish_size_1 || size - i <= finish_size_2)
         return (NG);
-    if ((int)list->content >= sorted_arry[size - n] || (int)list->content <= sorted_arry[n - 1])
+    if ((int)list->content >= sorted_array[size - n] || (int)list->content <= sorted_array[n - 1])
         return (OK); //change
     else
         return (NG);

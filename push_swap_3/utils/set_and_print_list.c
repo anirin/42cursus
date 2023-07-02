@@ -15,7 +15,7 @@
 #include "../header/sort.h"
 #include "../header/push_swap.h"
 
-t_list  *set_list(int size, int *arry)
+t_list  *set_list(int size, int *array)
 {
     int i;
     long num;
@@ -26,7 +26,7 @@ t_list  *set_list(int size, int *arry)
     list = NULL;
     while (i < size)
     {
-        num = (long)arry[i++];
+        num = (long)array[i++];
         new = ft_lstnew((void *)num);
         if (new == NULL)
         {

@@ -19,7 +19,6 @@ void swap(t_list **list, int flag, t_list **swap_result)
     t_list *tmp;
     t_list *p1;
     t_list *p2;
-    t_list *new;
 
     if (ft_lstsize(*list) < 2)
         return ;
@@ -42,9 +41,7 @@ void swap(t_list **list, int flag, t_list **swap_result)
 
 void push(t_list **list_a, t_list **list_b, int flag, t_list **swap_result)
 {
-    t_list *lst;
     t_list *tmp;
-    t_list *new;
 
     if (flag == A || flag == B)
         swap_result_exit(swap_result, flag + 30);
@@ -72,7 +69,6 @@ void rotate(t_list **list, int flag, t_list **swap_result)
     t_list *p1;
     t_list *p2;
     t_list *head;
-    t_list *new;
 
     if (flag == A || flag == B || flag == R)
         swap_result_exit(swap_result, flag + 20);
@@ -101,7 +97,6 @@ void rev_rotate(t_list **list, int flag, t_list **swap_result)
 {
     t_list *p1;
     t_list *p2;
-    t_list *new;
 
     if (flag == A || flag == B || flag == R)
         swap_result_exit(swap_result, flag + 40);

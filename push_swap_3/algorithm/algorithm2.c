@@ -56,11 +56,11 @@ int can_swap_rotate(t_three_lists *three_lists)
 
 void get_three_pivot(t_list **list, int size, int *pivot)
 {
-    int arry[size];
+    int array[size];
 
-    set_arry_num(arry, *list);
-    bub_sort_arry(arry, size);
-    pivot[0] = arry[(size / 4) - 1];
-    pivot[1] = arry[(size / 2) - 1];
-    pivot[2] = arry[(size / 2) + (size / 4) - 1];
+    set_array_num(array, *list);
+    bub_sort_array(array, size);
+    pivot[0] = array[(size / 4) - 1];
+    pivot[1] = array[(size / 2) - 1];
+    pivot[2] = array[(size / 2) + (size / 4) - 1];
 }

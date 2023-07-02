@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:09:10 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/01 19:26:02 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 13:56:27 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,52 +17,50 @@
 #include "../header/algorithm.h"
 
 
-t_three_lists set_main_lists(t_three_lists three_lists, int size, int *arry)
+void set_main_lists(t_three_lists *three_lists, int size, int *array)
 {
-    t_three_lists three_lists;
-
-    *three_lists.list_a == set_list(size, arry);
-    *three_lists.list_b == NULL;
-    *three_lists.swap_result == NULL;
-    return (three_lists);
+    *three_lists->sub_list_a = set_list(size, array);
+    *three_lists->sub_list_b = NULL;
+    *three_lists->sub_swap_result = NULL;
 }
 
-int *set_main_arry(int size, char **argv)
+int *set_main_array(int size, char **argv)
 {
-    int sorted_arry[size];
+    int *array;
+    int sorted_array[size];
     
-    arry = malloc(sizeof(int) * size);
-    if (arry == NULL)
+    array = malloc(sizeof(int) * size);
+    if (array == NULL)
         return (NULL);
-    set_arry(arry, size, argv);
-    set_arry(sorted_arry, size, argv);
-    sort_count = bub_sort_arry(sorted_arry, size);
-    compress_arry(arry, sorted_arry, size);
-    return (arry); 
+    set_array(array, size, argv);
+    set_array(sorted_array, size, argv);
+    bub_sort_array(sorted_array, size);
+    compress_array(array, sorted_array, size);
+    return (array); 
 }
 
 int main(int argc, char **argv)
 {
-    int *arry;
+    int *array;
     int size;
     t_three_lists three_lists;
 
     size = argc - 1; 
-    arry = set_arry_in_main(size, argv);
-    if (arry == NULL)
+    array = set_main_array(size, argv);
+    if (array == NULL)
         return (NG);
-    three_lists = set_list(size, arry);
+    set_main_lists(&three_lists, size, array);
     push_swap(&three_lists);
-    print_list(swap_result);
+    print_list(*three_lists.sub_swap_result);
 
     //end
-    free(arry);
-    ft_lstclear(three_lists.list_a, &del);
-    ft_lstclear(three_lists.swap_result, &del);
+    free(array);
+    ft_lstclear(three_lists.sub_list_a, &del);
+    ft_lstclear(three_lists.sub_swap_result, &del);
 }
 
 
     //print
-    //print_arry(arry, size);
+    //print_array(array, size);
 
 //gcc *.c ./*/*.c -I ./header  

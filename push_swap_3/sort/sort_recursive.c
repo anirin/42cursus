@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 09:25:06 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/30 14:56:04 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 13:43:45 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,18 +81,18 @@ int get_min(int i, int size)
 
 t_location get_location(t_list *list, int size)
 {
-    int arry[size];
+    int array[size];
     int i;
     t_location location;
 
     i = 0;
-    set_arry_num(arry, list);
-    bub_sort_arry(arry, size);
+    set_array_num(array, list);
+    bub_sort_array(array, size);
     while (list != NULL)
     {
-        if (arry[0] == (int)list->content)
+        if (array[0] == (int)list->content)
             location.min= i;
-        if (arry[size - 1] == (int)list->content)
+        if (array[size - 1] == (int)list->content)
             location.max = i;
         list = list->next;
         i++;
@@ -104,8 +104,6 @@ int rotate_max_or_min(t_list **list, int size, int flag, t_list **swap_result)
 {
     t_location location;
     int i;
-    int min_rotate_num;
-    int max_rotate_num;
 
     location = get_location(*list, size);
     //printf("size = %d, min = %d, max = %d\n", size, location.min, location.max);
