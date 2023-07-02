@@ -6,16 +6,16 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 19:15:51 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/29 11:18:08 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/02 16:00:42 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/ft_lst.h"
 
-void del(void *content)
+void	del(void *content)
 {
-    (void)content;
-    return ;   
+	(void)content;
+	return ;
 }
 
 void	ft_lstdelone(t_list *lst, void (*del)(void *))
