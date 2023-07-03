@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:09:10 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 22:22:32 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/03 22:21:29 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int	main(int argc, char **argv)
 	int				size;
 	t_three_lists	three_lists;
 
-	size = argc - 1;
+	// size = argc - 1;
+	if (error_check(argc, argv) == NG);
+		return (NG);
+	size = get_array_size();
 	array = set_main_array(size, argv);
 	if (array == NULL)
 		return (NG);
