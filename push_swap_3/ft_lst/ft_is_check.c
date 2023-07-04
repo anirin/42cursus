@@ -1,53 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_array.c                                        :+:      :+:    :+:   */
+/*   ft_is_check.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/02 16:12:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/04 21:07:24 by atokamot         ###   ########.fr       */
+/*   Created: 2023/05/16 16:17:12 by atokamot          #+#    #+#             */
+/*   Updated: 2023/07/04 23:59:51 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/push_swap.h"
 #include "../header/algorithm.h"
 #include "../header/ft_lst.h"
 #include "../header/operate.h"
+#include "../header/push_swap.h"
 #include "../header/sort.h"
 
-void	set_array(int *array, t_list *list)
+int	ft_isdigit(int c)
 {
-	int	i;
-
-	i = 0;
-	while (list != NULL)
-	{
-		array[i++] = (int)list->content;
-		list = list->next;
-	}
+	if (c >= '0' && c <= '9')
+		return (OK);
+	else
+		return (NG);
 }
 
-void	set_array_num(int *array, t_list *list)
+int	ft_issapce(int c)
 {
-	int	i;
-
-	i = 0;
-	while (list != NULL)
-	{
-		array[i++] = (int)list->content;
-		list = list->next;
-	}
+	if (c == ' ')
+		return (OK);
+	else
+		return (NG);
 }
 
-void	set_array_num_by_size(int *array, t_list *list, int size)
+int	is_plus_minus(int c)
 {
-	int	i;
-
-	i = 0;
-	while (i < size)
-	{
-		array[i++] = (int)list->content;
-		list = list->next;
-	}
+	if (c == '+' || c == '-')
+		return (OK);
+	else
+		return (NG);
 }

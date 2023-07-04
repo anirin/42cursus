@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:15:23 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 22:30:54 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/04 23:58:34 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static long	get_max_result(const char *str)
 	return (result);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi_long(const char *str)
 {
 	int		sign;
 	int		i;
@@ -76,14 +76,3 @@ int	ft_atoi(const char *str)
 		result = get_min_result(&str[i]);
 	return (result);
 }
-
-/*
-int	main(void)
-{
-	char	str[];
-
-	str[] = "-9223372036854775808";
-	printf("ft : %d\n", ft_atoi(str));
-	printf("or : %d\n", atoi(str));
-}
-*/

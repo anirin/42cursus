@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 14:35:08 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 22:22:28 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/04 23:54:47 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ void	compress_array(int *array, int *sorted_array, int size)
 	}
 }
 
-void	print_array(int *array, int size)
-{
-	int	i;
+// void	print_array(int *array, int size)
+// {
+// 	int	i;
 
-	i = 0;
-	while (i < size)
-	{
-		printf("array[%d]=%d\n", i, array[i]);
-		i++;
-	}
-}
+// 	i = 0;
+// 	while (i < size)
+// 	{
+// 		printf("array[%d]=%d\n", i, array[i]);
+// 		i++;
+// 	}
+// }

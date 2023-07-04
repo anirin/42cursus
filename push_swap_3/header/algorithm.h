@@ -6,14 +6,14 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 19:22:51 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 22:39:12 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/05 00:00:05 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ALGORITHM_H
 # define ALGORITHM_H
 
-#include "../header/push_swap.h"
+# include "../header/push_swap.h"
 
 void	first_half_push(t_three_lists *three_lists, int *pivot, int size);
 void	second_half_push(t_three_lists *three_lists, int *pivot, int size);

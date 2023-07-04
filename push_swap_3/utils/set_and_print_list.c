@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 20:18:33 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 22:22:38 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/04 23:57:51 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,15 @@ void	print_list(t_list *list)
 void	print_swap_and_push(t_list *list)
 {
 	if ((int)list->content == SA)
-		printf("sa\n");
+		write(1, "sa\n", 3);
 	else if ((int)list->content == SB)
-		printf("sb\n");
+		write(1, "sb\n", 3);
 	else if ((int)list->content == SS)
-		printf("ss\n");
+		write(1, "ss\n", 3);
 	else if ((int)list->content == PA)
-		printf("pa\n");
+		write(1, "pa\n", 3);
 	else if ((int)list->content == PB)
-		printf("pb\n");
+		write(1, "pb\n", 3);
 }
 
 int	print_rotate(t_list *list)
@@ -74,33 +74,33 @@ int	print_rotate(t_list *list)
 	{
 		if (list->next != NULL && (int)list->next->content == RB)
 		{
-			printf("rr\n");
+			write(1, "rr\n", 3);
 			return (OK);
 		}
 		else
-			printf("ra\n");
+			write(1, "ra\n", 3);
 	}
 	else if ((int)list->content == RB)
 	{
 		if (list->next != NULL && (int)list->next->content == RA)
 		{
-			printf("rr\n");
+			write(1, "rr\n", 3);
 			return (OK);
 		}
 		else
-			printf("rb\n");
+			write(1, "rb\n", 3);
 	}
 	else if ((int)list->content == RR)
-		printf("rr\n");
+		write(1, "rr\n", 3);
 	return (NG);
 }
 
 void	print_rev_rotate(t_list *list)
 {
 	if ((int)list->content == RRA)
-		printf("rra\n");
+		write(1, "rra\n", 4);
 	else if ((int)list->content == RRB)
-		printf("rrb\n");
+		write(1, "rrb\n", 4);
 	else if ((int)list->content == RRR)
-		printf("rrr\n");
+		write(1, "rrr\n", 4);
 }
