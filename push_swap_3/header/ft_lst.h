@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:58:38 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/05 00:00:21 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/05 01:42:34 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,6 @@ char	**ft_split(char const *s, char c);
 int		ft_isdigit(int c);
 int		ft_issapce(int c);
 int		is_plus_minus(int c);
+int     ft_strcmp(char *str1, char *str2);
 
 #endif
