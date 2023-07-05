@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 01:29:51 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/05 16:38:32 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/05 22:27:07 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,13 @@ int	first_set_list(int argc, char **argv, t_list **list)
 		j = 0;
 		while (split_result[j] != NULL)
 		{
-			num = ft_atoi_long(split_result[j]);
+			num = ft_atoi_long(split_result[j++]);
 			if (num < INT_MIN || num > INT_MAX)
 				return (NG);
 			ft_lstadd_back(list, ft_lstnew((void *)num));
-			j++;
+			free(split_result[j - 1]);
 		}
+		free(split_result);
 	}
 	return (OK);
 }

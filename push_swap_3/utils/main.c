@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/29 10:09:10 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/05 01:30:28 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/05 22:44:17 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	main(int argc, char **argv)
 		push_swap(&three_lists);
 	print_list(three_lists.sub_swap_result);
 	free(array);
-	free(list);
+	ft_lstclear(&list, &del);
 	ft_lstclear(&three_lists.sub_list_a, &del);
 	ft_lstclear(&three_lists.sub_swap_result, &del);
 	return (0);
