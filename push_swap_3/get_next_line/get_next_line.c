@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/31 09:51:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/06/12 12:45:26 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/06/02 17:48:12 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ char	*ft_gnljoin(char const *s1, char const *s2, int check)
 	char	*result;
 	size_t	s1_len;
 
-	// if (save == NULL)
-	// 	save = ft_calloc(1, 1);
 	if (s1 == NULL)
 		return (NULL);
 	s1_len = ft_strlen(s1);
@@ -70,8 +68,8 @@ char	*get_newline(char *save, int fd)
 			if (check == -1)
 				return (NULL);
 			buf[check] = '\0';
-			// if (save == NULL)
-			// 	save = ft_calloc(1, 1);
+			if (save == NULL)
+				save = ft_calloc(1, 1);
 			tmp = save;
 			save = ft_gnljoin(tmp, buf, check);
 			free(tmp);
