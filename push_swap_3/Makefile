@@ -55,18 +55,21 @@ $(BONUS_TARGET) : $(ALGOOBJS) $(FTLSTOBJS) $(SORTOBJS) $(OPEOBJS) $(CHECK_UTILSO
 
 bonus : $(BONUS_TARGET)
 
-fclean :
+clean :
 	rm -rf $(ALGOOBJS) $(FTLSTOBJS) $(SORTOBJS) $(OPEOBJS) $(UTILSOBJS) $(GNLOBJS) $(CHECKOBJS)
 
-clean : fclean
+fclean : clean
 	rm -rf $(TARGET) $(BONUS_TARGET)
 
-re : clean all
+re : fclean all
 
 .PHONY : all clean fclean re
 
 echo :
 	echo $(UTILSSRCS)
 
-debug : clean
+debug : fclean
 	gcc ./*/*.c -I ./header -g -fsanitize=address -o push_swap
+
+bonus_debug : fclean
+	gcc -I ./header $(ALGOSRCS) $(FTLSTSRCS) $(SORTSRCS) $(OPESRCS) $(CHECK_UTILSSRCS) $(CHECKSRCS) $(GNLSRCS) -g -fsanitize=address -o checker

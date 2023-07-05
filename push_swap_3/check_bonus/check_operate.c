@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 01:03:02 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/05 16:40:28 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/05 18:23:59 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	check_swap(char *str, t_three_lists *lists)
 void	check_push(char *str, t_three_lists *lists)
 {
 	if (ft_strcmp(str, "pa\n") == 0)
-		push(&lists->sub_list_a, &lists->sub_list_b, C,
+		push(&lists->sub_list_b, &lists->sub_list_a, C,
 			&lists->sub_swap_result);
 	if (ft_strcmp(str, "pb\n") == 0)
-		push(&lists->sub_list_b, &lists->sub_list_a, C,
+		push(&lists->sub_list_a, &lists->sub_list_b, C,
 			&lists->sub_swap_result);
 }
 

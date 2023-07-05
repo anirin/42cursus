@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:24:29 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/02 22:33:54 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/05 18:25:16 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	push(t_list **list_a, t_list **list_b, int flag, t_list **swap_result)
 
 	if (flag == A || flag == B)
 		swap_result_exit(swap_result, flag + 30);
+	if (ft_lstsize(*list_a) == 0)
+		return ;
 	if (ft_lstsize(*list_a) == 1)
 	{
 		ft_lstadd_front(list_b, *list_a);

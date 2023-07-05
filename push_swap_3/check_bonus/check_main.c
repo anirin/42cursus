@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/05 00:23:34 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/05 16:40:12 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/05 18:29:36 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ void	help_check_result(t_three_lists *lists, char *str)
 	else if (ft_strcmp(str, "ra\n") == 0 || ft_strcmp(str, "rb\n") == 0
 		|| ft_strcmp(str, "rr\n") == 0)
 		check_rotate(str, lists);
-	else if (ft_strcmp(str, "ra\n") == 0 || ft_strcmp(str, "rb\n") == 0
-		|| ft_strcmp(str, "rr\n") == 0)
+	else if (ft_strcmp(str, "rra\n") == 0 || ft_strcmp(str, "rrb\n") == 0
+		|| ft_strcmp(str, "rrr\n") == 0)
 		check_rev_rotate(str, lists);
 	else
 		print_error_and_exit();
