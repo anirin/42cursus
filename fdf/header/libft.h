@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 13:27:49 by atokamot          #+#    #+#             */
-/*   Updated: 2023/05/29 16:25:48 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/10 11:38:30 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,11 @@
 # define HEAD 1
 # define NOT_HEAD 0
 
-# include <ctype.h>
-# include <fcntl.h>
-# include <limits.h>
-# include <stdio.h>
-# include <stdlib.h>
-# include <string.h>
-# include <unistd.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
+
+# include <libc.h>
 
 typedef struct s_list
 {
@@ -83,5 +81,8 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
+
+//gnl
+char	*get_next_line(int fd);
 
 #endif

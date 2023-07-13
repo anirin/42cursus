@@ -1,11 +1,25 @@
 CC = gcc
 NAME = test
 
-SRC = main.c
+SRC = main.c ./fdf/map.c ./fdf/tool.c
 OBJ = $(SRC:.c=.o)
 
-$(NAME): $(OBJ)
-	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 %.o: %.c
-	$(CC) -Wall -Wextra -Werror -Imlx -c $< -o $@
+	$(CC) -I ./header -Wall -Wextra -Werror -Imlx -c $< -o $@
+
+$(NAME): $(OBJ)
+	make -C ./libft
+	$(CC) $(OBJ) -g -fsanitize=address -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) libft.a
+#	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) libft.a
+
+all : $(NAME)
+
+fclean : 
+	rm -rf $(OBJ) 
+
+clean : fclean
+	make fclean -C ./libft
+	rm -rf $(NAME)
+
+re : clean all
