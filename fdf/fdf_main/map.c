@@ -6,14 +6,14 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:58:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/13 23:36:14 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:47:07 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./header/libft.h"
-#include "./header/fdf.h"
+#include "../header/libft.h"
+#include "../header/fdf.h"
 
-int get_map_width(char *one_line)
+int get_map_width(const char *one_line)
 {
     char **split_result;
     int count;
@@ -24,17 +24,19 @@ int get_map_width(char *one_line)
     {
         if (split_result[count] == NULL)
             break;
-        free(ft_split[count]);
+        free(split_result[count]);
         count++;
     }
     free(split_result);
     return (count);
 }
 
-int get_map_size(char **argv)
+t_wid_hig get_map_size(const char **argv)
 {
 	int w;
 	int h;
+	int fd;
+	char *one_line;
 
 	w = 0;
 	h = 0;
@@ -50,7 +52,10 @@ int get_map_size(char **argv)
 		free(one_line);
 	}
 	close(fd);
-	return (w * h);
+	t_wid_hig size;
+	size.w = w;
+	size.h = h;
+	return (size);
 }
 
 void get_map_info(char **result, t_cor *map)
@@ -72,21 +77,22 @@ void get_map_info(char **result, t_cor *map)
 	y++;
 }
 
-t_data *get_map(char **argv)
+t_cor *get_map(const char **argv, size_t size)
 {
 	char *one_line;
 	char **split_result;
 	t_cor *map;
+	int fd;
 
-	map = malloc(sizeof(t_cor) * get_map_size);
+	map = malloc(sizeof(t_cor) * size);
 	fd = open(argv[1], O_RDONLY);
 	while (1)
 	{
 		one_line = get_next_line(fd);
-		split_result = split(one_line);
+		split_result = ft_split(one_line, ' ');
 		if (one_line == NULL)
 			break;
-		get_map(split_result, &map);
+		get_map_info(split_result, map);
 		free(one_line);
 		free(split_result);
 	}

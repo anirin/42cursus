@@ -1,7 +1,7 @@
 CC = gcc
 NAME = test
 
-SRC = main.c ./fdf/map.c ./fdf/tool.c
+SRC = main.c ./fdf_main/map.c
 OBJ = $(SRC:.c=.o)
 
 

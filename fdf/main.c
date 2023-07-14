@@ -132,6 +132,29 @@ void change_cor(t_cor *map, int size, t_cor ps)
 	int i = 0;
 	t_cor cor;
 
+	/*
+	//test
+	while (i < size)
+	{
+		//diff
+		cor.x = map[i].x - ps.x;
+		cor.y = map[i].y - ps.y;
+		cor.z = map[i].z - ps.z;
+
+		//rotate
+		map[i].x = cos_a * cos_b * cor.x\
+				+ cos_a * sin_b * cor.y\
+				+ sin_a * cor.z;
+		map[i].y = -sin_b * cor.x\
+				+ cos_b * cor.y;
+		map[i].z = - sin_a * cos_b * cor.x\
+				- sin_a * sin_b * cor.y\
+				+ cos_a * cor.z;
+
+		i++;
+	}
+	*/
+
 	while (i < size)
 	{
 		//diff
@@ -174,9 +197,9 @@ int	main(int argc, char **argv)
 
 	//perspective
 	t_cor ps;
-	ps.x = 20;
+	ps.x = 10; //over 20 danger : move like z??
 	ps.y = 10;
-	ps.z = 9;
+	ps.z = 10;
 
 	//rotate
 	printf("--rotate--\n");
