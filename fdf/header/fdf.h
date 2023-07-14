@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:28:48 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/13 21:31:59 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/14 16:54:51 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <mlx.h>
 #include <math.h>
 
-#define ZOOM 20
+#define ZOOM 1
 #define DIS_W 1920
 #define DIS_H 1000
 
@@ -38,6 +38,15 @@ typedef struct	s_wid_hig {
 	int w;
 	int h;
 }				t_wid_hig;
+
+typedef struct	s_trig_ab {
+	double a;
+	double b;
+	double sin_a;
+	double cos_a;
+	double sin_b;
+	double cos_b;
+}				t_trig_ab;
 
 //map
 int get_map_width(const char *one_line);

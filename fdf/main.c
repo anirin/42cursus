@@ -58,13 +58,17 @@ void connect_dot(double ax, double ay, double bx, double by, t_data img)
 	{
 		while(y <= by || y <= ay)
 		{
-			my_mlx_pixel_put(&img, (int)x + DIS_W / 2 , (int)y + DIS_H / 2, 0x00FF0000);
+			if ((int)x + DIS_W / 2 > 0 && (int)x + DIS_W / 2 < DIS_W \
+				&& (int)y + DIS_H / 2 > 0 && (int)y + DIS_H / 2 < DIS_H)
+			{
+				my_mlx_pixel_put(&img, (int)x + DIS_W / 2 , (int)y + DIS_H / 2, 0x00FF0000);
+			}
 			y++;
 		}
 	}
 
-	printf("min x=%d, y=%d\n", x, y);
-	printf("slope = %f, intercept = %f\n", slope, intercept);
+	// printf("min x=%d, y=%d\n", x, y);
+	// printf("slope = %f, intercept = %f\n", slope, intercept);
 	int tmp = (int)y;
 	while(x <= bx || x <= ax)
 	{
@@ -72,13 +76,17 @@ void connect_dot(double ax, double ay, double bx, double by, t_data img)
 		while(y <= by || y <= ay)
 		{
 			check = y - slope * x - intercept;
-			printf("check = %f\n", check);
+			// printf("check = %f\n", check);
 			if (check < 1.5 && check > -1.5)
 			{
-				printf("-----put pixel------\n");
-				my_mlx_pixel_put(&img, (int)x + DIS_W / 2 , (int)y + DIS_H / 2, 0x00FF0000);
+				// printf("-----put pixel------\n");
+				if ((int)x + DIS_W / 2 > 0 && (int)x + DIS_W / 2 < DIS_W \
+					&& (int)y + DIS_H / 2 > 0 && (int)y + DIS_H / 2 < DIS_H)
+				{
+					my_mlx_pixel_put(&img, (int)x + DIS_W / 2 , (int)y + DIS_H / 2, 0x00FF0000);
+				}
 			}
-			printf("x=%d, y=%d\n", x + DIS_W / 2 , y + DIS_H / 2);
+			// printf("x=%d, y=%d\n", x + DIS_W / 2 , y + DIS_H / 2);
 			y++;
 		}
 		x++;
@@ -114,23 +122,55 @@ void print_map(const t_wid_hig size, const t_cor *map, t_data img)
 	}
 }
 
-void change_cor(t_cor *map, int size, t_cor ps)
+t_trig_ab get_trig_ab(t_cor ps)
 {
-	double sin_a;
-	double cos_a;
-	double sin_b;
-	double cos_b;
-	double a = sqrt(pow(ps.x, 2) + pow(ps.y, 2));
-	double b = sqrt(pow(a, 2) + pow(ps.z, 2));
+	t_trig_ab trig_ab;
+
+	trig_ab.a = sqrt(pow(ps.x, 2) + pow(ps.y, 2)); 
+	trig_ab.b = sqrt(pow(ps.x, 2) + pow(ps.y, 2) + pow(ps.z, 2)); 
 
 	//sin cos b = 0 not
-	sin_a = ps.x / b;
-	cos_a = ps.y / a;
-	sin_b = ps.z / b;
-	cos_b = a / b;
+	trig_ab.sin_a = ps.x / trig_ab.a; //changed formula
+	trig_ab.cos_a = ps.y / trig_ab.a; 
+	trig_ab.sin_b = ps.z / trig_ab.b;
+	trig_ab.cos_b = trig_ab.a / trig_ab.b;
+	return (trig_ab);
+}
 
+void change_cor(t_cor *map, int size, t_cor ps, t_trig_ab trig_ab, int d)
+{
 	int i = 0;
 	t_cor cor;
+	double sin_a = trig_ab.sin_a;
+	double cos_a = trig_ab.cos_a;
+	double sin_b = trig_ab.sin_b;
+	double cos_b = trig_ab.cos_b;
+
+	while (i < size)
+	{
+		//diff
+		cor.x = map[i].x - ps.x;
+		cor.y = map[i].y - ps.y;
+		cor.z = map[i].z - ps.z;
+
+		//rotate
+		map[i].x = sin_a * sin_b * cor.x\
+				- sin_a * cos_b * cor.y\
+				+ cos_a * cor.z;
+		map[i].y = cos_b * cor.x\
+				+ sin_b * cor.y;
+		map[i].z = - cos_a * sin_b * cor.x\
+				+ cos_a * cos_b * cor.y\
+				+ sin_a * cor.z;
+
+		//central projection
+		d = (double)d;
+		map[i].x *= d / (d + map[i].z);
+		map[i].y *= d / (d + map[i].z);
+
+		i++;
+	}
+
 
 	/*
 	//test
@@ -154,28 +194,6 @@ void change_cor(t_cor *map, int size, t_cor ps)
 		i++;
 	}
 	*/
-
-	while (i < size)
-	{
-		//diff
-		cor.x = map[i].x - ps.x;
-		cor.y = map[i].y - ps.y;
-		cor.z = map[i].z - ps.z;
-
-		//rotate
-		map[i].x = sin_a * sin_b * cor.x\
-				- sin_a * cos_b * cor.y\
-				+ cos_a * cor.z;
-		map[i].y = cos_b * cor.x\
-				+ sin_b * cor.y;
-		map[i].z = - cos_a * sin_b * cor.x\
-				+ cos_a * cos_b * cor.y\
-				+ sin_a * cor.z;
-
-		i++;
-	}
-
-
 }
 
 int	main(int argc, char **argv)
@@ -198,12 +216,17 @@ int	main(int argc, char **argv)
 	//perspective
 	t_cor ps;
 	ps.x = 10; //over 20 danger : move like z??
-	ps.y = 10;
-	ps.z = 10;
+	ps.y = 10; //move as y
+	ps.z = 30; //mave as -x
 
+	//depth
+	int d = 10;
+
+	t_trig_ab trig_ab;
+	trig_ab = get_trig_ab(ps);
 	//rotate
 	printf("--rotate--\n");
-	change_cor(map, size.w * size.h, ps);
+	change_cor(map, size.w * size.h, ps, trig_ab, d);
 
 	//print
 	printf("--print--\n");
