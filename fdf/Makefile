@@ -1,5 +1,5 @@
 CC = gcc
-NAME = test
+NAME = fdf_exe
 
 SRC = main.c ./fdf_main/map.c
 OBJ = $(SRC:.c=.o)
