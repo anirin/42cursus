@@ -21,7 +21,7 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void connect_dot(double ax, double ay, double bx, double by, t_data img)
+void connect_dot(double ax, double ay, double bx, double by, t_data img, int zoom)
 {
 	int x;
 	int y;
@@ -30,10 +30,10 @@ void connect_dot(double ax, double ay, double bx, double by, t_data img)
 	double check;
 
 	//zoom
-	ax = ZOOM * ax;
-	ay = ZOOM * ay;
-	bx = ZOOM * bx;
-	by = ZOOM * by;
+	ax = zoom * ax;
+	ay = zoom * ay;
+	bx = zoom * bx;
+	by = zoom * by;
 
 	if (ax != bx)
 	{
@@ -93,7 +93,7 @@ void connect_dot(double ax, double ay, double bx, double by, t_data img)
 	}
 }
 
-void print_map(const t_wid_hig size, const t_cor *map, t_data img)
+void print_map(const t_wid_hig size, const t_cor *map, t_data img, int zoom)
 {
 	int x;
 	int y;
@@ -110,11 +110,11 @@ void print_map(const t_wid_hig size, const t_cor *map, t_data img)
 			if (y < size.h - 1)
 			{
 				// printf("x=%f, y=%f, x=%f, y=%f\n", map[num].x, map[num].y, map[num + size.w].x, map[num + size.w].y);
-				connect_dot(map[num].x, map[num].y, map[num + size.w].x, map[num + size.w].y, img);
+				connect_dot(map[num].x, map[num].y, map[num + size.w].x, map[num + size.w].y, img, zoom);
 			}
 			if (x < size.w - 1)
 			{
-				connect_dot(map[num].x, map[num].y, map[num + 1].x, map[num + 1].y, img);
+				connect_dot(map[num].x, map[num].y, map[num + 1].x, map[num + 1].y, img, zoom);
 			}
 			x++;
 		}
@@ -215,12 +215,18 @@ int	main(int argc, char **argv)
 
 	//perspective
 	t_cor ps;
-	ps.x = 10; //over 20 danger : move like z??
-	ps.y = 10; //move as y
-	ps.z = 30; //mave as -x
+	ps.x = ft_atoi(argv[2]); //over 20 danger : move like z??
+	ps.y = ft_atoi(argv[3]); //move as y
+	ps.z = ft_atoi(argv[4]); //mave as -x
+
+	ps.x -= 20;
+	ps.y -= 5;
+
+	//zoom
+	int zoom = ft_atoi(argv[5]);
 
 	//depth
-	int d = 10;
+	int d = ft_atoi(argv[6]);
 
 	t_trig_ab trig_ab;
 	trig_ab = get_trig_ab(ps);
@@ -230,7 +236,7 @@ int	main(int argc, char **argv)
 
 	//print
 	printf("--print--\n");
-	print_map((const t_wid_hig)size, (const t_cor*)map, img);
+	print_map((const t_wid_hig)size, (const t_cor*)map, img, zoom);
 
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);

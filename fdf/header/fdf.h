@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:28:48 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/14 16:54:51 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/14 17:27:44 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <mlx.h>
 #include <math.h>
 
-#define ZOOM 1
+// #define ZOOM 10
 #define DIS_W 1920
 #define DIS_H 1000
 
