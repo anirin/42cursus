@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:58:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/14 14:47:07 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/26 19:59:13 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,14 @@ void get_map_info(char **result, t_cor *map)
 		map[num].x = (double)x;
 		map[num].y = (double)y;
 		map[num].z = (double)ft_atoi(result[x]);
+		if (strchr(result[x], ','))
+			map[num].color = get_color(result[x]);//get color 
+		else
+			map[num].color = 0x00ffffff;
 		free(result[x]);
         num++;
 		x++;
+	// printf("(x, y) = (%d, %d)\n", x, y);
 	}
 	y++;
 }
@@ -96,7 +101,24 @@ t_cor *get_map(const char **argv, size_t size)
 		free(one_line);
 		free(split_result);
 	}
-	free(map);
+	// free(map);
 	close(fd);
     return (map);
+}
+
+t_cor *copy_map(t_cor *map, size_t size)
+{
+	size_t i;
+	t_cor *copy_map;
+
+	i = 0;
+	copy_map = malloc(sizeof(t_cor) * size);
+	while(i < size)
+	{
+		copy_map[i].x = map[i].x;	
+		copy_map[i].y = map[i].y;	
+		copy_map[i].z = map[i].z;	
+		i++;
+	}
+	return (copy_map);
 }

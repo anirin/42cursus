@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/21 13:27:49 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/10 11:38:30 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/19 13:06:13 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define NOT_HEAD 0
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 10
+#  define BUFFER_SIZE 1000
 # endif
 
 # include <libc.h>

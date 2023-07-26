@@ -13,131 +13,21 @@
 #include "./header/libft.h"
 #include "./header/fdf.h"
 
-void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-{
-	char	*dst;
-
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-void connect_dot(double ax, double ay, double bx, double by, t_data img, int zoom)
-{
-	int x;
-	int y;
-	double slope;
-	double intercept;
-	double check;
-
-	//zoom
-	ax = zoom * ax;
-	ay = zoom * ay;
-	bx = zoom * bx;
-	by = zoom * by;
-
-	if (ax != bx)
-	{
-		slope = (by - ay) / (bx - ax);
-		intercept = ay - slope * ax;
-	}
-
-	if (ax <= bx)
-		x = ax;
-	else
-		x = bx;
-	
-	if (ay <= by)
-		y = ay;
-	else
-		y = by;
-	
-	printf("connect ax=%f, ay=%f, bx=%f, by=%f\n", ax, ay, bx, by);
-	// printf("int connect ax=%d, bx=%d, ay=%d, by=%d\n", (int)ax, (int)bx, (int)ay, (int)by);
-	
-	if (ax == bx)
-	{
-		while(y <= by || y <= ay)
-		{
-			if ((int)x + DIS_W / 2 > 0 && (int)x + DIS_W / 2 < DIS_W \
-				&& (int)y + DIS_H / 2 > 0 && (int)y + DIS_H / 2 < DIS_H)
-			{
-				my_mlx_pixel_put(&img, (int)x + DIS_W / 2 , (int)y + DIS_H / 2, 0x00FF0000);
-			}
-			y++;
-		}
-	}
-
-	// printf("min x=%d, y=%d\n", x, y);
-	// printf("slope = %f, intercept = %f\n", slope, intercept);
-	int tmp = (int)y;
-	while(x <= bx || x <= ax)
-	{
-		y = tmp;	
-		while(y <= by || y <= ay)
-		{
-			check = y - slope * x - intercept;
-			// printf("check = %f\n", check);
-			if (check < 1.5 && check > -1.5)
-			{
-				// printf("-----put pixel------\n");
-				if ((int)x + DIS_W / 2 > 0 && (int)x + DIS_W / 2 < DIS_W \
-					&& (int)y + DIS_H / 2 > 0 && (int)y + DIS_H / 2 < DIS_H)
-				{
-					my_mlx_pixel_put(&img, (int)x + DIS_W / 2 , (int)y + DIS_H / 2, 0x00FF0000);
-				}
-			}
-			// printf("x=%d, y=%d\n", x + DIS_W / 2 , y + DIS_H / 2);
-			y++;
-		}
-		x++;
-	}
-}
-
-void print_map(const t_wid_hig size, const t_cor *map, t_data img, int zoom)
-{
-	int x;
-	int y;
-	int num;
-
-	x = 0;
-	y = 0;
-	while(y < size.h)	
-	{
-		x = 0;
-		while(x < size.w)
-		{
-			num = x + y * size.w;
-			if (y < size.h - 1)
-			{
-				// printf("x=%f, y=%f, x=%f, y=%f\n", map[num].x, map[num].y, map[num + size.w].x, map[num + size.w].y);
-				connect_dot(map[num].x, map[num].y, map[num + size.w].x, map[num + size.w].y, img, zoom);
-			}
-			if (x < size.w - 1)
-			{
-				connect_dot(map[num].x, map[num].y, map[num + 1].x, map[num + 1].y, img, zoom);
-			}
-			x++;
-		}
-		y++;
-	}
-}
-
-t_trig_ab get_trig_ab(t_cor ps)
+t_trig_ab get_trig_ab(const t_vars vars)
 {
 	t_trig_ab trig_ab;
 
-	trig_ab.a = sqrt(pow(ps.x, 2) + pow(ps.y, 2)); 
-	trig_ab.b = sqrt(pow(ps.x, 2) + pow(ps.y, 2) + pow(ps.z, 2)); 
+	trig_ab.a = sqrt(pow(vars.x, 2) + pow(vars.y, 2)); 
+	trig_ab.b = sqrt(pow(vars.x, 2) + pow(vars.y, 2) + pow(vars.z, 2)); 
 
-	//sin cos b = 0 not
-	trig_ab.sin_a = ps.x / trig_ab.a; //changed formula
-	trig_ab.cos_a = ps.y / trig_ab.a; 
-	trig_ab.sin_b = ps.z / trig_ab.b;
+	trig_ab.sin_a = vars.x / trig_ab.a; //changed formula
+	trig_ab.cos_a = vars.y / trig_ab.a; 
+	trig_ab.sin_b = vars.z / trig_ab.b;
 	trig_ab.cos_b = trig_ab.a / trig_ab.b;
 	return (trig_ab);
 }
 
-void change_cor(t_cor *map, int size, t_cor ps, t_trig_ab trig_ab, int d)
+void change_cor(t_cor *map, int size, t_vars vars, t_trig_ab trig_ab)
 {
 	int i = 0;
 	t_cor cor;
@@ -149,96 +39,138 @@ void change_cor(t_cor *map, int size, t_cor ps, t_trig_ab trig_ab, int d)
 	while (i < size)
 	{
 		//diff
-		cor.x = map[i].x - ps.x;
-		cor.y = map[i].y - ps.y;
-		cor.z = map[i].z - ps.z;
+		cor.x = map[i].x - vars.x;
+		cor.y = map[i].y - vars.y;
+		cor.z = map[i].z - vars.z;
 
 		//rotate
-		map[i].x = sin_a * sin_b * cor.x\
-				- sin_a * cos_b * cor.y\
-				+ cos_a * cor.z;
-		map[i].y = cos_b * cor.x\
-				+ sin_b * cor.y;
-		map[i].z = - cos_a * sin_b * cor.x\
-				+ cos_a * cos_b * cor.y\
-				+ sin_a * cor.z;
+		map[i].x = cos_b * cos_a * cor.x\
+				+ cos_b * sin_a * cor.y\
+				+ sin_b * cor.z;
+		map[i].y = -sin_a * cor.x\
+				+ cos_a * cor.y;
+		map[i].z = - sin_b * cos_a * cor.x\
+				- sin_b * sin_a * cor.y\
+				+ cos_b * cor.z;
 
-		//central projection
-		d = (double)d;
-		map[i].x *= d / (d + map[i].z);
-		map[i].y *= d / (d + map[i].z);
-
+		/*
+		//rotate
+		map[i].x = cos_b * sin_a * cor.x\
+				+ cos_b * cos_a * cor.y\
+				+ sin_b * cor.z;
+		map[i].y = cos_a * cor.x\
+				+ sin_a * cor.y;
+		map[i].z = - sin_b * sin_a * cor.x\
+				- sin_b * cos_a * cor.y\
+				+ cos_b * cor.z;
+		*/
 		i++;
 	}
+}
 
-
-	/*
-	//test
-	while (i < size)
+int	key_down(int keycode, t_vars *vars)
+{
+	printf("keycode = %d\n", keycode);
+	if (keycode == ESC)
 	{
-		//diff
-		cor.x = map[i].x - ps.x;
-		cor.y = map[i].y - ps.y;
-		cor.z = map[i].z - ps.z;
-
-		//rotate
-		map[i].x = cos_a * cos_b * cor.x\
-				+ cos_a * sin_b * cor.y\
-				+ sin_a * cor.z;
-		map[i].y = -sin_b * cor.x\
-				+ cos_b * cor.y;
-		map[i].z = - sin_a * cos_b * cor.x\
-				- sin_a * sin_b * cor.y\
-				+ cos_a * cor.z;
-
-		i++;
+		mlx_destroy_window(vars->mlx, vars->win);
+		exit(0);
 	}
-	*/
+	else if (keycode == UP)
+		vars->y -= 1;
+	else if (keycode == DOWN)
+		vars->y += 1;
+	else if (keycode == LEFT)
+		vars->x -= 1;
+	else if (keycode == RIGHT)
+		vars->x += 1;
+	else if (keycode == Z_UP_Q)
+		vars->z += 1;
+	else if (keycode == Z_DOWN_Q)
+		vars->z -= 1;
+	else
+	{
+		vars->x = 10;
+		vars->y = 10;
+		vars->z = 10;
+		// printf("reset!\n");
+	}
+
+	//destroy
+	mlx_destroy_image(vars->mlx, vars->img);
+	vars->img = mlx_new_image(vars->mlx, DIS_W, DIS_H);
+	vars->addr = mlx_get_data_addr(vars->img, &vars->bits_per_pixel, &vars->line_length, &vars->endian);
+	// printf("destory!\n");
+
+	printf("(x y z) = (%d, %d, %d)\n", (int)vars->x, (int)vars->y, (int)vars->z);
+	//print
+	print_map(vars);
+	return (0);
+}
+
+int mouse_down(int button, int x, int y, t_vars *vars)
+{
+	printf("button = %d\n", button);
+	if (button == M_UP)
+		vars->zoom += 1;
+	if (button == M_DOWN)
+		vars->zoom -= 1;
+	
+	printf("(x y z) = (%d, %d, %d)\n", (int)vars->x, (int)vars->y, (int)vars->z);
+	(void)x;
+	(void)y;
+	//destroy
+	mlx_destroy_image(vars->mlx, vars->img);
+	vars->img = mlx_new_image(vars->mlx, DIS_W, DIS_H);
+	vars->addr = mlx_get_data_addr(vars->img, &vars->bits_per_pixel, &vars->line_length, &vars->endian);
+
+	//print
+	print_map(vars);
+	return (0);
+}
+
+int red_cross_mark(t_vars *vars)
+{
+	printf("red_cross\n");
+	mlx_destroy_window(vars->mlx, vars->win);
+	exit(0);
+	return 0;
 }
 
 int	main(int argc, char **argv)
 {
-	void	*mlx;
-	void	*mlx_win;
-	t_data	img;
-	t_cor *map;
-	t_wid_hig size;
+	t_vars	vars;
 
-	(void)argc;
-	mlx = mlx_init();
-	mlx_win = mlx_new_window(mlx, DIS_W, DIS_H, "fdf");
-	img.img = mlx_new_image(mlx, DIS_W, DIS_H);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								&img.endian);
-	size = get_map_size((const char**)argv);
-	map = get_map((const char**)argv, (size.w * size.h));
+	if (argc != 2)
+	{
+		printf("invalid argc\n");
+		return 0;
+	}
+	//initialize
+	vars.mlx = mlx_init();
+	vars.win = mlx_new_window(vars.mlx, DIS_W, DIS_H, "fdf");
+	vars.img = mlx_new_image(vars.win, DIS_W, DIS_H);
+	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
 
 	//perspective
-	t_cor ps;
-	ps.x = ft_atoi(argv[2]); //over 20 danger : move like z??
-	ps.y = ft_atoi(argv[3]); //move as y
-	ps.z = ft_atoi(argv[4]); //mave as -x
-
-	ps.x -= 20;
-	ps.y -= 5;
+	vars.x = 10;
+	vars.y = 10;
+	vars.z = 10;
 
 	//zoom
-	int zoom = ft_atoi(argv[5]);
+	vars.zoom = 10;
 
-	//depth
-	int d = ft_atoi(argv[6]);
+	//set map
+	vars.size = get_map_size((const char**)argv);
+	vars.save_map = get_map((const char**)argv, (vars.size.w * vars.size.h));
 
-	t_trig_ab trig_ab;
-	trig_ab = get_trig_ab(ps);
-	//rotate
-	printf("--rotate--\n");
-	change_cor(map, size.w * size.h, ps, trig_ab, d);
+	//first_print
+	print_map(&vars);
 
 	//print
-	printf("--print--\n");
-	print_map((const t_wid_hig)size, (const t_cor*)map, img, zoom);
+	mlx_hook(vars.win, ON_KEYDOWN, 0, key_down, &vars);
+	mlx_hook(vars.win, ON_MOUSEDOWN, 0, mouse_down, &vars);
+	mlx_hook(vars.win, ON_DESTROY, 0, red_cross_mark, &vars);
+	mlx_loop(vars.mlx);
 
-	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
-	mlx_loop(mlx);
-	free(map);
 }

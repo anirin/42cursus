@@ -1,7 +1,7 @@
 CC = gcc
 NAME = fdf_exe
 
-SRC = main.c ./fdf_main/map.c
+SRC = main.c ./fdf_main/map.c ./fdf_main/print.c
 OBJ = $(SRC:.c=.o)
 
 
