@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:58:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/29 17:41:50 by atsu             ###   ########.fr       */
+/*   Updated: 2023/07/29 18:10:28 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
+#include "../libft/libft.h"
 #include "../header/fdf.h"
 
 static int get_map_width(const char *one_line)
