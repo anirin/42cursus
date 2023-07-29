@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:28:48 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/26 23:23:09 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:32:07 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,17 @@ typedef struct s_matrix
 	19;
 
 }				t_matrix;
+
+typedef struct s_equation
+{
+	double slope;
+	double intercept;
+
+	double max_x;
+	double min_x;
+	double max_y;
+	double min_y;
+}				t_equation;
 
 typedef struct	s_vars {
 	//mlx

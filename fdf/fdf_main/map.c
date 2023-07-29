@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:58:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/26 19:59:13 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/29 12:21:34 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,4 +121,17 @@ t_cor *copy_map(t_cor *map, size_t size)
 		i++;
 	}
 	return (copy_map);
+}
+
+void zoom_cor(t_cor *map, int size, int zoom)
+{
+	int i;
+
+	while (i < size)
+	{
+		map[i].x *= zoom;
+		map[i].y *= zoom;
+		map[i].z *= zoom;
+		i++;
+	}
 }
