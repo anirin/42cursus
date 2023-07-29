@@ -6,9 +6,12 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 12:36:24 by atsu              #+#    #+#             */
-/*   Updated: 2023/07/29 15:17:48 by atsu             ###   ########.fr       */
+/*   Updated: 2023/07/29 17:35:04 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../header/libft.h"
+#include "../header/fdf.h"
 
 double get_slope(t_cor cor1, t_cor cor2)
 {

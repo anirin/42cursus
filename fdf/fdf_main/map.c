@@ -6,14 +6,14 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:58:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/29 12:21:34 by atsu             ###   ########.fr       */
+/*   Updated: 2023/07/29 17:41:50 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 #include "../header/fdf.h"
 
-int get_map_width(const char *one_line)
+static int get_map_width(const char *one_line)
 {
     char **split_result;
     int count;
@@ -58,7 +58,7 @@ t_wid_hig get_map_size(const char **argv)
 	return (size);
 }
 
-void get_map_info(char **result, t_cor *map)
+static void get_map_info(char **result, t_cor *map)
 {
 	int x;
 	static int y = 0;
@@ -127,6 +127,7 @@ void zoom_cor(t_cor *map, int size, int zoom)
 {
 	int i;
 
+	i = 0;
 	while (i < size)
 	{
 		map[i].x *= zoom;

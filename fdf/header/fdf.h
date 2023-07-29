@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:28:48 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/29 12:32:07 by atsu             ###   ########.fr       */
+/*   Updated: 2023/07/29 17:45:42 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,18 @@ typedef struct	s_trig_ab {
 	double cos_b;
 }				t_trig_ab;
 
+/*
 typedef struct s_matrix
 {
 	19;
 
 }				t_matrix;
+*/
 
 typedef struct s_equation
 {
 	double slope;
 	double intercept;
-
 	double max_x;
 	double min_x;
 	double max_y;
@@ -109,16 +110,18 @@ typedef struct	s_vars {
 	t_trig_ab trig_ab;
 }				t_vars;
 
+//connect
+void connect_dot(t_cor cor1, t_cor cor2, t_vars *vars);
+
 //output
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
-void connect_dot(double ax, double ay, double bx, double by, t_vars *vars, int zoom);
-void put_pixel_to_map(t_wid_hig size, t_cor *map, t_vars *vars, int zoom);
 void print_map(t_vars *vars);
+void put_pixel_to_map(t_wid_hig size, t_cor *map, t_vars *vars);
 
 //map
-int get_map_width(const char *one_line);
+// int get_map_width(const char *one_line);
 t_wid_hig get_map_size(const char **argv);
-void get_map_info(char **result, t_cor *map);
+// void get_map_info(char **result, t_cor *map);
 t_cor *get_map(const char **argv, size_t size);
 t_cor *copy_map(t_cor *map, size_t size);
 
@@ -133,5 +136,10 @@ int	key_down(int keycode, t_vars *vars);
 
 //helper
 int get_color(const char *str);
+void zoom_cor(t_cor *map, int size, int zoom);
+
+//equation
+double get_slope(t_cor cor1, t_cor cor2);
+double get_intercept(t_cor cor1, double slope);
 
 #endif

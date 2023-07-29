@@ -1,7 +1,9 @@
 CC = gcc
 NAME = fdf_exe
 
-SRC = main.c ./fdf_main/map.c ./fdf_main/print.c
+SRC = main.c ./fdf_main/map.c ./fdf_main/print.c\
+	./fdf_main/connect_dot.c ./fdf_main/equation.c\
+	./helper/get_color.c
 OBJ = $(SRC:.c=.o)
 
 
