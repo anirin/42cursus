@@ -1,7 +1,7 @@
 CC = gcc
 NAME = exe_test
 
-SRC = main.c 
+SRC = $(wildcard *.c) 
 OBJ = $(SRC:.c=.o)
 
 

@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:01:58 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/19 18:04:11 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/26 23:27:15 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,66 @@ void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
+int diff_color(int color1, int color2, int x, int min_x, int max_x)
+{
+	double ratio;
+	double diff;
+
+	ratio = (double)x - (double)min_x / (double)max_x - (double)min_x;
+	diff = (double)(color2 - color1) * ratio;
+	return ((int)diff);
+}
+
+void print_vertical()
+{
+	int y;
+
+	y = min_y();
+	while(y <= max_y)	
+	{
+		my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H, color1 + diff_color());
+		y++;
+	}
+}
+
+void print_horizontall()
+{
+	int x;
+
+	x = min_x();
+	while(y <= max_x)	
+	{
+		my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H, color1 + diff_color());
+		y++;
+	}
+}
+
+void connect_dot(double ax, double ay, double bx, double by, t_vars *vars, int zoom, int color1, int color2)
+{
+	int x;
+	int y;
+	int min_x;
+	int max_x;
+	double slope;
+	double intercept;
+
+	if (ax == bx)
+		return (print_vertical());
+	else if (ay == by)
+		return (print_horizontall());
+	slope = get_slope();	
+	intercept = get_intercept();
+	min_x = fmin(ax, bx);
+	max_x = fmax(ax, bx);
+	while (x < fmax)
+	{
+		y = round((double)x * slope + intercept);
+		my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H, color1 + diff_color());
+		x++;
+	}
+}
+
+/*connect dot
 void connect_dot(double ax, double ay, double bx, double by, t_vars *vars, int zoom)
 {
 	int x;
@@ -123,6 +183,7 @@ void connect_dot(double ax, double ay, double bx, double by, t_vars *vars, int z
 		x++;
 	}
 }
+*/
 
 void put_pixel_to_map(t_wid_hig size, t_cor *map, t_vars *vars, int zoom)
 {

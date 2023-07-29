@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:28:48 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/26 20:22:00 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/26 23:23:09 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,12 @@ typedef struct	s_trig_ab {
 	double sin_b;
 	double cos_b;
 }				t_trig_ab;
+
+typedef struct s_matrix
+{
+	19;
+
+}				t_matrix;
 
 typedef struct	s_vars {
 	//mlx
