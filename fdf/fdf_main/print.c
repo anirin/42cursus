@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:01:58 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/29 17:36:50 by atsu             ###   ########.fr       */
+/*   Updated: 2023/07/30 15:11:33 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void put_pixel_to_map(t_wid_hig size, t_cor *map, t_vars *vars)
 			num = x + y * size.w;
 			if (y < size.h - 1)
 			{
-				// printf("x=%f, y=%f, x=%f, y=%f\n", map[num].x, map[num].y, map[num + size.w].x, map[num + size.w].y);
+				printf("x=%f, y=%f, color1=%X, x=%f, y=%f, color2=%X\n",\
+				 map[num].x, map[num].y, map[num].color, map[num + size.w].x, map[num + size.w].y, map[num + size.w].color);
 				connect_dot(map[num], map[num + size.w], vars);
 			}
 			if (x < size.w - 1)

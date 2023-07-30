@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:41:57 by atsu              #+#    #+#             */
-/*   Updated: 2023/07/29 16:01:23 by atsu             ###   ########.fr       */
+/*   Updated: 2023/07/30 16:28:53 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ static void connect_vertical(t_equation equ, t_vars *vars, int color1, int color
 	y = (int)equ.min_y;
 	while(y <= (int)equ.max_y)	
 	{
-		my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H, connect_color(color1, color2, (double)y - equ.min_y, equ.max_y - equ.min_y));
+		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
+			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, (double)y - equ.min_y, equ.max_y - equ.min_y));
 		y++;
 	}
 }
@@ -46,7 +47,8 @@ static void connect_horizontall(t_equation equ, t_vars *vars, int color1, int co
 	y = (int)equ.min_y;
 	while(x <= (int)equ.max_x)	
 	{
-		my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H, connect_color(color1, color2, (double)x - equ.min_x, equ.max_x - equ.min_x));
+		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
+			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, (double)x - equ.min_x, equ.max_x - equ.min_x));
 		x++;
 	}
 }
@@ -60,7 +62,14 @@ static void connect_other(t_equation equ, t_vars *vars, int color1, int color2)
 	while (x < (int)equ.max_x)
 	{
 		y = (int)round((double)x * equ.slope + equ.intercept);
-		my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
+		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
+		{
+			printf("/-----------------\n");
+			printf("x=%d, y=%d, color=%X\n", x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
+			printf("------------------/\n\n");
+			//my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
+			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
+		}
 		x++;
 	}
 }

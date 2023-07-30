@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:57:16 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/29 17:48:31 by atsu             ###   ########.fr       */
+/*   Updated: 2023/07/30 14:58:14 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int get_color(const char *str)
     size_t len;
     int color;
 
+	color = 0;
     hex_num = ft_strchr(str, ',') + 1;
     len = ft_strlen(hex_num);
     while(len-- >= 2)

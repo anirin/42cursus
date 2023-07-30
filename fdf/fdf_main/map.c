@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:58:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/29 18:10:28 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/07/30 15:01:14y atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ static void get_map_info(char **result, t_cor *map)
 		map[num].x = (double)x;
 		map[num].y = (double)y;
 		map[num].z = (double)ft_atoi(result[x]);
-		if (strchr(result[x], ','))
+		if (strchr(result[x], ',') != NULL)
 			map[num].color = get_color(result[x]);//get color 
 		else
-			map[num].color = 0x00ffffff;
+			map[num].color = 0x00FFFFFF;
 		free(result[x]);
         num++;
 		x++;
@@ -118,6 +118,7 @@ t_cor *copy_map(t_cor *map, size_t size)
 		copy_map[i].x = map[i].x;	
 		copy_map[i].y = map[i].y;	
 		copy_map[i].z = map[i].z;	
+		copy_map[i].color = map[i].color;
 		i++;
 	}
 	return (copy_map);
