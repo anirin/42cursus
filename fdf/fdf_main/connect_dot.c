@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:41:57 by atsu              #+#    #+#             */
-/*   Updated: 2023/07/30 16:28:53 by atsu             ###   ########.fr       */
+/*   Updated: 2023/07/30 17:02:25 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int connect_color(int color1, int color2, double dist, double max_dist)
 	return ((int)diff + color1);
 }
 
-static void connect_vertical(t_equation equ, t_vars *vars, int color1, int color2)
+//static void connect_vertical(t_equation equ, t_vars *vars, int color1, int color2)
+void connect_vertical(t_equation equ, t_vars *vars, int color1, int color2)
 {
 	int x;
 	int y;
@@ -38,7 +39,8 @@ static void connect_vertical(t_equation equ, t_vars *vars, int color1, int color
 	}
 }
 
-static void connect_horizontall(t_equation equ, t_vars *vars, int color1, int color2)
+//static void connect_horizontall(t_equation equ, t_vars *vars, int color1, int color2)
+void connect_horizontall(t_equation equ, t_vars *vars, int color1, int color2)
 {
 	int x;
 	int y;
@@ -53,7 +55,8 @@ static void connect_horizontall(t_equation equ, t_vars *vars, int color1, int co
 	}
 }
 
-static void connect_other(t_equation equ, t_vars *vars, int color1, int color2)
+// static void connect_other(t_equation equ, t_vars *vars, int color1, int color2)
+void connect_other(t_equation equ, t_vars *vars, int color1, int color2)
 {
 	int x;
 	int y;
@@ -64,9 +67,11 @@ static void connect_other(t_equation equ, t_vars *vars, int color1, int color2)
 		y = (int)round((double)x * equ.slope + equ.intercept);
 		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
 		{
+			/*
 			printf("/-----------------\n");
 			printf("x=%d, y=%d, color=%X\n", x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
 			printf("------------------/\n\n");
+			*/
 			//my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
 			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
 		}
