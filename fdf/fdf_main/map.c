@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../libft/libft.h"
+#include "../header/libft.h"
 #include "../header/fdf.h"
 
 static int get_map_width(const char *one_line)
@@ -71,13 +71,12 @@ static void get_map_info(char **result, t_cor *map)
 		map[num].y = (double)y;
 		map[num].z = (double)ft_atoi(result[x]);
 		if (strchr(result[x], ',') != NULL)
-			map[num].color = get_color(result[x]);//get color 
+			map[num].color = get_color(result[x]);
 		else
 			map[num].color = 0x00FFFFFF;
 		free(result[x]);
         num++;
 		x++;
-	// printf("(x, y) = (%d, %d)\n", x, y);
 	}
 	y++;
 }
@@ -101,7 +100,6 @@ t_cor *get_map(const char **argv, size_t size)
 		free(one_line);
 		free(split_result);
 	}
-	// free(map);
 	close(fd);
     return (map);
 }
@@ -122,18 +120,4 @@ t_cor *copy_map(t_cor *map, size_t size)
 		i++;
 	}
 	return (copy_map);
-}
-
-void zoom_cor(t_cor *map, int size, int zoom)
-{
-	int i;
-
-	i = 0;
-	while (i < size)
-	{
-		map[i].x *= zoom;
-		map[i].y *= zoom;
-		map[i].z *= zoom;
-		i++;
-	}
 }

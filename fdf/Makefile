@@ -1,27 +1,29 @@
 CC = gcc
 NAME = fdf_exe
 
-SRC = main.c ./fdf_main/map.c ./fdf_main/print.c\
-	./fdf_main/connect_dot.c ./fdf_main/equation.c\
-	./helper/get_color.c
-OBJ = $(SRC:.c=.o)
+FDF_DIR = ./fdf_main/
+FDF_FILES = connect_color.c map.c connect_dot.c print.c equation.c rotate.c get_color.c zoom_cor.c
+FDF_SRC = $(addprefix $(FDF_DIR),$(FDF_FILES))
 
+SRC = main.c $(FDF_SRC)
+
+OBJ = $(SRC:.c=.o)
 
 %.o: %.c
 	$(CC) -I ./header -Wall -Wextra -Werror -Imlx -c $< -o $@
 
 $(NAME): $(OBJ)
 	make -C ./libft
-	$(CC) $(OBJ) -g -fsanitize=address -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) libft.a
-#	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) libft.a
+	$(CC) $(OBJ) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME) libft.a
 
-all : $(NAME)
+all: $(NAME)
 
-fclean : 
+clean: 
+	make clean -C ./libft
 	rm -rf $(OBJ) 
 
-clean : fclean
+fclean: clean
 	make fclean -C ./libft
 	rm -rf $(NAME)
 
-re : clean all
+re: clean all

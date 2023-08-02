@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/09 14:28:48 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/29 17:45:42 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/02 18:03:52by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@
 #define M_DOWN 5
 #define Z_UP_Q 12
 #define Z_DOWN_Q 13
+#define POS_X 6
+#define NEG_X 0
+#define POS_Y 7
+#define NEG_Y 1
+#define POS_Z 8
+#define NEG_Z 2
 
 enum {
 	ON_KEYDOWN = 2,
@@ -61,14 +67,6 @@ typedef struct	s_trig_ab {
 	double cos_b;
 }				t_trig_ab;
 
-/*
-typedef struct s_matrix
-{
-	19;
-
-}				t_matrix;
-*/
-
 typedef struct s_equation
 {
 	double slope;
@@ -78,6 +76,13 @@ typedef struct s_equation
 	double max_y;
 	double min_y;
 }				t_equation;
+
+typedef struct s_color{
+	int t;
+	int r;
+	int g;
+	int b;
+}				t_color;
 
 typedef struct	s_vars {
 	//mlx
@@ -103,6 +108,11 @@ typedef struct	s_vars {
 	double y;
 	double z;
 
+	//rotate
+	int x_degree;
+	int y_degree;
+	int z_degree;
+
 	//zoom
 	int zoom;
 
@@ -116,12 +126,9 @@ void connect_dot(t_cor cor1, t_cor cor2, t_vars *vars);
 //output
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color);
 void print_map(t_vars *vars);
-void put_pixel_to_map(t_wid_hig size, t_cor *map, t_vars *vars);
 
 //map
-// int get_map_width(const char *one_line);
 t_wid_hig get_map_size(const char **argv);
-// void get_map_info(char **result, t_cor *map);
 t_cor *get_map(const char **argv, size_t size);
 t_cor *copy_map(t_cor *map, size_t size);
 
@@ -137,9 +144,21 @@ int	key_down(int keycode, t_vars *vars);
 //helper
 int get_color(const char *str);
 void zoom_cor(t_cor *map, int size, int zoom);
+int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b);
+unsigned char	get_t(int trgb);
+unsigned char	get_r(int trgb);
+unsigned char	get_g(int trgb);
+unsigned char	get_b(int trgb);
+int connect_color(int color1, int color2, double dist, double max_dist);
 
 //equation
 double get_slope(t_cor cor1, t_cor cor2);
 double get_intercept(t_cor cor1, double slope);
+
+//rotate
+void rotate_cor_x(t_cor *map, int size, int degree);
+void rotate_cor_y(t_cor *map, int size, int degree);
+void rotate_cor_z(t_cor *map, int size, int degree);
+void change_cor_isometic(t_cor *map, int size);
 
 #endif

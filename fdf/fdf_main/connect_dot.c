@@ -6,25 +6,14 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/29 15:41:57 by atsu              #+#    #+#             */
-/*   Updated: 2023/07/30 17:02:25 by atsu             ###   ########.fr       */
+/*   Updated: 2023/07/30 17:32:56by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/libft.h"
 #include "../header/fdf.h"
 
-static int connect_color(int color1, int color2, double dist, double max_dist)
-{
-	double ratio;
-	double diff;
-
-	ratio = dist / max_dist;
-	diff = (double)(color2 - color1) * ratio;
-	return ((int)diff + color1);
-}
-
-//static void connect_vertical(t_equation equ, t_vars *vars, int color1, int color2)
-void connect_vertical(t_equation equ, t_vars *vars, int color1, int color2)
+static void connect_vertical(t_equation equ, t_vars *vars, int color1, int color2)
 {
 	int x;
 	int y;
@@ -39,8 +28,7 @@ void connect_vertical(t_equation equ, t_vars *vars, int color1, int color2)
 	}
 }
 
-//static void connect_horizontall(t_equation equ, t_vars *vars, int color1, int color2)
-void connect_horizontall(t_equation equ, t_vars *vars, int color1, int color2)
+static void connect_horizontall(t_equation equ, t_vars *vars, int color1, int color2)
 {
 	int x;
 	int y;
@@ -55,8 +43,7 @@ void connect_horizontall(t_equation equ, t_vars *vars, int color1, int color2)
 	}
 }
 
-// static void connect_other(t_equation equ, t_vars *vars, int color1, int color2)
-void connect_other(t_equation equ, t_vars *vars, int color1, int color2)
+static void connect_other_x(t_equation equ, t_vars *vars, int color1, int color2)
 {
 	int x;
 	int y;
@@ -67,15 +54,26 @@ void connect_other(t_equation equ, t_vars *vars, int color1, int color2)
 		y = (int)round((double)x * equ.slope + equ.intercept);
 		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
 		{
-			/*
-			printf("/-----------------\n");
-			printf("x=%d, y=%d, color=%X\n", x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
-			printf("------------------/\n\n");
-			*/
-			//my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
 			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
 		}
 		x++;
+	}
+}
+
+static void connect_other_y(t_equation equ, t_vars *vars, int color1, int color2)
+{
+	int x;
+	int y;
+
+	y = (int)round(equ.min_y);
+	while (y < (int)equ.max_y)
+	{
+		x = (int)round(((double)y - equ.intercept) / equ.slope);
+		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
+		{
+			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, y - equ.min_y, equ.max_y - equ.min_y));
+		}
+		y++;
 	}
 }
 
@@ -93,5 +91,12 @@ void connect_dot(t_cor cor1, t_cor cor2, t_vars *vars)
 		return (connect_horizontall(equ, vars, cor1.color, cor2.color));
 	equ.slope = get_slope(cor1, cor2);	
 	equ.intercept = get_intercept(cor1, equ.slope);
-	connect_other(equ, vars, cor1.color, cor2.color);
+	if (cor1.x == equ.min_x)
+		connect_other_x(equ, vars, cor1.color, cor2.color);
+	else
+		connect_other_x(equ, vars, cor2.color, cor1.color);
+	if (cor1.y == equ.min_y)
+		connect_other_y(equ, vars, cor1.color, cor2.color);
+	else
+		connect_other_y(equ, vars, cor2.color, cor1.color);
 }
