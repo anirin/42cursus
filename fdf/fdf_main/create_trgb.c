@@ -6,14 +6,15 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/03 09:25:10 by atokamot          #+#    #+#             */
-/*   Updated: 2023/08/03 13:43:03 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/08/03 14:23:16 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/fdf.h"
 #include "../header/libft.h"
 
-int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
+int	create_trgb(unsigned char t, unsigned char r, unsigned char g,
+		unsigned char b)
 {
 	return (*(int *)(unsigned char [4]){b, g, r, t});
 }

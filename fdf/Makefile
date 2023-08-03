@@ -1,8 +1,8 @@
 CC = gcc
-NAME = fdf_exe
+NAME = fdf
 
 FDF_DIR = ./fdf_main/
-FDF_FILES = connect_color.c map.c connect_dot.c print.c equation.c rotate.c get_color.c zoom_cor.c create_trgb.c
+FDF_FILES = connect_color.c map.c connect_dot.c print.c equation.c rotate.c get_color.c zoom_cor.c create_trgb.c free_split.c
 FDF_SRC = $(addprefix $(FDF_DIR),$(FDF_FILES))
 
 SRC = main.c $(FDF_SRC)
@@ -33,4 +33,4 @@ norm :
 	norminette ./header ./fdf_main ./libft main.c
 
 f :
-	./fdf_exe test_maps/42.fdf
+	./fdf test_maps/42.fdf
