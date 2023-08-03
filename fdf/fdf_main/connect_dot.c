@@ -22,7 +22,7 @@ static void connect_vertical(t_equation equ, t_vars *vars, int color1, int color
 	y = (int)equ.min_y;
 	while(y <= (int)equ.max_y)	
 	{
-		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
+		if ((x + DIS_W / 2 > 0 && x + DIS_W / 2 < DIS_W ) && (y + DIS_H / 2 > 0 && y + DIS_H / 2 < DIS_H ))
 			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, (double)y - equ.min_y, equ.max_y - equ.min_y));
 		y++;
 	}
@@ -37,7 +37,7 @@ static void connect_horizontall(t_equation equ, t_vars *vars, int color1, int co
 	y = (int)equ.min_y;
 	while(x <= (int)equ.max_x)	
 	{
-		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
+		if ((x + DIS_W / 2 > 0 && x + DIS_W / 2 < DIS_W ) && (y + DIS_H / 2 > 0 && y + DIS_H / 2 < DIS_H ))
 			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, (double)x - equ.min_x, equ.max_x - equ.min_x));
 		x++;
 	}
@@ -52,7 +52,7 @@ static void connect_other_x(t_equation equ, t_vars *vars, int color1, int color2
 	while (x < (int)equ.max_x)
 	{
 		y = (int)round((double)x * equ.slope + equ.intercept);
-		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
+		if ((x + DIS_W / 2 > 0 && x + DIS_W / 2 < DIS_W ) && (y + DIS_H / 2 > 0 && y + DIS_H / 2 < DIS_H ))
 		{
 			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, x - equ.min_x, equ.max_x - equ.min_x));
 		}
@@ -69,7 +69,7 @@ static void connect_other_y(t_equation equ, t_vars *vars, int color1, int color2
 	while (y < (int)equ.max_y)
 	{
 		x = (int)round(((double)y - equ.intercept) / equ.slope);
-		if ((x + DIS_W / 2 >= 0 && x + DIS_W / 2 <= DIS_W ) && (y + DIS_H / 2 >= 0 && y + DIS_H / 2 <= DIS_H ))
+		if ((x + DIS_W / 2 > 0 && x + DIS_W / 2 < DIS_W ) && (y + DIS_H / 2 > 0 && y + DIS_H / 2 < DIS_H ))
 		{
 			my_mlx_pixel_put(vars, x + DIS_W / 2 , y + DIS_H / 2, connect_color(color1, color2, y - equ.min_y, equ.max_y - equ.min_y));
 		}

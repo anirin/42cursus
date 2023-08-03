@@ -2,7 +2,7 @@ CC = gcc
 NAME = fdf_exe
 
 FDF_DIR = ./fdf_main/
-FDF_FILES = connect_color.c map.c connect_dot.c print.c equation.c rotate.c get_color.c zoom_cor.c
+FDF_FILES = connect_color.c map.c connect_dot.c print.c equation.c rotate.c get_color.c zoom_cor.c create_trgb.c
 FDF_SRC = $(addprefix $(FDF_DIR),$(FDF_FILES))
 
 SRC = main.c $(FDF_SRC)
@@ -25,5 +25,6 @@ clean:
 fclean: clean
 	make fclean -C ./libft
 	rm -rf $(NAME)
+	rm -rf libft.a
 
 re: clean all

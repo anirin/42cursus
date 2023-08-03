@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 		return 0;
 	vars.mlx = mlx_init();
 	vars.win = mlx_new_window(vars.mlx, DIS_W, DIS_H, "fdf");
-	vars.img = mlx_new_image(vars.win, DIS_W, DIS_H);
+	vars.img = mlx_new_image(vars.mlx, DIS_W, DIS_H);
 	vars.addr = mlx_get_data_addr(vars.img, &vars.bits_per_pixel, &vars.line_length, &vars.endian);
 	vars.x_degree = 0;
 	vars.y_degree = 0;
