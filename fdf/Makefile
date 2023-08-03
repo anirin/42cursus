@@ -28,3 +28,9 @@ fclean: clean
 	rm -rf libft.a
 
 re: clean all
+
+norm :
+	norminette ./header ./fdf_main ./libft main.c
+
+f :
+	./fdf_exe test_maps/42.fdf
