@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 16:20:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/08/02 18:23:47 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/03 21:18:32 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,3 @@ void	*ft_calloc(size_t num, size_t size)
 	ft_memset(ret, 0, num * size);
 	return (ret);
 }
-
-/*
-int	main(void)
-{
-	//printf("origin=%p\n", calloc(SIZE_MAX, SIZE_MAX));
-	//printf("origin=%p\n", calloc(LONG_MAX, 1));
-	printf("origin=%p\n", calloc(ULONG_MAX, 1));
-	printf("origin=%p\n", calloc(SIZE_MAX, 1));
-}
-*/

@@ -3,69 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/10 07:58:42 by atokamot          #+#    #+#             */
-/*   Updated: 2023/07/30 15:01:14y atsu             ###   ########.fr       */
+/*   Updated: 2023/08/03 21:41:47 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
 #include "../header/fdf.h"
+#include "../header/libft.h"
 
-static int get_map_width(const char *one_line)
+static int	get_map_width(const char *one_line)
 {
-    char **split_result;
-    int count;
+	char	**split_result;
+	int		count;
 
-    split_result = ft_split(one_line, ' ');
-    count = 0;
-    while(1)
-    {
-        if (split_result[count] == NULL)
-            break;
-        free(split_result[count]);
-        count++;
-    }
-    free(split_result);
-    return (count);
+	split_result = ft_split(one_line, ' ');
+	count = 0;
+	while (1)
+	{
+		if (split_result == NULL || split_result[count] == NULL
+			|| split_result[count][0] == '\0' || split_result[count][0] == '\n')
+			break ;
+		count++;
+	}
+	free_split(split_result);
+	return (count);
 }
 
-t_wid_hig get_map_size(const char **argv)
+t_wid_hig	get_map_size(const char **argv)
 {
-	int w;
-	int h;
-	int fd;
-	char *one_line;
+	int			fd;
+	char		*one_line;
+	t_wid_hig	size;
 
-	w = 0;
-	h = 0;
+	size.w = 0;
+	size.h = 0;
 	fd = open(argv[1], O_RDONLY);
-	while(1)
+	if (fd == -1)
+	{
+		write(1, "open error\n", 11);
+		return (size);
+	}
+	while (1)
 	{
 		one_line = get_next_line(fd);
 		if (one_line == NULL)
-			break;
-		if (w == 0)
-			w = get_map_width(one_line);
-		h++;
+			break ;
+		if (size.w == 0)
+			size.w = get_map_width(one_line);
+		size.h++;
 		free(one_line);
 	}
 	close(fd);
-	t_wid_hig size;
-	size.w = w;
-	size.h = h;
 	return (size);
 }
 
-static void get_map_info(char **result, t_cor *map)
+static void	get_map_info(char **result, t_cor *map, int width)
 {
-	int x;
-	static int y = 0;
-	static int num = 0;
-	
+	int			x;
+	static int	y = 0;
+	static int	num = 0;
+
 	x = 0;
-	while(result[x] != NULL)
+	while (x < width)
 	{
 		map[num].x = (double)x;
 		map[num].y = (double)y;
@@ -74,48 +75,52 @@ static void get_map_info(char **result, t_cor *map)
 			map[num].color = get_color(result[x]);
 		else
 			map[num].color = 0x00FFFFFF;
-		free(result[x]);
-        num++;
+		num++;
 		x++;
 	}
 	y++;
 }
 
-t_cor *get_map(const char **argv, size_t size)
+t_cor	*get_map(const char **argv, t_wid_hig size)
 {
-	char *one_line;
-	char **split_result;
-	t_cor *map;
-	int fd;
+	char	*one_line;
+	char	**split_result;
+	t_cor	*map;
+	int		fd;
+	int		i;
 
-	map = malloc(sizeof(t_cor) * size);
+	i = 0;
+	map = malloc(sizeof(t_cor) * size.w * size.h);
+	if (map == NULL)
+		exit(1);
 	fd = open(argv[1], O_RDONLY);
-	while (1)
+	while (i < size.h)
 	{
 		one_line = get_next_line(fd);
 		split_result = ft_split(one_line, ' ');
-		if (one_line == NULL)
-			break;
-		get_map_info(split_result, map);
+		get_map_info(split_result, map, size.w);
 		free(one_line);
-		free(split_result);
+		free_split(split_result);
+		i++;
 	}
 	close(fd);
-    return (map);
+	return (map);
 }
 
-t_cor *copy_map(t_cor *map, size_t size)
+t_cor	*copy_map(t_cor *map, size_t size)
 {
-	size_t i;
-	t_cor *copy_map;
+	size_t	i;
+	t_cor	*copy_map;
 
 	i = 0;
 	copy_map = malloc(sizeof(t_cor) * size);
-	while(i < size)
+	if (copy_map == NULL)
+		exit(1);
+	while (i < size)
 	{
-		copy_map[i].x = map[i].x;	
-		copy_map[i].y = map[i].y;	
-		copy_map[i].z = map[i].z;	
+		copy_map[i].x = map[i].x;
+		copy_map[i].y = map[i].y;
+		copy_map[i].z = map[i].z;
 		copy_map[i].color = map[i].color;
 		i++;
 	}

@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   equation.c                                         :+:      :+:    :+:   */
+/*   free_split.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/29 12:36:24 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/03 14:23:25 by atokamot         ###   ########.fr       */
+/*   Created: 2023/08/03 21:07:38 by atokamot          #+#    #+#             */
+/*   Updated: 2023/08/03 21:22:04 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/fdf.h"
 #include "../header/libft.h"
 
-double	get_slope(t_cor cor1, t_cor cor2)
+void	free_split(char **split)
 {
-	double	slope;
+	int	i;
 
-	slope = (cor2.y - cor1.y) / (cor2.x - cor1.x);
-	return (slope);
-}
-
-double	get_intercept(t_cor cor1, double slope)
-{
-	double	intercept;
-
-	intercept = cor1.y - (slope * cor1.x);
-	return (intercept);
+	i = 0;
+	while (split[i] != NULL)
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
 }

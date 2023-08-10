@@ -3,35 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 12:01:58 by atokamot          #+#    #+#             */
-/*   Updated: 2023/08/02 18:02:04 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/03 19:05:50 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
 #include "../header/fdf.h"
+#include "../header/libft.h"
 
 void	my_mlx_pixel_put(t_vars *vars, int x, int y, int color)
 {
 	char	*dst;
 
 	dst = vars->addr + (y * vars->line_length + x * (vars->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
+	*(unsigned int *)dst = color;
 }
 
-static void put_pixel_to_map(t_wid_hig size, t_cor *map, t_vars *vars)
+static void	put_pixel_to_map(t_wid_hig size, t_cor *map, t_vars *vars)
 {
-	int x;
-	int y;
-	int num;
+	int	x;
+	int	y;
+	int	num;
 
 	y = 0;
-	while(y < size.h)	
+	while (y < size.h)
 	{
 		x = 0;
-		while(x < size.w)
+		while (x < size.w)
 		{
 			num = x + y * size.w;
 			if (y < size.h - 1)
@@ -48,9 +48,11 @@ static void put_pixel_to_map(t_wid_hig size, t_cor *map, t_vars *vars)
 	}
 }
 
-void print_map(t_vars *vars)
+void	print_map(t_vars *vars)
 {
 	vars->map = copy_map(vars->save_map, vars->size.w * vars->size.h);
+	if (vars->map == NULL)
+		exit(1);
 	rotate_cor_x(vars->map, vars->size.w * vars->size.h, vars->x_degree);
 	rotate_cor_y(vars->map, vars->size.w * vars->size.h, vars->y_degree);
 	rotate_cor_z(vars->map, vars->size.w * vars->size.h, vars->z_degree);

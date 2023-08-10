@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_color.c                                        :+:      :+:    :+:   */
+/*   create_trgb.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 19:57:16 by atokamot          #+#    #+#             */
-/*   Updated: 2023/08/03 14:23:33 by atokamot         ###   ########.fr       */
+/*   Created: 2023/08/03 09:25:10 by atokamot          #+#    #+#             */
+/*   Updated: 2023/08/03 14:23:16 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/fdf.h"
 #include "../header/libft.h"
 
-int	get_color(const char *str)
+int	create_trgb(unsigned char t, unsigned char r, unsigned char g,
+		unsigned char b)
 {
-	char	*hex_num;
-	size_t	len;
-	int		color;
-	size_t	i;
+	return (*(int *)(unsigned char [4]){b, g, r, t});
+}
 
-	color = 0;
-	i = 2;
-	hex_num = ft_strchr(str, ',') + 1;
-	len = ft_strlen(hex_num);
-	while (i < len)
-	{
-		if (ft_isdigit(hex_num[i]))
-			color = 16 * color + hex_num[i] - '0';
-		else if (hex_num[i] >= 'a' && hex_num[i] <= 'z')
-			color = 16 * color + hex_num[i] - 'a' + 10;
-		else
-			color = 16 * color + hex_num[i] - 'A' + 10;
-		i++;
-	}
-	return (color);
+unsigned char	get_t(int trgb)
+{
+	return (((unsigned char *)&trgb)[3]);
+}
+
+unsigned char	get_r(int trgb)
+{
+	return (((unsigned char *)&trgb)[2]);
+}
+
+unsigned char	get_g(int trgb)
+{
+	return (((unsigned char *)&trgb)[1]);
+}
+
+unsigned char	get_b(int trgb)
+{
+	return (((unsigned char *)&trgb)[0]);
 }

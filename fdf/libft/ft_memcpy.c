@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 10:46:01 by atokamot          #+#    #+#             */
-/*   Updated: 2023/08/02 18:23:47 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/03 21:19:23 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,3 @@ void	*ft_memcpy(void *buf1, const void *buf2, size_t n)
 		*p1++ = *p2++;
 	return ((void *)buf1);
 }
-
-/*
-int	main(void)
-{
-	char	buf[];
-
-	buf[] = "test";
-	printf("%s\n", memcpy(buf, NULL, 4));
-}
-*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 12:59:23 by atokamot          #+#    #+#             */
-/*   Updated: 2023/08/02 18:23:47 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/03 21:19:14 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,3 @@ char	*ft_strchr(const char *s, int c)
 		return ((char *)s);
 	return (NULL);
 }
-
-/*
-#include <stdio.h>
-
-int	main(void)
-{
-	char	*s;
-
-	s = "libft-test-tokyo";
-	printf("ft:%s ori:%s\n", ft_strchr(s, 'l' + 256), strchr(s, 'l' + 256));
-	printf("ft:%s ori:%s\n", ft_strchr(s, 'l' + 256), strchr(s, 'l' + 256));
-	printf("ft:%s ori:%s\n", ft_strchr(s, 'l' - 256), strchr(s, 'l' - 256));
-	printf("ft:%s ori:%s\n", ft_strchr(s, 'l' - 256), strchr(s, 'l' - 256));
-	return (0);
-}
-*/

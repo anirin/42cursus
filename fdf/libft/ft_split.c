@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/24 10:39:47 by atokamot          #+#    #+#             */
-/*   Updated: 2023/08/02 18:23:47 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/03 21:19:02 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,25 +95,3 @@ char	**ft_split(char const *s, char c)
 		return (NULL);
 	return (ft_split_sub(result, s, c, i));
 }
-
-/*
-int	main(void)
-{
-	char	**result;
-	int		i;
-
-	i = 0;
-	result = ft_split("lorem ipsum dolor sit amet,
-			consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor,
-			dignissim sit amet, adipiscing nec, ultricies sed,
-			dolor. Cras elementum ultricies diam. Maecenas ligula massa,
-			varius a, semper congue, euismod non, mi.", 'i');
-	while (result[i] != NULL)
-	{
-		printf("i=%d result=%s\n", i, result[i]);
-		i++;
-	}
-	printf("i=%d result=%s\n", i, result[i]);
-	return (0);
-}
-*/

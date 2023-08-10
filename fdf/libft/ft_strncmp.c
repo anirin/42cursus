@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 16:14:10 by atokamot          #+#    #+#             */
-/*   Updated: 2023/08/02 18:23:47 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/03 21:19:29 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,21 +29,3 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 	return (0);
 }
-
-/*
-int	main(void)
-{
-	char	*str;
-	char	*cmp2;
-	int		len;
-
-	str = "libft-test-tokyo";
-	cmp2 = calloc(10, 1);
-	len = strlen(str);
-	printf("origin=%d\n", strncmp("hello", NULL, 0));
-	printf("ft=%d, origin=%d\n" ,strncmp(NULL, "hello", 0), strncmp(NULL,
-				"hello", 0));
-	printf("ft=%d, origin=%d\n" ,strncmp(NULL, NULL, 0), strncmp(NULL, NULL,
-				0));
-}
-*/

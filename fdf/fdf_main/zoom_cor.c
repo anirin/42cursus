@@ -6,16 +6,16 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/02 18:14:27 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/02 18:16:12 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/03 14:14:41 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/libft.h"
 #include "../header/fdf.h"
+#include "../header/libft.h"
 
-void zoom_cor(t_cor *map, int size, int zoom)
+void	zoom_cor(t_cor *map, int size, int zoom)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < size)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 17:15:23 by atokamot          #+#    #+#             */
-/*   Updated: 2023/08/02 18:23:47 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/03 21:18:54 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,3 @@ int	ft_atoi(const char *str)
 		result = get_min_result(&str[i]);
 	return (result);
 }
-
-/*
-int	main(void)
-{
-	char	str[];
-
-	str[] = "-9223372036854775808";
-	printf("ft : %d\n", ft_atoi(str));
-	printf("or : %d\n", atoi(str));
-}
-*/
