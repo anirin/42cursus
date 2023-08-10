@@ -1,25 +1,27 @@
 CC = gcc
 NAME = pipex
 
-SRC = srcs/*.c
-
+SRC = ${wildcard srcs/*.c}
 OBJ = $(SRC:.c=.o)
 
 %.o: %.c
 	$(CC) -Wall -Wextra -Werror -c $< -o $@
 
 $(NAME): $(OBJ)
-	make -C ../includes/libft
+	make -C ./libft
 	$(CC) $(OBJ) -o $(NAME) libft.a
 
 all: $(NAME)
 
 clean: 
-	make clean -C ../includes/libft
+	make clean -C ./libft
 	rm -rf $(OBJ) 
 
 fclean: clean
-	make fclean -C ../includes/libft
+	make fclean -C ./libft
 	rm -rf $(NAME)
 
 re: clean all
+
+echo :
+	echo $(SRC)

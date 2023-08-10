@@ -6,14 +6,14 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:25:19 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/08 16:23:45 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/08 16:49:08 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/pipex.h"
 
-int open_read_exit(static t_vars vars)
+int open_read_exit(const t_vars vars)
 {
 	int fd;
 
@@ -23,9 +23,10 @@ int open_read_exit(static t_vars vars)
 		perror("open");
 		exit(1);
 	}
+	return (fd);
 }
 
-int open_create_exit(static t_vars vars)
+int open_create_exit(const t_vars vars)
 {
 	int fd;
 
@@ -35,4 +36,5 @@ int open_create_exit(static t_vars vars)
 		perror("open");
 		exit(1);
 	}
+	return (fd);
 }

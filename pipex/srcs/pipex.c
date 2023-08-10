@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:28:47 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/08 16:23:45 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/08 16:49:55 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void ft_pipe(t_vars vars)
 	}
 }
 
-int main(int argc, char **argv, char **envp)
+int main(int argc, char **argv, char *envp[])
 {
 	t_vars vars;
 
@@ -44,6 +44,7 @@ int main(int argc, char **argv, char **envp)
 	vars.file[1] = argv[4];
 	vars.cmd1 = ft_split(argv[2], ' ');
 	vars.cmd2 = ft_split(argv[3], ' ');
+	vars.envp = envp;
 
 	ft_pipe(vars);
 	free_split(vars.cmd1);

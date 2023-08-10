@@ -6,14 +6,14 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:13:55 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/08 16:23:45 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/08 16:48:33 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/pipex.h"
 
-char **get_envp(static char **envp)
+char **get_envp(char *const envp[])
 {
 	int i;
 	char **path;
@@ -31,7 +31,7 @@ char **get_envp(static char **envp)
 	return (path);
 }
 
-char *get_path(static char **envp, static char *cmd1)
+char *get_path(char *const envp[], const char *cmd1)
 {
 	int i;
 	char **path;

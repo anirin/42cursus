@@ -6,14 +6,14 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 18:39:55 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/08 16:23:45 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/08 16:37:57 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/pipex.h"
 
-int dup2_error(int fd1, int fd2)
+void dup2_error(int fd1, int fd2)
 {
 	int check;
 
