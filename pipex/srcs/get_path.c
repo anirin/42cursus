@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:13:55 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/12 10:57:10 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/12 18:06:42 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/pipex.h"
 
-char **get_envp(char *const envp[])
+char	**get_envp(char *const envp[])
 {
-	int i;
-	char **path;
+	int		i;
+	char	**path;
 
 	i = 0;
 	path = NULL;
-	while(envp[i])
+	while (envp[i])
 	{
-		if (strncmp(envp[i], "PATH", 4) == 0)
+		if (ft_strncmp(envp[i], "PATH", 4) == 0)
 		{
 			path = ft_split(envp[i] + 5, ':');
 		}
@@ -31,21 +31,23 @@ char **get_envp(char *const envp[])
 	return (path);
 }
 
-char *get_path(char *const envp[], const char *cmd1)
+char	*get_path(char *const envp[], const char *cmd1)
 {
-	int i;
-	char **path;
-	char *file_path;
-	char *dir_path;
+	int		i;
+	char	**path;
+	char	*file_path;
+	char	*dir_path;
 
+	if (access(cmd1, X_OK) == 0)
+		return ((char *)cmd1);
 	i = 0;
 	path = get_envp(envp);
-	while(path[i] != NULL)
+	while (path[i] != NULL)
 	{
 		dir_path = ft_strjoin(path[i], "/");
 		file_path = ft_strjoin(dir_path, cmd1);
 		free(dir_path);
-		if(access(file_path, X_OK) == 0)
+		if (access(file_path, X_OK) == 0)
 		{
 			free_split(path);
 			return (file_path);
