@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup_error.c                                        :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/07 18:39:55 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/10 18:10:29 by atsu             ###   ########.fr       */
+/*   Created: 2023/08/10 18:09:53 by atsu              #+#    #+#             */
+/*   Updated: 2023/08/10 18:12:07 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/libft.h"
 #include "../includes/pipex.h"
 
-void dup2_error_exit(int fd1, int fd2)
+void close_error_exit(int fd)
 {
 	int check;
 
-	check = dup2(fd1, fd2);
+	check = close(fd);
 	if (check == -1)
 	{
-		perror("dup2");
+		perror("close");
 		exit(1);
 	}
 }

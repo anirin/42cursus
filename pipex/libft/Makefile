@@ -1,6 +1,6 @@
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rc
-NAME = ../includes/libft.a
+NAME = ../libft.a
 OBJCS = $(SRCS:%.c=%.o)
 BOBJCS = $(BSRCS:%.c=%.o)
 SRCS = ft_atoi.c\

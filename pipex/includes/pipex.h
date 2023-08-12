@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/07 17:19:26 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/08 16:48:49 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/11 19:22:44 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,12 @@ char **get_envp(char *const envp[]);
 char *get_path(char *const envp[], const char *cmd1);
 
 //open
-int open_read_exit(const t_vars vars);
-int open_create_exit(const t_vars vars);
+int open_create_error_exit(const t_vars vars);
 
 //dup2
-void dup2_error(int fd1, int fd2);
+void dup2_error_exit(int fd1, int fd2);
+
+//close
+void close_error_exit(int fd);
 
 #endif

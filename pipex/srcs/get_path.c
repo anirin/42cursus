@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:13:55 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/08 16:48:33 by atsu             ###   ########.fr       */
+/*   Updated: 2023/08/12 10:57:10 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,15 +43,16 @@ char *get_path(char *const envp[], const char *cmd1)
 	while(path[i] != NULL)
 	{
 		dir_path = ft_strjoin(path[i], "/");
-		free(path[i]);
 		file_path = ft_strjoin(dir_path, cmd1);
 		free(dir_path);
-		if(access(file_path, 0) == 0)
+		if(access(file_path, X_OK) == 0)
 		{
+			free_split(path);
 			return (file_path);
 		}
 		free(file_path);
 		i++;
 	}
+	free_split(path);
 	return (NULL);
 }

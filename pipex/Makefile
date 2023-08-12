@@ -1,4 +1,4 @@
-CC = gcc
+CC = cc
 NAME = pipex
 
 SRC = ${wildcard srcs/*.c}
@@ -23,5 +23,5 @@ fclean: clean
 
 re: clean all
 
-echo :
-	echo $(SRC)
+ex :
+	./pipex infile "grep a1" "wc -w" outfile
