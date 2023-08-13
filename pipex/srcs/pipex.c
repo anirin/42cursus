@@ -30,6 +30,10 @@ void	ft_pipe(t_vars vars)
 	pid_read = fork_error_exit();
 	if (pid_read == 0)
 		child_proc_read(vars, pipefd);
+
+	//close pipe
+	close_error_exit(pipefd[1]);
+	close_error_exit(pipefd[0]);
 	waitpid_error_exit(pid_write);
 	waitpid_error_exit(pid_read);
 	exit(0);
