@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_child_and_parent.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 16:14:56 by atsu              #+#    #+#             */
-/*   Updated: 2023/08/12 18:07:51 by atokamot         ###   ########.fr       */
+/*   Updated: 2023/08/13 14:28:42 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@ void	child_proc_write(const t_vars vars, const int *pipefd)
 		exit(1);
 	}
 	execve(path, vars.cmd1, NULL);
-	//test
-	// char *test[3];
-	// test[0] = strdup("echo");
-	// test[1] = strdup("Hello");
-	// test[1] = NULL;
-	// fprintf(stderr, "path=%s\n", path);
-	// execve("/bin/echo", test, NULL);
-	//
 	perror(vars.cmd1[0]);
 	exit(1);
 }
@@ -62,13 +54,6 @@ void	child_proc_read(const t_vars vars, const int *pipefd)
 	fd = open_create_error_exit(vars);
 	dup2_error_exit(fd, 1);
 	execve(path, vars.cmd2, NULL);
-	//test
-	// char *test[3];
-	// test[0] = strdup("echo");
-	// test[1] = strdup("Hello");
-	// test[2] = NULL;
-	// execve("/bin/echo", test, NULL);
-	//
 	perror(vars.cmd2[0]);
 	exit(1);
 }
