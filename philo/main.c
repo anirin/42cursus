@@ -6,8 +6,8 @@ int	main(int argc, char **argv)
 	t_philo		*philos;
 	pthread_t 	*philo_threads;
 	pthread_mutex_t		*forks;
-	t_limiter	limiter;
 	t_data	*data;
+	t_time *times;
 	struct timeval tv;
 
 	//error
@@ -17,22 +17,20 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 
-	//time start
-	gettimeofday(&tv, NULL);
-
 	//init
 	setting = get_setting(argv);
-	forks = init_forks(setting.number_of_philosophers);
-	philos = init_philos_data(setting, forks, tv);
-	limiter = limiter_init(setting);
-	data = integrate_data(setting, philos, limiter);
+	forks = init_forks(setting.number);
+	philos = init_philos(setting, forks);
+	times = init_time(setting.number);
+	data = integrate_data(setting, philos, times);
 
 	//philo lifecycle
 	philo_threads = create_philos_thread(data);
 
 	//finish
-	finish_pthreads(setting.number_of_philosophers, philo_threads);
-	finish_mutex(setting.number_of_philosophers, forks);
+	//動的に確保したスレッドの処理が必要
+	finish_pthreads(setting.number, philo_threads);
+	finish_mutex(setting.number, forks);
 
 	return (0);
 }

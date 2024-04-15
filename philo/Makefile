@@ -3,7 +3,7 @@ CC = gcc #変更
 SEGV = -g -fsanitize=address
 NAME = philo
 
-SRC = main.c init.c philo.c utils.c print.c
+SRC = main.c init.c philo.c utils.c print.c time.c 
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,36 +1,39 @@
 #include "philo.h"
 
-void philo_get_forks(t_philo philo)
+void print_fork_address(t_data data)
 {
-	pthread_mutex_lock(philo.left_fork);
-	philo_print(philo, "take left fork");
-	pthread_mutex_lock(philo.right_fork);
-	philo_print(philo, "take right fork");
+	printf("philo [%d] address left[%d]:%p right[%d]:%p\n", data.philo.index, data.philo.index ,data.philo.left_fork,(data.philo.index + 1) % data.setting.number, data.philo.right_fork);
 }
 
-void philo_eat(t_setting setting, t_philo philo)
+void philo_get_forks(t_data data)
 {
-	philo_print(philo, "is eating");
-	usleep(setting.time_to_eat * 1000);
+	pthread_mutex_lock(data.philo.left_fork);
+	pthread_mutex_lock(data.philo.right_fork);
+	print_fork_address(data);
+	print_state(data, FORK);
 }
 
-void philo_put_forks(t_philo philo)
+void philo_eat(t_data data)
 {
-	pthread_mutex_unlock(philo.left_fork);
-	philo_print(philo, "put left fork");
-	pthread_mutex_unlock(philo.right_fork);
-	philo_print(philo, "put right fork");
+	print_state(data, EATING);
+	my_usleep(data.time, data.setting.time_to_eat);
 }
 
-void philo_sleep(t_setting setting, t_philo philo)
+void philo_put_forks(t_data data)
 {
-	philo_print(philo, "is sleeping");
-	usleep(setting.time_to_sleep * 1000);
+	pthread_mutex_unlock(data.philo.left_fork);
+	pthread_mutex_unlock(data.philo.right_fork);
 }
 
-void philo_think(t_philo philo)
+void philo_sleep(t_data data)
 {
-	philo_print(philo, "is thinking");
+	print_state(data, SLEEPING);
+	my_usleep(data.time, data.setting.time_to_sleep);
+}
+
+void philo_think(t_data data)
+{
+	print_state(data, THINKING);
 }
 
 void philo_lifecycle(t_data data)
@@ -38,14 +41,13 @@ void philo_lifecycle(t_data data)
 	int i;
 
 	i = 0;
-	//第５匹数がない場合を考慮していない memo
 	while (data.setting.eat_times > i)
 	{
-		philo_get_forks(data.philo);
-		philo_eat(data.setting, data.philo);
-		philo_put_forks(data.philo);
-		philo_sleep(data.setting, data.philo);
-		philo_think(data.philo);
+		philo_get_forks(data);
+		philo_eat(data);
+		philo_put_forks(data);
+		philo_sleep(data);
+		philo_think(data);
 		i++;
 	}
 }
@@ -56,8 +58,9 @@ pthread_t *create_philos_thread(t_data *data)
 	int i;
 
 	i = 0;
-	philo_thread = malloc(data[0].setting.number_of_philosophers * sizeof(pthread_t));
-	while (data[0].setting.number_of_philosophers > i)
+	philo_thread = malloc(data[0].setting.number * sizeof(pthread_t));
+
+	while (data[0].setting.number > i)
 	{
 		printf("philo [%d] is born\n", data[i].philo.index);
 		pthread_create(&philo_thread[i], NULL, (void *)philo_lifecycle, &data[i]);
