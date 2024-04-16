@@ -54,6 +54,8 @@ t_philo	*init_philos(t_setting data, pthread_mutex_t *forks)
 		philo[i].index = i;
 		philo[i].left_fork = &forks[i];
 		philo[i].right_fork = &forks[(i + 1) % data.number];
+		philo[i].check = UNCHECK;
+		philo[i].status = WAITING;
 		i++;
 	}
 	return (philo);
@@ -75,34 +77,3 @@ t_data	*integrate_data(t_setting setting, t_philo *philo, t_time *time)
 	}
 	return (data);
 }
-
-// void print_philo(t_philo philo)
-// {
-// 	printf("index: %d\n", philo.index);
-// 	printf("time_to_die: %d\n", philo.time_to_die);
-// 	printf("time_to_eat: %d\n", philo.time_to_eat);
-// 	printf("time_to_sleep: %d\n", philo.time_to_sleep);
-// 	printf("eat_times: %d\n", philo.eat_times);
-// 	printf("--------------------\n");
-// }
-
-// void print_philos(t_data data, t_philo *philo)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (i < data.number)
-// 	{
-// 		print_philo(philo[i]);
-// 		i++;
-// 	}
-// }	
-
-// void print_data(t_data data)
-// {
-// 	printf("number: %d\n", data.number);
-// 	printf("time_to_die: %d\n", data.time_to_die);
-// 	printf("time_to_eat: %d\n", data.time_to_eat);
-// 	printf("time_to_sleep: %d\n", data.time_to_sleep);
-// 	printf("eat_times: %d\n", data.eat_times);
-// }
