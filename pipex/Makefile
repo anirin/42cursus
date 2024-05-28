@@ -9,7 +9,7 @@ OBJ = $(SRCS:.c=.o)
 
 $(NAME): $(OBJ)
 	make -C ./libft
-	$(CC) $(OBJ) -o $(NAME) libft.a
+	$(CC) $(OBJ) -Llibft -lft -o $(NAME) 
 
 all: $(NAME)
 
@@ -24,7 +24,14 @@ fclean: clean
 re: clean all
 
 ex :
-	./pipex infile "grep a1" "wc -w" outfile
+	./pipex infile "grep a" "wc -w" outfile
+	@cat outfile
+	@echo -----------
+
+true :
+	< infile grep a | wc -w > outfile
+	@cat outfile
+	@echo -----------
 
 norm :
 	norminette includes libft srcs

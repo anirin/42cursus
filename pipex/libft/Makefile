@@ -1,6 +1,6 @@
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rc
-NAME = ../libft.a
+NAME = ./libft.a
 OBJCS = $(SRCS:%.c=%.o)
 BOBJCS = $(BSRCS:%.c=%.o)
 SRCS = ft_atoi.c\
@@ -52,20 +52,14 @@ ft_lstmap.c
 $(NAME): $(OBJCS)
 	$(AR) $@ $^
 
-
-# ifeq ($(MAKEGAOLD), bonus)
-# 	SRCS += BSRCS
-# endif
 ifdef WITH_BONUS
 SRCS+=$(BSRCS)
 endif
 
 all: $(NAME)
 
-# bonus : $(BOBJCS) $(OBJCS)
 bonus:
 	make WITH_BONUS=1 ${NAME}
-
 
 clean:
 	$(RM) $(BOBJCS) $(OBJCS) 

@@ -2,10 +2,11 @@ package service
 
 import (
 	"database/sql"
+	"fmt"
 	"net/http"
+	"problem1/apperrors"
 	"problem1/configs"
 	"problem1/repository"
-	"fmt"
 
 	"github.com/labstack/echo/v4"
 )
@@ -18,15 +19,25 @@ func GetFriendList(c echo.Context) error {
 	conf := configs.Get()
 	db, err := sql.Open(conf.DB.Driver, conf.DB.DataSource)
 	if err != nil {
-		panic(err)
+		err = apperrors.SqlError.Wrap(err, "failed to open db")
+		apperrors.ErrorHandler(c, err)
+		return err
 	}
 	defer db.Close()
 
 	id := c.QueryParam("ID")
 
 	fmt.Println("try")
-	friendList := repository.GetFriendLinkList(db, id)
-	friendUserList := repository.GetUserNameList(db, friendList)
+	friendList, err := repository.GetFriendLinkList(db, id)
+	if err != nil {
+		apperrors.ErrorHandler(c, err)
+		return err
+	}	
+	friendUserList, err := repository.GetUserNameList(db, friendList)
+	if err != nil {
+		apperrors.ErrorHandler(c, err)
+		return err
+	}	
 
 	return c.JSON(http.StatusOK, friendUserList)
 }
