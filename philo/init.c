@@ -1,79 +1,56 @@
 #include "philo.h"
 
-t_setting	get_setting(char **argv)
+t_data set_data(char *argv[])
 {
-	int		number;
-	int		time_to_die;
-	int		time_to_eat;
-	int		time_to_sleep;
-	int		eat_times;
-	t_setting	data;
+	t_data data;
 
-	//argvから値を取得
-	number = atoi(argv[1]);
-	time_to_die = atoi(argv[2]);
-	time_to_eat = atoi(argv[3]);
-	time_to_sleep = atoi(argv[4]);
-	eat_times = atoi(argv[5]);
-
-	//構造体に格納
-	data.number = number;
-	data.time_to_die = time_to_die;
-	data.time_to_eat = time_to_eat;
-	data.time_to_sleep = time_to_sleep;
-	data.eat_times = eat_times;
+	data.num_of_philos = atoi(argv[1]);
+	data.time_to_die = atoi(argv[2]);
+	data.time_to_eat = atoi(argv[3]);
+	data.time_to_sleep = atoi(argv[4]);
+	if (argv[5])
+		data.num_of_times_each_philo_must_eat = atoi(argv[5]);
+	else
+		data.num_of_times_each_philo_must_eat = -1;
 	return (data);
 }
 
-pthread_mutex_t	*init_forks(int number)
-{
-	pthread_mutex_t	*forks;
-	int				i;
 
+t_fork *init_forks(int num_of_philos)
+{
+	t_fork *forks;
+	int i;
+
+	forks = malloc(sizeof(t_fork) * num_of_philos);
+	if (!forks)
+		return (NULL);
 	i = 0;
-	forks = malloc(sizeof(pthread_mutex_t) * number);
-	while (i < number)
+	while (i < num_of_philos)
 	{
-		pthread_mutex_init(&forks[i], NULL);
+		pthread_mutex_init(&forks[i].mutex, NULL);
+		forks[i].clean = true;
+		forks[i].owner = -1;
+		forks[i].requested = false;
 		i++;
 	}
 	return (forks);
 }
 
-t_philo	*init_philos(t_setting data, pthread_mutex_t *forks)
+t_philo *init_philos(t_data data, t_fork *forks)
 {
-	int		i;
-	t_philo	*philo;
-	pthread_mutex_t print_mutex;
-
-	i = 0;
-	philo = malloc(sizeof(t_philo) * data.number);
-	pthread_mutex_init(&print_mutex, NULL);
-	while (i < data.number)
-	{
-		philo[i].index = i;
-		philo[i].left_fork = &forks[i];
-		philo[i].right_fork = &forks[(i + 1) % data.number];
-		philo[i].check = UNCHECK;
-		philo[i].status = WAITING;
-		i++;
-	}
-	return (philo);
-}
-
-t_data	*integrate_data(t_setting setting, t_philo *philo, t_time *time)
-{
-	t_data	*data;
+	t_philo *philos;
 	int i;
 
+	philos = malloc(sizeof(t_philo) * data.num_of_philos);
+	if (!philos)
+		return (NULL);
 	i = 0;
-	data = malloc(sizeof(t_data) * setting.number);
-	while (i < setting.number)
+	while (i < data.num_of_philos)
 	{
-		data[i].setting = setting;
-		data[i].philo = philo[i];
-		data[i].time = time[i];
+		philos[i].id = i + 1;
+		philos[i].left_fork = &forks[i];
+		philos[i].right_fork = &forks[(i + 1) % data.num_of_philos];
 		i++;
 	}
-	return (data);
+	return (philos);
 }
