@@ -1,9 +1,9 @@
 # CFLAGS = -Wall -Wextra -Werror
 NAME = philo
 CC = gcc
-SRCS = main.c init.c simulation.c
-OBJ_DIR = obj
+SRCS = init.c main.c print.c simulation.c time.c
 OBJCS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJ_DIR = obj
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
@@ -25,3 +25,9 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
+
+run : fclean all
+	./philo 5 200 200 200 10 
+
+files :
+	ls *.c | tr '\n' ' '

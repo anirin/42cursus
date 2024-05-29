@@ -5,7 +5,7 @@ int main(int argc, char *argv[])
 	t_philo *philos;
 	t_fork *forks;
 	t_data data;
-	int start_time;
+	long start_time;
 
 	if (argc != 5 && argc != 6)
 	{
@@ -20,7 +20,4 @@ int main(int argc, char *argv[])
 	philos = init_philos(data, forks, start_time);
 
 	run_simulation(data, philos);
-
-	// free_forks(forks, data.num_of_philos);
-	// free_philos(philos);
 }

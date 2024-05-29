@@ -29,7 +29,7 @@ t_fork *init_forks(int num_of_philos)
 	{
 		pthread_mutex_init(&forks[i].mutex, NULL);
 		forks[i].status = Clean;
-		forks[i].requested = false;
+		forks[i].owner = (i / 2) * 2;
 		i++;
 	}
 	return (forks);
@@ -46,11 +46,12 @@ t_philo *init_philos(t_data data, t_fork *forks, long start_time)
 	i = 0;
 	while (i < data.num_of_philos)
 	{
-		philos[i].id = i + 1;
+		philos[i].id = i;
 		philos[i].left_fork = &forks[i];
 		philos[i].right_fork = &forks[(i + 1) % data.num_of_philos];
 		philos[i].check_point = 0;
 		philos[i].start_time = start_time;
+		philos[i].data = data;
 		i++;
 	}
 	return (philos);
