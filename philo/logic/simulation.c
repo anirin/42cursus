@@ -39,7 +39,6 @@ void	*philo_routine(void *arg)
 void *monitor(void *arg)
 {
 	t_philo	*philo;
-	int i;
 	long current_time;
 	int diff;
 
