@@ -1,8 +1,8 @@
 #include "philo.h"
 
-t_data set_data(char *argv[])
+t_data	set_data(char *argv[])
 {
-	t_data data;
+	t_data	data;
 
 	data.num_of_philos = atoi(argv[1]);
 	data.time_to_die = atoi(argv[2]);
@@ -15,31 +15,25 @@ t_data set_data(char *argv[])
 	return (data);
 }
 
-pthread_mutex_t *init_print_mutex()
+t_common	init_common(void)
 {
-	pthread_mutex_t *print_mutex;
+	t_common	common;
 
-	print_mutex = malloc(sizeof(pthread_mutex_t));
-	if (!print_mutex)
-		return (NULL);
-	pthread_mutex_init(print_mutex, NULL);
-	return (print_mutex);
+	common.alive = malloc(sizeof(bool));
+	*common.alive = true;
+	common.full = malloc(sizeof(int));
+	*common.full = 0;
+	common.full_mutex = malloc(sizeof(pthread_mutex_t));
+	common.print_mutex = malloc(sizeof(pthread_mutex_t));
+	pthread_mutex_init(common.print_mutex, NULL);
+	pthread_mutex_init(common.full_mutex, NULL);
+	return (common);
 }
 
-bool *init_alive()
+t_fork	*init_forks(int num_of_philos)
 {
-	bool *alive;
-
-	alive = malloc(sizeof(bool));
-	*alive = true;
-	return (alive);
-}
-
-
-t_fork *init_forks(int num_of_philos)
-{
-	t_fork *forks;
-	int i;
+	t_fork	*forks;
+	int		i;
 
 	forks = malloc(sizeof(t_fork) * num_of_philos);
 	if (!forks)
@@ -55,20 +49,16 @@ t_fork *init_forks(int num_of_philos)
 	return (forks);
 }
 
-t_philo *init_philos(t_data data, t_fork *forks, long start_time, bool *alive)
+t_philo	*init_philos(t_data data, t_fork *forks, long start_time,
+		t_common common_value)
 {
 	t_philo *philos;
 	int i;
-	int *full;
-	pthread_mutex_t full_mutex;
-	pthread_mutex_t print_mutex;
 
 	philos = malloc(sizeof(t_philo) * data.num_of_philos);
 	if (!philos)
 		return (NULL);
 	i = 0;
-	full = malloc(sizeof(int));
-	*full = 0;
 	while (i < data.num_of_philos)
 	{
 		philos[i].id = i;
@@ -77,11 +67,11 @@ t_philo *init_philos(t_data data, t_fork *forks, long start_time, bool *alive)
 		philos[i].check_point = 0;
 		philos[i].start_time = start_time;
 		philos[i].latest_eat_time = 0;
-		philos[i].alive = alive;
 		philos[i].data = data;
-		philos[i].print_mutex = &print_mutex;
-		philos[i].full = full;
-		philos[i].full_mutex = &full_mutex;
+		philos[i].alive = common_value.alive;
+		philos[i].full = common_value.full;
+		philos[i].print_mutex = common_value.print_mutex;
+		philos[i].full_mutex = common_value.full_mutex;
 		i++;
 	}
 	return (philos);
