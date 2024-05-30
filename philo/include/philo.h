@@ -74,11 +74,11 @@ t_philo				*init_philos(t_data data, t_fork *forks, long start_time,
 void				run_simulation(int num_of_philos, t_philo *philos);
 
 //routine
-void get_fork(t_philo *philo);
-void eat(t_philo *philo);
-void clean_fork(t_philo *philo);
-void philo_sleep(t_philo *philo);
-void think(t_philo *philo);
+void				get_fork(t_philo *philo);
+void				eat(t_philo *philo);
+void				clean_fork(t_philo *philo);
+void				philo_sleep(t_philo *philo);
+void				think(t_philo *philo);
 
 //time
 long				get_current_time(void);
@@ -91,4 +91,4 @@ void				print_philo_status(t_philo *philo, char *status);
 void				clean_up(t_philo *philos, t_fork *forks, t_common common);
 
 //error
-int check_error(int argc, char *argv[]);
+int					check_error(int argc, char *argv[]);

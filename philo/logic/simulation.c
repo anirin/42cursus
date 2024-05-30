@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void full_check(t_philo *philo, int i)
+void	full_check(t_philo *philo, int i)
 {
 	if (philo->data.num_of_times_each_philo_must_eat == i)
 	{
@@ -13,37 +13,38 @@ void full_check(t_philo *philo, int i)
 void	*philo_routine(void *arg)
 {
 	t_philo	*philo;
-	int i;
+	int		i;
 
 	philo = (t_philo *)arg;
 	i = 0;
-	while(1)
+	while (1)
 	{
-		if (philo->check_point == 0 && (philo->id % 2 == 1 || philo->id == philo->data.num_of_philos - 1))
+		if (philo->check_point == 0 && (philo->id % 2 == 1
+				|| philo->id == philo->data.num_of_philos - 1))
 			think(philo);
 		if (philo->data.num_of_philos == 1)
-			break;
+			break ;
 		get_fork(philo);
 		eat(philo);
 		clean_fork(philo);
 		philo_sleep(philo);
 		think(philo);
 		if (*philo->alive == false || *philo->full == philo->data.num_of_philos)
-			break;
+			break ;
 		i++;
 		full_check(philo, i);
 	}
-	return NULL;
+	return (NULL);
 }
 
-void *monitor(void *arg)
+void	*monitor(void *arg)
 {
 	t_philo	*philo;
-	long current_time;
-	int diff;
+	long	current_time;
+	int		diff;
 
 	philo = (t_philo *)arg;
-	while(1)
+	while (1)
 	{
 		current_time = get_current_time();
 		diff = current_time - philo->start_time - philo->latest_eat_time;
@@ -51,14 +52,13 @@ void *monitor(void *arg)
 		{
 			print_philo_status(philo, Die);
 			*philo->alive = false;
-			break;
+			break ;
 		}
 		if (*philo->alive == false)
-			break;
+			break ;
 		usleep(1000 * 1);
 	}
-
-	return NULL;
+	return (NULL);
 }
 
 void	run_simulation(int num_of_philos, t_philo *philos)
@@ -68,7 +68,8 @@ void	run_simulation(int num_of_philos, t_philo *philos)
 	i = 0;
 	while (i < num_of_philos)
 	{
-		pthread_create(&philos[i].routine_thread, NULL, &philo_routine, &philos[i]);
+		pthread_create(&philos[i].routine_thread, NULL, &philo_routine,
+				&philos[i]);
 		pthread_create(&philos[i].monitor_thread, NULL, &monitor, &philos[i]);
 		i++;
 	}

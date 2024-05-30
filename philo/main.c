@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	t_philo *philos;
 	t_fork *forks;

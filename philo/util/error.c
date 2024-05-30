@@ -1,6 +1,6 @@
 #include "philo.h"
 
-int check_error(int argc, char *argv[])
+int	check_error(int argc, char *argv[])
 {
 	if (argc != 5 && argc != 6)
 	{
