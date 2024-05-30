@@ -40,6 +40,7 @@ void get_fork(t_philo *philo)
 	pthread_t get_left_fork_thread;
 	pthread_t get_right_fork_thread;
 	long currnt_time;
+	int diff;
 
 	pthread_create(&get_left_fork_thread, NULL, &get_left_fork, (void *)philo);
 	pthread_create(&get_right_fork_thread, NULL, &get_right_fork, (void *)philo);
@@ -47,24 +48,20 @@ void get_fork(t_philo *philo)
 	pthread_join(get_left_fork_thread, NULL);
 	pthread_join(get_right_fork_thread, NULL);
 
-	// if (philo->id == 1)
-	// {
-	// 	printf("take fork: time %d, id:%d, check_point:%d, left owner %d, right owner %d\n",
-	// 		get_current_time() - philo->start_time , philo->id, philo->check_point, philo->left_fork->owner, philo->right_fork->owner);
-	// }
-
 	currnt_time = get_current_time();
-	// printf("id:%d start:%ld, current:%ld, diff:%ld\n",philo->id, philo->start_time, currnt_time, currnt_time - philo->start_time);
-	if (currnt_time - philo->start_time - philo->check_point > Buffer)
+	diff = currnt_time - philo->start_time - philo->check_point;
+
+
+	if ((diff > Buffer) && (diff <= Buffer + philo->data.time_to_eat))
 	{
 		philo->check_point += philo->data.time_to_eat;
 	}
-	else if (currnt_time - philo->start_time - philo->check_point > Buffer + philo->data.time_to_eat)
+	else if (diff > Buffer + philo->data.time_to_eat)
 	{
 		philo->check_point += philo->data.time_to_eat * 2;
 	}
 
-	// print_philo_status(philo, Fork);
+	print_philo_status(philo, Fork);
 }
 
 void	eat(t_philo *philo)
@@ -73,6 +70,7 @@ void	eat(t_philo *philo)
 	philo->check_point += philo->data.time_to_eat;
 	philo->left_fork->status = Dirty;
 	philo->right_fork->status = Dirty;
+	philo->latest_eat_time = philo->check_point;
 }
 
 void	clean_fork(t_philo *philo)
@@ -110,15 +108,24 @@ void	*philo_routine(void *arg)
 
 	i = 0;
 
-	while(i < 5)
+	while(1)
 	{
 		get_fork(philo);
 		eat(philo);
 		clean_fork(philo);
 		philo_sleep(philo);
 		think(philo);
+		if (*philo->alive == false || *philo->full == philo->data.num_of_philos)
+			break;
 
 		i++;
+
+		if (philo->data.num_of_times_each_philo_must_eat == i)
+		{
+			pthread_mutex_lock(philo->full_mutex);
+			*philo->full += 1;
+			pthread_mutex_unlock(philo->full_mutex);
+		}
 	}
 
 	return NULL;
@@ -128,15 +135,27 @@ void *monitor(void *arg)
 {
 	t_philo	*philo;
 	int i;
+	long current_time;
+	int diff;
 
 	philo = (t_philo *)arg;
 
 	while(1)
 	{
-		printf("time %d, id:%d, check_point:%d, left owner %d, right owner %d\n",
-			get_current_time() - philo->start_time , philo->id, philo->check_point, philo->left_fork->owner, philo->right_fork->owner);
-		usleep(1000 * 100);
+		current_time = get_current_time();
+		diff = current_time - philo->start_time - philo->latest_eat_time;
+		if (diff >= philo->data.time_to_die)
+		{
+			print_philo_status(philo, Die);
+			*philo->alive = false;
+			break;
+		}
+		if (*philo->alive == false)
+			break;
+		usleep(1000 * 1);
 	}
+
+	return NULL;
 }
 
 void	run_simulation(t_data data, t_philo *philos)
@@ -147,12 +166,9 @@ void	run_simulation(t_data data, t_philo *philos)
 	while (i < data.num_of_philos)
 	{
 		pthread_create(&philos[i].routine_thread, NULL, &philo_routine, &philos[i]);
+		pthread_create(&philos[i].monitor_thread, NULL, &monitor, &philos[i]);
 		i++;
 	}
-
-	// debug
-	// pthread_t monitor_thread;
-	// pthread_create(&monitor_thread, NULL, &monitor, (void *)&philos[1]);
 
 	i = 0;
 	while (i < data.num_of_philos)

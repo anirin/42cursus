@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <string.h>
 #include <sys/time.h>
 
 #define Dirty false
@@ -13,7 +14,7 @@
 #define Sleep "is sleeping\n"
 #define Think "is thinking\n"
 #define Die "died\n"
-#define Buffer 10
+#define Buffer 30
 
 typedef struct s_data
 {
@@ -35,20 +36,27 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	pthread_t		routine_thread;
-	pthread_t		clean_thread;
+	pthread_t		monitor_thread;
 	int				id;
 	t_fork			*left_fork;
 	t_fork			*right_fork;
+	int				latest_eat_time;
 	int				check_point;
 	long			start_time;
+	bool			*alive;
+	int				*full;
+
+	pthread_mutex_t *print_mutex;
+	pthread_mutex_t *full_mutex;
 
 	t_data			data;
 }					t_philo;
 
 //init
+bool *init_alive();
 t_data				set_data(char *argv[]);
 t_fork				*init_forks(int num_of_philos);
-t_philo				*init_philos(t_data data, t_fork *forks, long start_time);
+t_philo				*init_philos(t_data data, t_fork *forks, long start_time, bool *alive);
 
 //simulation
 void				run_simulation(t_data data, t_philo *philos);

@@ -27,7 +27,7 @@ re: fclean all
 .PHONY: all clean fclean re
 
 run : fclean all
-	./philo 5 200 200 200 10 
+	./philo 5 1000 200 200 10 
 
 files :
 	ls *.c | tr '\n' ' '
