@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
-ADDRESS = -fsanitize=address
-# THREAD = -fsanitize=thread
+SANITIZE_FLAGS = -fsanitize=address
+# THREAD_FLAGS = -fsanitize=thread
 
 NAME = philo
 
@@ -23,24 +23,30 @@ SRCS = \
 	./util/print.c \
 	./util/time.c
 
-OBJCS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
+OBJCS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)/%.o)
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR) $(OBJ_DIR)/logic $(OBJ_DIR)/routine $(OBJ_DIR)/util
+RED=\033[31m
+GREEN=\033[32m
+RESET=\033[0m
 
-$(OBJ_DIR)/%.o: %.c | $(OBJ_DIR)
-	$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
+$(OBJ_DIR)/%.o: $(SRC_DIR)%.c
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) -I $(INC_DIR) -c $< -o $@
 
 all: $(NAME)
 
 $(NAME): $(OBJCS)
-	$(CC) $(CFLAGS) $(ADDRESS) $(THREAD) -o $@ $(OBJCS)
+	@$(CC) $(CFLAGS) $(SANITIZE_FLAGS) $(THREAD_FLAGS) -o $@ $(OBJCS)
+	@echo "$(GREEN)✅ $(NAME) created$(RESET)"
 
 clean:
-	$(RM) $(OBJCS)
+	@$(RM) $(OBJCS)
+	@echo "🧹Cleaned"
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
+	@$(RM) -rf $(OBJ_DIR)
+	@echo "🧹fcleaned"
 
 re: fclean all
 
