@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   simulation.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/06 14:59:17 by atokamot          #+#    #+#             */
+/*   Updated: 2024/06/06 15:05:37 by atokamot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	full_check(t_philo *philo, int i)
@@ -63,13 +75,13 @@ void	*monitor(void *arg)
 
 void	run_simulation(int num_of_philos, t_philo *philos)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < num_of_philos)
 	{
 		pthread_create(&philos[i].routine_thread, NULL, &philo_routine,
-				&philos[i]);
+			&philos[i]);
 		pthread_create(&philos[i].monitor_thread, NULL, &monitor, &philos[i]);
 		i++;
 	}

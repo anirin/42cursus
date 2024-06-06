@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/06 14:59:36 by atokamot          #+#    #+#             */
+/*   Updated: 2024/06/06 15:04:10 by atokamot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	check_error(int argc, char *argv[])
@@ -19,7 +31,8 @@ int	check_error(int argc, char *argv[])
 	}
 	if (argc == 6 && atoi(argv[5]) < 1)
 	{
-		printf("Error: Number of times each philosopher must eat must be greater than 0\n");
+		printf("Error: Number of times \
+		each philosopher must eat must be greater than 0\n");
 		return (1);
 	}
 	return (0);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_fork.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/06 14:59:20 by atokamot          #+#    #+#             */
+/*   Updated: 2024/06/06 15:02:34 by atokamot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	*get_left_fork(void *arg)
@@ -41,7 +53,7 @@ void	get_fork(t_philo *philo)
 
 	pthread_create(&get_left_fork_thread, NULL, &get_left_fork, (void *)philo);
 	pthread_create(&get_right_fork_thread, NULL, &get_right_fork,
-			(void *)philo);
+		(void *)philo);
 	pthread_join(get_left_fork_thread, NULL);
 	pthread_join(get_right_fork_thread, NULL);
 	print_philo_status(philo, FORK);

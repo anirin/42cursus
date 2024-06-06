@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/06 14:59:34 by atokamot          #+#    #+#             */
+/*   Updated: 2024/06/06 15:02:50 by atokamot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	clean_up(t_philo *philos, t_fork *forks, t_common common)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < philos->data.num_of_philos)

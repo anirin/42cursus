@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/06 14:59:41 by atokamot          #+#    #+#             */
+/*   Updated: 2024/06/06 15:04:38 by atokamot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 t_data	set_data(char *argv[])
@@ -42,7 +54,7 @@ t_fork	*init_forks(int num_of_philos)
 	while (i < num_of_philos)
 	{
 		pthread_mutex_init(&forks[i].mutex, NULL);
-		forks[i].status = Clean;
+		forks[i].status = CLEAN;
 		forks[i].owner = (i / 2) * 2;
 		i++;
 	}
@@ -52,8 +64,8 @@ t_fork	*init_forks(int num_of_philos)
 t_philo	*init_philos(t_data data, t_fork *forks, long start_time,
 		t_common common_value)
 {
-	t_philo *philos;
-	int i;
+	t_philo	*philos;
+	int		i;
 
 	philos = malloc(sizeof(t_philo) * data.num_of_philos);
 	if (!philos)
@@ -64,7 +76,6 @@ t_philo	*init_philos(t_data data, t_fork *forks, long start_time,
 		philos[i].id = i;
 		philos[i].left_fork = &forks[i];
 		philos[i].right_fork = &forks[(i + 1) % data.num_of_philos];
-		// philos[i].check_point = 0;
 		philos[i].start_time = start_time;
 		philos[i].latest_eat_time = 0;
 		philos[i].data = data;

@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/06 14:59:55 by atokamot          #+#    #+#             */
+/*   Updated: 2024/06/06 15:04:02 by atokamot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	main(int argc, char *argv[])
 {
-	t_philo *philos;
-	t_fork *forks;
-	t_data data;
-	t_common common_value;
-	long start_time;
+	t_philo		*philos;
+	t_fork		*forks;
+	t_data		data;
+	t_common	common_value;
+	long		start_time;
 
 	if (check_error(argc, argv) == 1)
 		return (1);

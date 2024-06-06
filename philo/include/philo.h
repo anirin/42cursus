@@ -1,18 +1,33 @@
-#include <pthread.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sys/time.h>
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/06/06 14:59:13 by atokamot          #+#    #+#             */
+/*   Updated: 2024/06/06 15:07:49 by atokamot         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#define Dirty 1
-#define Clean 0
-#define FORK "has taken a fork\n"
-#define EAT "is eating\n"
-#define SLEEP "is sleeping\n"
-#define THINK "is thinking\n"
-#define DIE "died\n"
+#ifndef PHILO_H
+# define PHILO_H
+
+# include <pthread.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/time.h>
+# include <unistd.h>
+
+# define DIRTY 1
+# define CLEAN 0
+# define FORK "has taken a fork\n"
+# define EAT "is eating\n"
+# define SLEEP "is sleeping\n"
+# define THINK "is thinking\n"
+# define DIE "died\n"
 
 typedef struct s_data
 {
@@ -89,3 +104,5 @@ void				clean_up(t_philo *philos, t_fork *forks, t_common common);
 
 //error
 int					check_error(int argc, char *argv[]);
+
+#endif

@@ -41,7 +41,7 @@ $(NAME): $(OBJCS)
 
 clean:
 	@$(RM) $(OBJCS)
-	@echo "🧹Cleaned"
+	@echo "🧹CLEANed"
 
 fclean: clean
 	@$(RM) $(NAME)
