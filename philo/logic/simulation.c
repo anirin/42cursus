@@ -19,7 +19,7 @@ void	*philo_routine(void *arg)
 	i = 0;
 	while (1)
 	{
-		if (philo->check_point == 0 && (philo->id % 2 == 1
+		if (philo->latest_eat_time == 0 && (philo->id % 2 == 1
 				|| philo->id == philo->data.num_of_philos - 1))
 			think(philo);
 		if (philo->data.num_of_philos == 1)

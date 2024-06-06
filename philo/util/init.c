@@ -64,7 +64,7 @@ t_philo	*init_philos(t_data data, t_fork *forks, long start_time,
 		philos[i].id = i;
 		philos[i].left_fork = &forks[i];
 		philos[i].right_fork = &forks[(i + 1) % data.num_of_philos];
-		philos[i].check_point = 0;
+		// philos[i].check_point = 0;
 		philos[i].start_time = start_time;
 		philos[i].latest_eat_time = 0;
 		philos[i].data = data;

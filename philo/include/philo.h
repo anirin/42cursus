@@ -14,7 +14,6 @@
 #define Sleep "is sleeping\n"
 #define Think "is thinking\n"
 #define Die "died\n"
-#define Buffer 30
 
 typedef struct s_data
 {
@@ -51,7 +50,6 @@ typedef struct s_philo
 	int				id;
 
 	int				latest_eat_time;
-	int				check_point;
 	long			start_time;
 
 	bool			*alive;

@@ -2,7 +2,6 @@
 
 void	clean_fork(t_philo *philo)
 {
-	wait_check_point(philo);
 	pthread_mutex_unlock(&philo->left_fork->mutex);
 	pthread_mutex_unlock(&philo->right_fork->mutex);
 	philo->left_fork->status = Clean;

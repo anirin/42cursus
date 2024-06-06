@@ -2,14 +2,12 @@
 
 void	print_philo_status(t_philo *philo, char *status)
 {
+	int diff;
+
 	if (*philo->alive == false || *philo->full == philo->data.num_of_philos)
 		return ;
-	if (strcmp(status, Die) == 0)
-	{
-		philo->check_point += philo->data.time_to_die;
-	}
-
+	diff = get_current_time() - philo->start_time;
 	pthread_mutex_lock(philo->print_mutex);
-	printf("%d %d %s", philo->check_point, philo->id, status);
+	printf("%d %d %s", diff, philo->id, status);
 	pthread_mutex_unlock(philo->print_mutex);
 }
