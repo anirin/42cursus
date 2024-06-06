@@ -6,19 +6,19 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:17 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/06 15:05:37 by atokamot         ###   ########.fr       */
+/*   Updated: 2024/06/06 23:27:02 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	full_check(t_philo *philo, int i)
+void	check_philo_is_full(t_philo *philo, int i)
 {
 	if (philo->data.num_of_times_each_philo_must_eat == i)
 	{
-		pthread_mutex_lock(philo->full_mutex);
-		*philo->full += 1;
-		pthread_mutex_unlock(philo->full_mutex);
+		pthread_mutex_lock(&philo->common->full_mutex);
+		philo->common->full += 1;
+		pthread_mutex_unlock(&philo->common->full_mutex);
 	}
 }
 
@@ -38,13 +38,13 @@ void	*philo_routine(void *arg)
 			break ;
 		get_fork(philo);
 		eat(philo);
+		check_philo_is_full(philo, i);
 		clean_fork(philo);
 		philo_sleep(philo);
 		think(philo);
-		if (*philo->alive == false || *philo->full == philo->data.num_of_philos)
+		if (philo->common->alive == false || philo->common->full == philo->data.num_of_philos)
 			break ;
 		i++;
-		full_check(philo, i);
 	}
 	return (NULL);
 }
@@ -59,14 +59,14 @@ void	*monitor(void *arg)
 	while (1)
 	{
 		current_time = get_current_time();
-		diff = current_time - philo->start_time - philo->latest_eat_time;
+		diff = current_time - philo->common->start_time - philo->latest_eat_time;
 		if (diff >= philo->data.time_to_die)
 		{
 			print_philo_status(philo, DIE);
-			*philo->alive = false;
+			philo->common->alive = false;
 			break ;
 		}
-		if (*philo->alive == false)
+		if (philo->common->alive == false)
 			break ;
 		usleep(1000 * 1);
 	}

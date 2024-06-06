@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:20 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/06 15:02:34 by atokamot         ###   ########.fr       */
+/*   Updated: 2024/06/06 23:29:44 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*get_left_fork(void *arg)
 	{
 		if (philo->left_fork->owner == philo->id)
 			break ;
-		if (*philo->alive == false)
+		if (philo->common->alive == false)
 			return (NULL);
 		usleep(1000 * 1);
 	}
@@ -38,7 +38,7 @@ void	*get_right_fork(void *arg)
 	{
 		if (philo->right_fork->owner == philo->id)
 			break ;
-		if (*philo->alive == false)
+		if (philo->common->alive == false)
 			return (NULL);
 		usleep(1000 * 1);
 	}

@@ -1,4 +1,3 @@
-CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 SANITIZE_FLAGS = -fsanitize=address
 # THREAD_FLAGS = -fsanitize=thread
@@ -21,7 +20,8 @@ SRCS = \
 	./util/error.c \
 	./util/init.c \
 	./util/print.c \
-	./util/time.c
+	./util/time.c \
+	./util/ft_atoi.c
 
 OBJCS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)/%.o)
 

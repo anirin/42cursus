@@ -6,13 +6,13 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:34 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/06 15:02:50 by atokamot         ###   ########.fr       */
+/*   Updated: 2024/06/06 23:18:36 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	clean_up(t_philo *philos, t_fork *forks, t_common common)
+void	clean_up(t_philo *philos, t_fork *forks, t_common *common)
 {
 	int	i;
 
@@ -23,11 +23,7 @@ void	clean_up(t_philo *philos, t_fork *forks, t_common common)
 		i++;
 	}
 	free(forks);
-	pthread_mutex_destroy(common.print_mutex);
-	pthread_mutex_destroy(common.full_mutex);
-	free(common.print_mutex);
-	free(common.full_mutex);
-	free(common.full);
-	free(common.alive);
 	free(philos);
+	pthread_mutex_destroy(&common->print_mutex);
+	pthread_mutex_destroy(&common->full_mutex);
 }

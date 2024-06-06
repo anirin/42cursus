@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:55 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/06 15:04:02 by atokamot         ###   ########.fr       */
+/*   Updated: 2024/06/06 23:31:53 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,21 @@ int	main(int argc, char *argv[])
 	t_fork		*forks;
 	t_data		data;
 	t_common	common_value;
-	long		start_time;
 
 	if (check_error(argc, argv) == 1)
 		return (1);
 	data = set_data(argv);
-	common_value = init_common();
-	start_time = get_current_time();
+	init_common(&common_value);
 	forks = init_forks(data.num_of_philos);
-	philos = init_philos(data, forks, start_time, common_value);
+	if (!forks)
+		return (1);
+	philos = init_philos(data, forks, &common_value);
+	if (!philos)
+	{
+		free(forks);
+		return (1);
+	}
 	run_simulation(data.num_of_philos, philos);
-	clean_up(philos, forks, common_value);
+	clean_up(philos, forks, &common_value);
 	return (0);
 }

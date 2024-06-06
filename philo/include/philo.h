@@ -6,13 +6,14 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:13 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/06 15:07:49 by atokamot         ###   ########.fr       */
+/*   Updated: 2024/06/06 23:34:39 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include <limits.h>
 # include <pthread.h>
 # include <stdbool.h>
 # include <stdio.h>
@@ -21,8 +22,6 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-# define DIRTY 1
-# define CLEAN 0
 # define FORK "has taken a fork\n"
 # define EAT "is eating\n"
 # define SLEEP "is sleeping\n"
@@ -47,10 +46,11 @@ typedef struct s_fork
 
 typedef struct s_common
 {
-	pthread_mutex_t	*print_mutex;
-	pthread_mutex_t	*full_mutex;
-	bool			*alive;
-	int				*full;
+	pthread_mutex_t	print_mutex;
+	pthread_mutex_t	full_mutex;
+	bool			alive;
+	int				full;
+	long			start_time;
 }					t_common;
 
 typedef struct s_philo
@@ -62,25 +62,17 @@ typedef struct s_philo
 	t_fork			*right_fork;
 
 	int				id;
-
 	int				latest_eat_time;
-	long			start_time;
 
-	bool			*alive;
-	int				*full;
-
-	pthread_mutex_t	*print_mutex;
-	pthread_mutex_t	*full_mutex;
-
+	t_common		*common;
 	t_data			data;
 }					t_philo;
 
 //init
-t_common			init_common(void);
+void				init_common(t_common *common);
 t_data				set_data(char *argv[]);
 t_fork				*init_forks(int num_of_philos);
-t_philo				*init_philos(t_data data, t_fork *forks, long start_time,
-						t_common common_value);
+t_philo	*init_philos(t_data data, t_fork *forks, t_common *common_value);
 
 //simulation
 void				run_simulation(int num_of_philos, t_philo *philos);
@@ -100,9 +92,12 @@ void				wait_check_point(t_philo *philo);
 void				print_philo_status(t_philo *philo, char *status);
 
 //clean_up
-void				clean_up(t_philo *philos, t_fork *forks, t_common common);
+void	clean_up(t_philo *philos, t_fork *forks, t_common *common);
 
 //error
 int					check_error(int argc, char *argv[]);
+
+//libft
+int					ft_atoi(const char *str);
 
 #endif
