@@ -2,5 +2,5 @@
 
 void	think(t_philo *philo)
 {
-	print_philo_status(philo, Think);
+	print_philo_status(philo, THINK);
 }

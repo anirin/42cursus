@@ -44,5 +44,5 @@ void	get_fork(t_philo *philo)
 			(void *)philo);
 	pthread_join(get_left_fork_thread, NULL);
 	pthread_join(get_right_fork_thread, NULL);
-	print_philo_status(philo, Fork);
+	print_philo_status(philo, FORK);
 }

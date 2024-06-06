@@ -50,7 +50,7 @@ void	*monitor(void *arg)
 		diff = current_time - philo->start_time - philo->latest_eat_time;
 		if (diff >= philo->data.time_to_die)
 		{
-			print_philo_status(philo, Die);
+			print_philo_status(philo, DIE);
 			*philo->alive = false;
 			break ;
 		}

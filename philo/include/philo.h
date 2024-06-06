@@ -6,14 +6,13 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-#define Dirty false
-#define Clean true
-#define Request true
-#define Fork "has taken a fork\n"
-#define Eat "is eating\n"
-#define Sleep "is sleeping\n"
-#define Think "is thinking\n"
-#define Die "died\n"
+#define Dirty 1
+#define Clean 0
+#define FORK "has taken a fork\n"
+#define EAT "is eating\n"
+#define SLEEP "is sleeping\n"
+#define THINK "is thinking\n"
+#define DIE "died\n"
 
 typedef struct s_data
 {
