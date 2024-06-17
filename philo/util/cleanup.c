@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:34 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/17 14:21:31 by atsu             ###   ########.fr       */
+/*   Updated: 2024/06/17 16:17:21 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	clean_up_forks(t_fork *forks, int num_of_philos)
 	}
 	free(forks);
 }
-
 
 void	clean_up(t_philo *philos, t_fork *forks, t_common *common, t_data *data)
 {
