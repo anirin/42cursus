@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:55 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/06 23:31:53 by atokamot         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:34:48 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,30 @@ int	main(int argc, char *argv[])
 	t_common	common_value;
 
 	if (check_error(argc, argv) == 1)
-		return (1);
+		return (ERROR);
+
 	data = set_data(argv);
-	init_common(&common_value);
+
+	if (init_common(&common_value) == ERROR)
+		return (ERROR);
+
 	forks = init_forks(data.num_of_philos);
 	if (!forks)
-		return (1);
+	{
+		clean_up_common(&common_value);
+		return (ERROR);
+	}
+
 	philos = init_philos(data, forks, &common_value);
 	if (!philos)
 	{
-		free(forks);
-		return (1);
+		clean_up_common(&common_value);
+		clean_up_forks(forks, data.num_of_philos);
+		return (ERROR);
 	}
+
 	run_simulation(data.num_of_philos, philos);
-	clean_up(philos, forks, &common_value);
+
+	clean_up(philos, forks, &common_value, &data);
 	return (0);
 }

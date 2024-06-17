@@ -1,19 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sleep.c                                            :+:      :+:    :+:   */
+/*   my_usleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/06 14:59:28 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/17 11:42:00 by atsu             ###   ########.fr       */
+/*   Created: 2024/06/17 11:31:51 by atsu              #+#    #+#             */
+/*   Updated: 2024/06/17 11:40:52 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	philo_sleep(t_philo *philo)
+void	my_usleep(int time)
 {
-	print_philo_status(philo, SLEEP);
-	my_usleep(philo->data.time_to_sleep);
+	long	start_time;
+
+	start_time = get_current_time();
+	while (get_current_time() - start_time < time)
+		usleep(100);
 }

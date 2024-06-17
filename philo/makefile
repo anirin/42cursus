@@ -11,17 +11,23 @@ INC_DIR = include
 SRCS = \
 	./main.c \
 	./logic/simulation.c \
+	./logic/monitor.c \
 	./routine/eat.c \
 	./routine/get_fork.c \
-	./routine/other.c \
+	./routine/change_fork_owner.c \
 	./routine/sleep.c \
 	./routine/think.c \
+	./init/init_common.c \
+	./init/init_fork.c \
+	./init/init_philo.c \
+	./init/set_data.c \
 	./util/cleanup.c \
 	./util/error.c \
-	./util/init.c \
 	./util/print.c \
 	./util/time.c \
+	./util/my_usleep.c \
 	./util/ft_atoi.c
+
 
 OBJCS = $(SRCS:$(SRC_DIR)%.c=$(OBJ_DIR)/%.o)
 

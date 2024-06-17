@@ -3,46 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   get_fork.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
+/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:20 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/06 23:29:44 by atokamot         ###   ########.fr       */
+/*   Updated: 2024/06/17 14:00:52 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*get_left_fork(void *arg)
+static void	*get_left_fork(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	while (1)
 	{
+		pthread_mutex_lock(&philo->left_fork->owner_mutex);
 		if (philo->left_fork->owner == philo->id)
+		{
+			pthread_mutex_unlock(&philo->left_fork->owner_mutex);
 			break ;
+		}
+		pthread_mutex_unlock(&philo->left_fork->owner_mutex);
 		if (philo->common->alive == false)
 			return (NULL);
-		usleep(1000 * 1);
+		usleep(500 * 1);
 	}
-	pthread_mutex_lock(&philo->left_fork->mutex);
+	pthread_mutex_lock(&philo->left_fork->fork_mutex);
+	print_philo_status(philo, FORK);
 	return (NULL);
 }
 
-void	*get_right_fork(void *arg)
+static void	*get_right_fork(void *arg)
 {
 	t_philo	*philo;
 
 	philo = (t_philo *)arg;
 	while (1)
 	{
+		pthread_mutex_lock(&philo->right_fork->owner_mutex);
 		if (philo->right_fork->owner == philo->id)
+		{
+			pthread_mutex_unlock(&philo->right_fork->owner_mutex);
 			break ;
+		}
+		pthread_mutex_unlock(&philo->right_fork->owner_mutex);
 		if (philo->common->alive == false)
 			return (NULL);
-		usleep(1000 * 1);
+		usleep(500 * 1);
 	}
-	pthread_mutex_lock(&philo->right_fork->mutex);
+	pthread_mutex_lock(&philo->right_fork->fork_mutex);
+	print_philo_status(philo, FORK);
 	return (NULL);
 }
 
@@ -56,5 +68,4 @@ void	get_fork(t_philo *philo)
 		(void *)philo);
 	pthread_join(get_left_fork_thread, NULL);
 	pthread_join(get_right_fork_thread, NULL);
-	print_philo_status(philo, FORK);
 }
