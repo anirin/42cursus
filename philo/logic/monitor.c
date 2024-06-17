@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:59:01 by atsu              #+#    #+#             */
-/*   Updated: 2024/06/17 16:10:12 by atsu             ###   ########.fr       */
+/*   Updated: 2024/06/17 17:34:36 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int	is_dead(t_philo philo, long current_time)
 	diff = current_time - philo.latest_eat_time - philo.common->start_time;
 	if (diff >= philo.data.time_to_die)
 	{
-		print_philo_status(&philo, DIE);
 		pthread_mutex_lock(&philo.common->dead_mutex);
+		print_philo_died(&philo, DIE);
 		philo.common->alive = false;
 		pthread_mutex_unlock(&philo.common->dead_mutex);
 		return (true);
@@ -61,6 +61,6 @@ void	monitor(t_philo *philos)
 		}
 		if (is_simulation_end(philos[0]) == true)
 			break ;
-		usleep(1000 * 1);
+		usleep(100 * 1);
 	}
 }

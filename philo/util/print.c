@@ -6,11 +6,21 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:46 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/17 16:54:16 by atokamot         ###   ########.fr       */
+/*   Updated: 2024/06/17 17:29:06 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+void	print_philo_died(t_philo *philo, char *status)
+{
+	int	diff;
+
+	diff = get_current_time() - philo->common->start_time;
+	pthread_mutex_lock(&philo->common->print_mutex);
+	printf("%d %d %s", diff, philo->id + 1, status);
+	pthread_mutex_unlock(&philo->common->print_mutex);
+}
 
 void	print_philo_status(t_philo *philo, char *status)
 {

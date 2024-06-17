@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:13 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/17 16:09:48 by atsu             ###   ########.fr       */
+/*   Updated: 2024/06/17 17:30:05 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ long				get_current_time(void);
 void				wait_check_point(t_philo *philo);
 
 //print
+void				print_philo_died(t_philo *philo, char *status);
 void				print_philo_status(t_philo *philo, char *status);
 
 //clean_up
