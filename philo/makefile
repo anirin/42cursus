@@ -1,6 +1,7 @@
 CFLAGS = -Wall -Wextra -Werror
-SANITIZE_FLAGS = -fsanitize=address
-# THREAD_FLAGS = -fsanitize=thread
+# SANITIZE_FLAGS = -g -fsanitize=address
+# THREAD_FLAGS = -g -fsanitize=thread
+# LEAK_FLAGS = -g -fsanitize=leak
 
 NAME = philo
 
@@ -42,7 +43,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)%.c
 all: $(NAME)
 
 $(NAME): $(OBJCS)
-	@$(CC) $(CFLAGS) $(SANITIZE_FLAGS) $(THREAD_FLAGS) -o $@ $(OBJCS)
+	@$(CC) $(CFLAGS) $(SANITIZE_FLAGS) $(THREAD_FLAGS) $(LEAK_FLAGS) -o $@ $(OBJCS)
 	@echo "$(GREEN)✅ $(NAME) created$(RESET)"
 
 clean:

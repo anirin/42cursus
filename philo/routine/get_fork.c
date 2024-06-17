@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:20 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/17 14:00:52 by atsu             ###   ########.fr       */
+/*   Updated: 2024/06/17 16:11:02 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	get_fork(t_philo *philo)
 
 	pthread_create(&get_left_fork_thread, NULL, &get_left_fork, (void *)philo);
 	pthread_create(&get_right_fork_thread, NULL, &get_right_fork,
-		(void *)philo);
+			(void *)philo);
 	pthread_join(get_left_fork_thread, NULL);
 	pthread_join(get_right_fork_thread, NULL);
 }

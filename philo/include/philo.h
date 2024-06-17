@@ -6,7 +6,7 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:13 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/17 14:31:59 by atsu             ###   ########.fr       */
+/*   Updated: 2024/06/17 16:09:48 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,9 @@
 # define THINK "is thinking\n"
 # define DIE "died\n"
 
+# define DEAD 1
+# define ALIVE 0
+
 # define ERROR 1
 # define OK 0
 
@@ -43,9 +46,9 @@ typedef struct s_data
 typedef struct s_fork
 {
 	pthread_mutex_t	fork_mutex;
+	pthread_mutex_t	owner_mutex;
 	bool			status;
 	int				owner;
-	pthread_mutex_t	owner_mutex;
 }					t_fork;
 
 typedef struct s_common
@@ -60,13 +63,13 @@ typedef struct s_common
 
 typedef struct s_philo
 {
+	int				id;
+	int				latest_eat_time;
+
 	pthread_t		routine_thread;
 
 	t_fork			*left_fork;
 	t_fork			*right_fork;
-
-	int				id;
-	int				latest_eat_time;
 
 	t_common		*common;
 	t_data			data;
@@ -81,7 +84,7 @@ t_philo				*init_philos(t_data data, t_fork *forks,
 
 //simulation
 void				monitor(t_philo *philos);
-void				run_simulation(int num_of_philos, t_philo *philos);
+int					run_simulation(int num_of_philos, t_philo *philos);
 
 //routine
 void				get_fork(t_philo *philo);
@@ -98,9 +101,10 @@ void				wait_check_point(t_philo *philo);
 void				print_philo_status(t_philo *philo, char *status);
 
 //clean_up
-void	clean_up_common(t_common *common);
-void	clean_up_forks(t_fork *forks, int num_of_philos);
-void	clean_up(t_philo *philos, t_fork *forks, t_common *common, t_data *data);
+void				clean_up_common(t_common *common);
+void				clean_up_forks(t_fork *forks, int num_of_philos);
+void				clean_up(t_philo *philos, t_fork *forks, t_common *common,
+						t_data *data);
 
 //error
 int					check_error(int argc, char *argv[]);

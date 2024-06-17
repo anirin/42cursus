@@ -6,18 +6,48 @@
 /*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:59:01 by atsu              #+#    #+#             */
-/*   Updated: 2024/06/17 13:59:06 by atsu             ###   ########.fr       */
+/*   Updated: 2024/06/17 16:10:12 by atsu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+static int	is_dead(t_philo philo, long current_time)
+{
+	int	diff;
+
+	diff = current_time - philo.latest_eat_time - philo.common->start_time;
+	if (diff >= philo.data.time_to_die)
+	{
+		print_philo_status(&philo, DIE);
+		pthread_mutex_lock(&philo.common->dead_mutex);
+		philo.common->alive = false;
+		pthread_mutex_unlock(&philo.common->dead_mutex);
+		return (true);
+	}
+	return (false);
+}
+
+static int	is_simulation_end(t_philo philo)
+{
+	pthread_mutex_lock(&philo.common->dead_mutex);
+	pthread_mutex_lock(&philo.common->full_mutex);
+	if (philo.common->alive == false
+		|| philo.common->full == philo.data.num_of_philos)
+	{
+		pthread_mutex_unlock(&philo.common->dead_mutex);
+		pthread_mutex_unlock(&philo.common->full_mutex);
+		return (true);
+	}
+	pthread_mutex_unlock(&philo.common->dead_mutex);
+	pthread_mutex_unlock(&philo.common->full_mutex);
+	return (false);
+}
+
 void	monitor(t_philo *philos)
 {
-	t_philo	philo;
-	long	current_time;
-	int		diff;
 	int		i;
+	long	current_time;
 
 	while (1)
 	{
@@ -25,21 +55,11 @@ void	monitor(t_philo *philos)
 		current_time = get_current_time();
 		while (i < philos[0].data.num_of_philos)
 		{
-			philo = philos[i];
-			diff = current_time - philo.common->start_time
-				- philo.latest_eat_time;
-			//mutex
-			if (diff >= philo.data.time_to_die)
-			{
-				print_philo_status(&philo, DIE);
-				philo.common->alive = false;
+			if (is_dead(philos[i], current_time) == true)
 				break ;
-			}
 			i++;
 		}
-		//条件要検討
-		if (philo.common->alive == false
-			|| philo.common->full == philo.data.num_of_philos)
+		if (is_simulation_end(philos[0]) == true)
 			break ;
 		usleep(1000 * 1);
 	}

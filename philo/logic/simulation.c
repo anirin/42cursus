@@ -12,12 +12,12 @@
 
 #include "philo.h"
 
-static void	check_philo_is_full(t_philo *philo, int i)
+static void	count_num_of_full_philo(t_philo *philo, int i)
 {
 	if (philo->data.num_of_times_each_philo_must_eat == i)
 	{
 		pthread_mutex_lock(&philo->common->full_mutex);
-		philo->common->full += 1;
+		philo->common->full++;
 		pthread_mutex_unlock(&philo->common->full_mutex);
 	}
 }
@@ -38,7 +38,7 @@ static void	*philo_routine(void *arg)
 			break ;
 		get_fork(philo);
 		eat(philo);
-		check_philo_is_full(philo, i);
+		count_num_of_full_philo(philo, i);
 		change_fork_owner(philo);
 		philo_sleep(philo);
 		think(philo);
@@ -50,15 +50,22 @@ static void	*philo_routine(void *arg)
 	return (NULL);
 }
 
-void	run_simulation(int num_of_philos, t_philo *philos)
+int	run_simulation(int num_of_philos, t_philo *philos)
 {
 	int	i;
+	int	err;
 
 	i = 0;
 	while (i < num_of_philos)
 	{
-		pthread_create(&philos[i].routine_thread, NULL, &philo_routine,
+		err = pthread_create(&philos[i].routine_thread, NULL, &philo_routine,
 				&philos[i]);
+		if (err != 0)
+		{
+			while (i > 0)
+				pthread_join(philos[--i].routine_thread, NULL);
+			return (ERROR);
+		}
 		i++;
 	}
 	monitor(philos);
@@ -68,4 +75,5 @@ void	run_simulation(int num_of_philos, t_philo *philos)
 		pthread_join(philos[i].routine_thread, NULL);
 		i++;
 	}
+	return (OK);
 }
