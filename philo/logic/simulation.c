@@ -6,7 +6,7 @@
 /*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:16:04 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/17 16:16:46 by atokamot         ###   ########.fr       */
+/*   Updated: 2024/06/17 16:46:55 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	count_num_of_full_philo(t_philo *philo, int i)
 {
-	if (philo->data.num_of_times_each_philo_must_eat == i)
+	if (philo->data.num_of_times_each_philo_must_eat == i + 1)
 	{
 		pthread_mutex_lock(&philo->common->full_mutex);
 		philo->common->full++;

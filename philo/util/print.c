@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: atsu <atsu@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: atokamot <atokamot@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 14:59:46 by atokamot          #+#    #+#             */
-/*   Updated: 2024/06/17 16:11:34 by atsu             ###   ########.fr       */
+/*   Updated: 2024/06/17 16:54:16 by atokamot         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	print_philo_status(t_philo *philo, char *status)
 	pthread_mutex_unlock(&philo->common->full_mutex);
 	diff = get_current_time() - philo->common->start_time;
 	pthread_mutex_lock(&philo->common->print_mutex);
-	printf("%d %d %s", diff, philo->id, status);
+	printf("%d %d %s", diff, philo->id + 1, status);
 	pthread_mutex_unlock(&philo->common->print_mutex);
 }
