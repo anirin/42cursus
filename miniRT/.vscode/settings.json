@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"vec3.h": "c",
+		"ray.h": "c",
+		"at_vec3.h": "c"
+	}
+}

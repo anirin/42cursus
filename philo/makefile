@@ -1,6 +1,6 @@
 CFLAGS = -Wall -Wextra -Werror
 # SANITIZE_FLAGS = -g -fsanitize=address
-# THREAD_FLAGS = -g -fsanitize=thread
+THREAD_FLAGS = -g -fsanitize=thread
 # LEAK_FLAGS = -g -fsanitize=leak
 
 NAME = philo
