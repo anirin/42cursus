@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cstring>
+#include <cctype>
 
 void strToUpper(char *str) {
   for (int i = 0; i < (int)strlen(str); i++) {
