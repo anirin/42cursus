@@ -1,16 +1,16 @@
-CC = g++
-FLAG = -std=c++98
-NAME = phonebook
-SRC = phonebook.cpp contact.cpp main.cpp
+CXX = g++
+CXXFLAG = -std=c++98
+NAME = zombie
+SRC = newZombie.cpp Zombie.cpp main.cpp randomChump.cpp
 OBJ = $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re format
 
 %.o: %.cpp
-	$(CC) $(FLAG) -Wall -Wextra -Werror -c $< -o $@
+	$(CXX) $(CXXFLAG) -Wall -Wextra -Werror -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CXX) $(OBJ) -o $(NAME)
 
 all: $(NAME)
 

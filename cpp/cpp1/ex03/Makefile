@@ -1,7 +1,7 @@
 CC = g++
 FLAG = -std=c++98
-NAME = phonebook
-SRC = phonebook.cpp contact.cpp main.cpp
+NAME = wepon
+SRC = main.cpp Weapon.hpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJ = $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re format

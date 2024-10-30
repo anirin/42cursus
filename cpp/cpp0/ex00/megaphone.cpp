@@ -1,12 +1,9 @@
 #include <iostream>
-#include <cstring>
-#include <cctype>
 
 void strToUpper(char *str) {
-  for (int i = 0; i < (int)strlen(str); i++) {
-    std::cout << (char)toupper(str[i]);
+  for (size_t i = 0; i < std::strlen(str); i++) {
+    std::cout << static_cast<char>(std::toupper(str[i]));
   }
-  std::cout << std::endl;
 }
 
 int main(int argc, char *argv[]) {
@@ -17,5 +14,6 @@ int main(int argc, char *argv[]) {
   for (int i = 1; i < argc; i++) {
     strToUpper(argv[i]);
   }
+  std::cout << std::endl;
   return 0;
 }
