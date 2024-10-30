@@ -1,7 +1,7 @@
 #include <iostream>
 
 void strToUpper(char *str) {
-  for (size_t i = 0; i < std::strlen(str); i++) {
+  for (size_t i = 0; str[i] != 0; i++) {
     std::cout << static_cast<char>(std::toupper(str[i]));
   }
 }
