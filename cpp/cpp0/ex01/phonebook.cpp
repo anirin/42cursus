@@ -8,12 +8,12 @@ void print_max_ten_words(std::string str) {
   int i;
 
   if (str.length() >= str_limit) {
-    std::cout << str.substr(0, str_limit - 2);
+    std::cout << str.substr(0, str_limit - 1);
     std::cout << ".";
   } else {
     std::cout << str;
     for (i = 0; i < (str_limit - (int)str.length()); i++) {
-      std::cout << ".";
+      std::cout << " ";
     }
   }
   return;
@@ -51,10 +51,12 @@ bool PhoneBook::search() {
     return true;
   }
 
+  std::stringstream ss;
   int num;
-  num = std::stoi(str_num);
-  if (num >= i || num < 0) {
-    std::cout << "不正な番号です。番号の範囲内で再度SEAECHしてください。"
+
+  ss << str_num;
+  if (!(ss >> num) || num >= i || num < 0) {
+    std::cout << "不正な番号です。番号の範囲内で再度SEARCHしてください。"
               << std::endl;
     return true;
   }
