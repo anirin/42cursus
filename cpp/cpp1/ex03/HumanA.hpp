@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "Weapon.hpp"
 
 #define GREEN "\033[32m"
 #define RED "\033[31m"
@@ -10,10 +11,11 @@
 
 class HumanA {
 private:
-  std::string type_;
+  std::string name_;
+  Weapon wepon_;
 
 public:
-  HumanA();
+  HumanA(std::string, Weapon);
   ~HumanA();
   void attack(std::string str);
 };

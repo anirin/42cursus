@@ -29,13 +29,13 @@ int main() {
       continue;
     }
 
-    if (input == "add") {
+    if (input == "ADD") {
       phone_book.add();
-    } else if (input == "search") {
+    } else if (input == "SEARCH") {
       if (!phone_book.search()) {
         return 1;
       }
-    } else if (input == "exit") {
+    } else if (input == "EXIT") {
       std::cout << std::endl << "<<終了>>" << std::endl;
       return 0;
     } else {

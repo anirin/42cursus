@@ -1,5 +1,5 @@
-CXX = g++
-CXXFLAG = -std=c++98
+CXX = c++
+CXXFLAG = -std=c++98 -Wall -Wextra -Werror 
 NAME = main
 SRC = main.cpp
 OBJ = $(SRC:.cpp=.o)
@@ -7,7 +7,7 @@ OBJ = $(SRC:.cpp=.o)
 .PHONY: all clean fclean re format
 
 %.o: %.cpp
-	$(CXX) $(CXXFLAG) -Wall -Wextra -Werror -c $< -o $@
+	$(CXX) $(CXXFLAG) -c $< -o $@
 
 $(NAME): $(OBJ)
 	$(CXX) $(OBJ) -o $(NAME)
