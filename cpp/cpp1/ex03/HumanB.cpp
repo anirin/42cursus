@@ -1,21 +1,16 @@
-#ifndef _HUMANA_H_
-#define _HUMANA_H_
+#include "HumanB.hpp"
 
-#include <iostream>
-#include <string>
+HumanB::HumanB(std::string name) : name_(name) {}
 
-#define GREEN "\033[32m"
-#define RED "\033[31m"
-#define RESET "\033[0m"
+HumanB::~HumanB() {}
 
-class HumanB {
-private:
-  std::string type_;
+void HumanB::attack() {
+  if (!weapon_) {
+    std::cout << name_ << " does not have weapon ..." << std::endl;
+    return;
+  }
+  const std::string &type = weapon_->getType();
+  std::cout << name_ << " attacks with their " << type << std::endl;
+}
 
-public:
-  HumanB();
-  ~HumanB();
-  void attack(std::string str);
-};
-
-#endif
+void HumanB::setWeapon(Weapon &weapon) { weapon_ = &weapon; }
