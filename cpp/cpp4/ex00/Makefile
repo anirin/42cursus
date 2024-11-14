@@ -1,7 +1,8 @@
 CXX = c++
-CXXFLAG = -std=c++98 -Wall -Wextra -Werror 
-NAME = phonebook
-SRC = phonebook.cpp contact.cpp main.cpp
+CXXFLAG = -std=c++98 -Wall -Wextra -Werror
+NAME = main
+SRC = main.cpp Cat.cpp Dog.cpp Animal.cpp WrongAnimal.cpp WrongCat.cpp
+HEAD = Cat.hpp Dog.hpp Animal.hpp WrongAnimal.hpp WrongCat.cpp
 OBJ = $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re format
@@ -23,4 +24,4 @@ fclean: clean
 re: fclean all
 
 format:
-	clang-format -i $(SRC)
+	clang-format -i $(SRC) $(HEAD)

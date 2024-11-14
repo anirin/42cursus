@@ -1,7 +1,7 @@
 CXX = c++
-CXXFLAG = -std=c++98 -Wall -Wextra -Werror 
-NAME = phonebook
-SRC = phonebook.cpp contact.cpp main.cpp
+CXXFLAG = -std=c++98 -Wall -Wextra -Werror
+NAME = main
+SRC = main.cpp Fixed.cpp
 OBJ = $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re format

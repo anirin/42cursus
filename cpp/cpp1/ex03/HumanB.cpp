@@ -1,6 +1,6 @@
 #include "HumanB.hpp"
 
-HumanB::HumanB(std::string name) : name_(name) {}
+HumanB::HumanB(std::string name) : name_(name), weapon_(nullptr) {}
 
 HumanB::~HumanB() {}
 

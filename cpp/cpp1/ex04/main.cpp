@@ -15,6 +15,11 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
+  if (s1 == "") {
+    std::cout << "input is invalid" << std::endl;
+    return 1;
+  }
+
   std::ifstream input_file(filename);
   if (!input_file) {
     std::cout << "Error: Could not open file " << filename << std::endl;
