@@ -3,6 +3,8 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include <cstdlib>
+#include <ctime>
 
 int main() {
 	srand(static_cast<unsigned int>(time(NULL)));
@@ -17,24 +19,24 @@ int main() {
 		{
 			ShrubberyCreationForm shrub("home");
 			// 署名権限テスト
-			intern.signForm(shrub);	  // 失敗するはず (grade 145必要)
-			manager.signForm(shrub);  // 成功するはず
+			intern.signForm(shrub);	  // 失敗 (grade 145必要)
+			manager.signForm(shrub);  // 成功
 			manager.signForm(shrub);  // 既に署名済みのテスト
 
 			// 実行権限テスト
-			intern.executeForm(shrub);	 // 失敗するはず (grade 137必要)
-			manager.executeForm(shrub);	 // 成功するはず
+			intern.executeForm(shrub);	 // 失敗 (grade 137必要)
+			manager.executeForm(shrub);	 // 成功
 		}
 
 		std::cout << "\n=== Testing RobotomyRequestForm ===" << std::endl;
 		{
 			RobotomyRequestForm robot("Bender");
 			// 署名権限テスト
-			intern.signForm(robot);	  // 失敗するはず (grade 72必要)
-			manager.signForm(robot);  // 成功するはず
+			intern.signForm(robot);	  // 失敗 (grade 72必要)
+			manager.signForm(robot);  // 成功
 
 			// 実行権限テスト
-			manager.executeForm(robot);	 // 成功するはず (grade 45必要)
+			manager.executeForm(robot);	 // 成功 (grade 45必要)
 			// 複数回実行して50%の成功率をテスト
 			manager.executeForm(robot);
 			manager.executeForm(robot);
@@ -44,21 +46,20 @@ int main() {
 		{
 			PresidentialPardonForm pardon("Criminal");
 			// 署名権限テスト
-			manager.signForm(pardon);	 // 失敗するはず (grade 25必要)
-			president.signForm(pardon);	 // 成功するはず
+			manager.signForm(pardon);	 // 失敗 (grade 25必要)
+			president.signForm(pardon);	 // 成功
 
 			// 実行権限テスト
-			manager.executeForm(pardon);	// 失敗するはず (grade 5必要)
-			president.executeForm(pardon);	// 成功するはず
+			manager.executeForm(pardon);	// 失敗 (grade 5必要)
+			president.executeForm(pardon);	// 成功
 		}
 
 		std::cout << "\n=== Testing Unsigned Form Execution ===" << std::endl;
 		{
 			PresidentialPardonForm pardon("Criminal");
 			// 署名なしでの実行テスト
-			president.executeForm(pardon);	// 署名されていないので失敗するはず
+			president.executeForm(pardon);	// 署名されていないので失敗
 		}
-
 	} catch (std::exception& e) {
 		std::cout << "Unexpected error: " << e.what() << std::endl;
 	}

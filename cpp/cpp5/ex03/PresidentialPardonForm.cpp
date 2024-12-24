@@ -7,7 +7,7 @@
 PresidentialPardonForm::PresidentialPardonForm() : AForm(), target_("") {}
 
 PresidentialPardonForm::PresidentialPardonForm(std::string target)
-	: AForm("presidential pardon", 25, 5), target_(target) {}
+	: AForm("Presidential pardon", 25, 5), target_(target) {}
 
 PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& src) : AForm(src), target_(src.target_) {}
 
@@ -49,3 +49,8 @@ void PresidentialPardonForm::execute(Bureaucrat const& executor) const {
 */
 
 /* ************************************************************************** */
+
+//child exception
+const char* PresidentialPardonForm::ChildException::what() const throw() {
+	return "PresidentialPardonForm exception";
+}

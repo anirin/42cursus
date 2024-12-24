@@ -47,7 +47,7 @@ std::ostream& operator<<(std::ostream& o, Bureaucrat const& i) {
 
 void Bureaucrat::increaseGrade(int number) {
 	if (number < 0) {
-		std::cout << "tooooo small!" << std::endl;
+		std::cout << "number must be positive" << std::endl;
 		return;
 	}
 	if (grade_ - number < max_grade) {
@@ -59,7 +59,7 @@ void Bureaucrat::increaseGrade(int number) {
 
 void Bureaucrat::decreaseGrade(int number) {
 	if (number < 0) {
-		std::cout << "tooooo small!" << std::endl;
+		std::cout << "number must be positive" << std::endl;
 		return;
 	}
 	if (grade_ + number > min_grade) {
@@ -99,3 +99,11 @@ int Bureaucrat::getGrade() const {
 }
 
 /* ************************************************************************** */
+
+const char* Bureaucrat::GradeTooHighException::what() const throw() {
+	return "Grade too high";
+}
+
+const char* Bureaucrat::GradeTooLowException::what() const throw() {
+	return "Grade too low";
+}

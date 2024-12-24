@@ -2,7 +2,6 @@
 #define PRESIDENTIALPARDONFORM_HPP
 
 #include "AForm.hpp"
-#include <iostream>
 #include <string>
 
 class PresidentialPardonForm : public AForm {
@@ -15,6 +14,11 @@ public:
 	PresidentialPardonForm& operator=(PresidentialPardonForm const& rhs);
 
 	void execute(Bureaucrat const& executor) const;
+
+	class ChildException : public AForm::ChildException {
+	public:
+		virtual const char* what() const throw();
+	};
 
 private:
 	std::string target_;

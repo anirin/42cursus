@@ -54,3 +54,8 @@ void RobotomyRequestForm::execute(Bureaucrat const& executor) const {
 */
 
 /* ************************************************************************** */
+
+//child exception
+const char* RobotomyRequestForm::FailDrilException::what() const throw() {
+	return "Error dril";
+}

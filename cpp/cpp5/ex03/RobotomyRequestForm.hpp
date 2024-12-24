@@ -4,6 +4,7 @@
 #include "AForm.hpp"
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 class RobotomyRequestForm : public AForm {
 public:
@@ -18,9 +19,7 @@ public:
 
 	class FailDrilException : public AForm::ChildException {
 	public:
-		virtual const char* what() const throw() {
-			return "Error dril";
-		}
+		virtual const char* what() const throw();
 	};
 
 private:

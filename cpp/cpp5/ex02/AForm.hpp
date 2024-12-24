@@ -21,27 +21,20 @@ public:
 
 	class GradeTooHighException : public std::exception {
 	public:
-		virtual const char* what() const throw() {
-			return "Too High";
-		}
+		virtual const char* what() const throw();
 	};
 	class GradeTooLowException : public std::exception {
 	public:
-		virtual const char* what() const throw() {
-			return "Too Low";
-		}
+		virtual const char* what() const throw();
 	};
 	class NotSignedException : public std::exception {
 	public:
-		virtual const char* what() const throw() {
-			return "Not Signed";
-		}
+		virtual const char* what() const throw();
 	};
+
 	class ChildException : public std::exception {
 	public:
-		virtual const char* what() const throw() {
-			return "";
-		}
+		virtual const char* what() const throw();
 	};
 
 	int getSignGrade() const;

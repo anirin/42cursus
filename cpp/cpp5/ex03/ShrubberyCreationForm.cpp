@@ -42,7 +42,7 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const {
 	}
 
 	std::string filename = target_ + "_shrubbery";
-	std::ofstream outputfile(filename);
+	std::ofstream outputfile(filename.c_str());
 	if (!outputfile.is_open()) {
 		throw ShrubberyCreationForm::FileOpenErrorException();
 	}
@@ -63,3 +63,8 @@ void ShrubberyCreationForm::execute(Bureaucrat const& executor) const {
 */
 
 /* ************************************************************************** */
+
+//child exception
+const char* ShrubberyCreationForm::FileOpenErrorException::what() const throw() {
+	return "File open error";
+}

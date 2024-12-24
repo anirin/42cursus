@@ -49,3 +49,8 @@ void PresidentialPardonForm::execute(Bureaucrat const& executor) const {
 */
 
 /* ************************************************************************** */
+
+//child exception
+const char* PresidentialPardonForm::ChildException::what() const throw() {
+	return "PresidentialPardonForm exception";
+}

@@ -19,20 +19,17 @@ public:
 
 	std::string getName() const;
 	int getGrade() const;
-	void increase_grade(int number);
-	void decrease_grade(int number);
+	void increaseGrade(int number);
+	void decreaseGrade(int number);
 
 	class GradeTooHighException : public std::exception {
 	public:
-		virtual const char* what() const throw() {
-			return "Too High";
-		}
+		virtual const char* what() const throw();
 	};
+
 	class GradeTooLowException : public std::exception {
 	public:
-		virtual const char* what() const throw() {
-			return "Too Low";
-		}
+		virtual const char* what() const throw();
 	};
 
 private:

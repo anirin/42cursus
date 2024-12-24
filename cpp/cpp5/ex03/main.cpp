@@ -3,9 +3,8 @@
 #include <iostream>
 
 int main() {
-	// インターンとビューロクラットの作成
 	Intern someRandomIntern;
-	Bureaucrat boss(1, "Boss");	 // 最高位のビューロクラット
+	Bureaucrat boss(1, "Boss");
 
 	std::cout << "\n=== Testing Valid Forms Creation ===" << std::endl;
 
@@ -15,7 +14,7 @@ int main() {
 	if (rrf) {
 		boss.signForm(*rrf);
 		boss.executeForm(*rrf);
-		delete rrf;	 // メモリリーク防止
+		delete rrf;
 	}
 
 	// Presidential Pardon Form のテスト
@@ -24,7 +23,7 @@ int main() {
 	if (ppf) {
 		boss.signForm(*ppf);
 		boss.executeForm(*ppf);
-		delete ppf;	 // メモリリーク防止
+		delete ppf;
 	}
 
 	// Shrubbery Creation Form のテスト
@@ -33,7 +32,7 @@ int main() {
 	if (scf) {
 		boss.signForm(*scf);
 		boss.executeForm(*scf);
-		delete scf;	 // メモリリーク防止
+		delete scf;
 	}
 
 	// 存在しないフォームのテスト
