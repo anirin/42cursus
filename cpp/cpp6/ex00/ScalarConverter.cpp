@@ -45,11 +45,11 @@ bool is_invalid_format(std::string input) {
 }
 
 void convert_char(double value) {
-	char c = static_cast<char>(static_cast<int>(value));
+	char c = static_cast<unsigned char>(static_cast<int>(value));
 	std::cout << "char: ";
-	if (std::isprint(static_cast<unsigned char>(c))) {
+	if (std::isprint(c)) {
 		std::cout << c;
-	} else if (std::iscntrl(static_cast<unsigned char>(c))) {
+	} else if (std::iscntrl(c)) {
 		std::cout << "Non displayable";
 	} else {
 		std::cout << "'*'";
@@ -68,7 +68,7 @@ void convert_int(double value) {
 
 void convert_float(double value) {
 	float f = static_cast<float>(value);
-	if (f <= std::numeric_limits<float>::max() && f >= std::numeric_limits<float>::lowest()) {
+	if (f <= std::numeric_limits<float>::max() && f >= std::numeric_limits<float>::min()) {
 		std::cout << "float: ";
 		if (std::floor(f) == f) {
 			std::cout << std::fixed << std::setprecision(1);

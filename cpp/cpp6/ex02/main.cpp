@@ -3,9 +3,11 @@
 #include "Base.hpp"
 #include "C.hpp"
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 int main() {
-	std::srand(std::time(nullptr));
+	std::srand(static_cast<unsigned int>(time(NULL)));
 	// generate()のテスト
 	std::cout << "=== generate()のテスト ===" << std::endl;
 	Base* ptr1 = Base::generate();
@@ -32,7 +34,7 @@ int main() {
 
 	// nullptrのテスト
 	std::cout << "\n=== nullptrのテスト ===" << std::endl;
-	Base::identify(nullptr);
+	Base::identify(NULL);
 
 	// メモリリーク防止のためのクリーンアップ
 	delete ptr1;

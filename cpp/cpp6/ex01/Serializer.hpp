@@ -4,6 +4,7 @@
 # include <iostream>
 # include <string>
 # include "Data.hpp"
+# include <inttypes.h>
 
 class Serializer
 {

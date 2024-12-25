@@ -1,3 +1,4 @@
+#include <typeinfo>
 #include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
@@ -24,7 +25,7 @@ Base::~Base() {}
 */
 
 Base* Base::generate() {
-	int random = std::rand() % 3;
+	int random = rand() % 3;
 
 	switch (random) {
 		case 0:
@@ -34,7 +35,7 @@ Base* Base::generate() {
 		case 2:
 			return new C();
 		default:
-			return nullptr;
+			return NULL;
 	}
 }
 
@@ -54,19 +55,19 @@ void Base::identify(Base& p) {
 		(void)dynamic_cast<A&>(p);
 		std::cout << "A" << std::endl;
 		return;
-	} catch (std::bad_cast&) {}
+	} catch (std::bad_cast& e) {}
 
 	try {
 		(void)dynamic_cast<B&>(p);
 		std::cout << "B" << std::endl;
 		return;
-	} catch (std::bad_cast&) {}
+	} catch (std::bad_cast& e) {}
 
 	try {
 		(void)dynamic_cast<C&>(p);
 		std::cout << "C" << std::endl;
 		return;
-	} catch (std::bad_cast&) {}
+	} catch (std::bad_cast& e) {}
 
 	std::cout << "Unknown" << std::endl;
 }
