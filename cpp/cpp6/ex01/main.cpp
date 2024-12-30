@@ -1,8 +1,7 @@
-#include "Serializer.hpp"
 #include "Data.hpp"
+#include "Serializer.hpp"
 
-int main()
-{
+int main() {
 	Data data;
 
 	uintptr_t serialized = Serializer::serialize(&data);

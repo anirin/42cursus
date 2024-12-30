@@ -68,12 +68,16 @@ void convert_int(double value) {
 
 void convert_float(double value) {
 	float f = static_cast<float>(value);
-	if (f <= std::numeric_limits<float>::max() && f >= std::numeric_limits<float>::min()) {
+	if (f <= std::numeric_limits<float>::max() && f >= std::numeric_limits<float>::lowest()) {
 		std::cout << "float: ";
 		if (std::floor(f) == f) {
 			std::cout << std::fixed << std::setprecision(1);
 		}
-		std::cout << f << "f" << std::endl;
+		if (static_cast<double>(f) != value) {
+			std::cout << f << "f (precision loss)" << std::endl;
+		} else {
+			std::cout << f << "f" << std::endl;
+		}
 	} else {
 		std::cout << "float: out of range" << std::endl;
 	}
@@ -102,6 +106,16 @@ void ScalarConverter::convert(std::string input) {
 		std::cout << "int: impossible" << std::endl;
 		std::cout << "float: " << input << "f" << std::endl;
 		std::cout << "double: " << input << std::endl;
+		return ;
+	}
+
+
+	if (input.length() == 1 && std::isalpha(input[0])) {
+		char c = input[0];
+		convert_char(c);
+		convert_int(c);
+		convert_float(c);
+		convert_double(c);
 		return ;
 	}
 

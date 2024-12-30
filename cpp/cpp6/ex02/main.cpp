@@ -7,9 +7,7 @@
 #include <ctime>
 
 int main() {
-	std::srand(static_cast<unsigned int>(time(NULL)));
-	// generate()のテスト
-	std::cout << "=== generate()のテスト ===" << std::endl;
+	std::srand(time(0));
 	Base* ptr1 = Base::generate();
 	Base* ptr2 = Base::generate();
 	Base* ptr3 = Base::generate();
@@ -40,19 +38,6 @@ int main() {
 	delete ptr1;
 	delete ptr2;
 	delete ptr3;
-
-	// 具体的な型のテスト
-	std::cout << "\n=== 具体的な型のテスト ===" << std::endl;
-	A a;
-	B b;
-	C c;
-
-	std::cout << "A object is: ";
-	Base::identify(a);
-	std::cout << "B object is: ";
-	Base::identify(b);
-	std::cout << "C object is: ";
-	Base::identify(c);
 
 	return 0;
 }

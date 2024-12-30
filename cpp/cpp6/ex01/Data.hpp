@@ -1,23 +1,19 @@
 #ifndef DATA_HPP
-# define DATA_HPP
+#define DATA_HPP
 
-# include <iostream>
-# include <string>
-# include <cstdlib>
+#include <cstdlib>
+#include <iostream>
+#include <string>
 
-class Data
-{
+class Data {
+public:
+	Data();
+	Data(Data const& src);
+	~Data();
 
-	public:
+	Data& operator=(Data const& rhs);
 
-		Data();
-		Data( Data const & src );
-		~Data();
-
-		Data &		operator=( Data const & rhs );
-
-	private:
-
+private:
 };
 
 #endif /* ************************************************************ DATA_H */
