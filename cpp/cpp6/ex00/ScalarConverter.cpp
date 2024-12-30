@@ -68,7 +68,7 @@ void convert_int(double value) {
 
 void convert_float(double value) {
 	float f = static_cast<float>(value);
-	if (f <= std::numeric_limits<float>::max() && f >= std::numeric_limits<float>::lowest()) {
+	if (f <= std::numeric_limits<float>::max() && f >= -std::numeric_limits<float>::max()) {
 		std::cout << "float: ";
 		if (std::floor(f) == f) {
 			std::cout << std::fixed << std::setprecision(1);

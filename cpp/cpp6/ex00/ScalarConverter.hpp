@@ -15,15 +15,16 @@ class ScalarConverter
 
 	public:
 
+		static void convert(std::string str);
+
+	private:
+
 		ScalarConverter();
 		ScalarConverter( ScalarConverter const & src );
 		~ScalarConverter();
 
 		ScalarConverter &		operator=( ScalarConverter const & rhs );
 
-		static void convert(std::string str);
-
-	private:
 
 };
 
