@@ -25,3 +25,6 @@ re: fclean all
 
 format:
 	clang-format -i $(SRC) $(HEAD)
+
+# comment
+# export CPLUS_INCLUDE_PATH=/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1   

@@ -1,10 +1,10 @@
 #include "iter.hpp"
 
-void print(int &n) {
+void print(int& n) {
 	std::cout << n << std::endl;
 }
 
-void print(std::string &s) {
+void print(std::string& s) {
 	std::cout << s << std::endl;
 }
 

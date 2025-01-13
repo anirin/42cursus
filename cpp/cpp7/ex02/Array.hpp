@@ -1,5 +1,4 @@
-#ifndef ARRAY_HPP
-#define ARRAY_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -13,7 +12,6 @@ public:
 
 	size_t size() const;
 
-	// todo constを書く必要あり
 	Array& operator=(Array const& rhs);
 	T& operator[](size_t index);
 
@@ -21,6 +19,3 @@ private:
 	T* _array;
 	size_t _size;
 };
-
-
-#endif /* *********************************************************** ARRAY_H */

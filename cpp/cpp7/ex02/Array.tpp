@@ -6,7 +6,7 @@
 
 template <typename T> Array<T>::Array() : _array(new T[0]()), _size(0) {}
 
-template <typename T> Array<T>::Array(unsigned int n) : _array(new T[n]()), _size(n) {}
+template <typename T> Array<T>::Array(size_t n) : _array(new T[n]()), _size(n) {}
 
 template <typename T> Array<T>::Array(const Array& src) : _array(new T[src._size]()), _size(src._size) {
 	for (size_t i = 0; i < _size; i++) {
@@ -46,15 +46,14 @@ template <typename T> Array<T>& Array<T>::operator=(Array const& rhs) {
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-//todo templateを２つ作る必要あり
-template <typename T> const T& Array<T>::operator[](unsigned int index) {
+template <typename T> T& Array<T>::operator[](size_t index) {
 	if (index >= _size) {
 		throw "Index out of range";
 	}
 	return _array[index];
 }
 
-template <typename T> unsigned int Array<T>::size() const {
+template <typename T> size_t Array<T>::size() const {
 	return _size;
 }
 
