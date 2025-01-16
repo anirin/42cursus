@@ -1,0 +1,50 @@
+services:
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./srcs/mariadb
+    ports:
+      - 3306:3306
+    volumes:
+      - data:/var/lib/mysql
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./srcs/wordpress
+    ports:
+      - 9000:9000
+    depends_on:
+      - mariadb
+    restart: always
+    volumes:
+      - share:/var/www/html
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./srcs/nginx
+    ports:
+      - 443:443
+    depends_on:
+      - wordpress
+    volumes:
+      - share:/var/www/html
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 3001:80
+    environment:
+      - PMA_HOST=mariadb
+      - PMA_PORT=3306
+      - PMA_USER=user
+      - PMA_PASSWORD=password
+    depends_on:
+      - mariadb
+      - wordpress
+
+volumes:
+  share:
+  data:
