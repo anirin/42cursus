@@ -31,19 +31,19 @@ services:
     volumes:
       - share:/var/www/html
 
-  phpmyadmin:
-    container_name: phpmyadmin
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - 3001:80
-    environment:
-      - PMA_HOST=mariadb
-      - PMA_PORT=3306
-      - PMA_USER=user
-      - PMA_PASSWORD=password
-    depends_on:
-      - mariadb
-      - wordpress
+  # phpmyadmin:
+  #   container_name: phpmyadmin
+  #   image: phpmyadmin/phpmyadmin
+  #   ports:
+  #     - 3001:80
+  #   environment:
+  #     - PMA_HOST=mariadb
+  #     - PMA_PORT=3306
+  #     - PMA_USER=user
+  #     - PMA_PASSWORD=password
+  #   depends_on:
+  #     - mariadb
+  #     - wordpress
 
 volumes:
   share:

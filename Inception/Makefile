@@ -1,5 +1,5 @@
 up: ## コンテナ起動
-	docker compose up -d
+	docker compose up -d --build
 
 down: ## コンテナ停止
 	docker compose down
