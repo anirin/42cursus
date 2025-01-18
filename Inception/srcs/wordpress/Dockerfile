@@ -1,5 +1,5 @@
 # php-fpm
-FROM alpine:3.20 AS php-fpm
+FROM alpine:3.20
 
 ENV PHPIZE_DEPS \
 		g++ \

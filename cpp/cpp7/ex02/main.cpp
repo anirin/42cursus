@@ -3,7 +3,7 @@
 
 int main() {
 	std::cout << "\n=== Int Array Test ===" << std::endl;
-	Array<int> intArray(5);
+	const Array<int> intArray(5);
 	std::cout << "Size: " << intArray.size() << std::endl;
 
 	// 値を設定
