@@ -1,9 +1,4 @@
 #!/bin/sh
-# 変数格納
-MYSQL_ROOT_PASSWORD=root
-MYSQL_DATABASE=wordpress
-MYSQL_USER=user
-MYSQL_PASSWORD=password
 
 # ディレクトリの作成
 if [ -d /run/mysqld ]; then

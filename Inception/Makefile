@@ -5,4 +5,5 @@ down: ## コンテナ停止
 	docker compose down
 
 clean: ## コンテナ削除
-	docker compose down --rmi all
+	docker compose down --rmi all --volumes --remove-orphans
+	docker system prune -af --volumes

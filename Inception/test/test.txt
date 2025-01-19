@@ -1,6 +1,0 @@
-# test
-docker build --tag=alpine-test .;
-docker run -it alpine-test;
-docker stop alpine-test;
-docker rm -f `docker ps -a -q`;
-docker rmi -f $(docker images -aq);

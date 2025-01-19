@@ -1,9 +1,0 @@
-# テスト
-docker stop mariadb-test;
-docker rm -f `docker ps -a -q`;
-docker rmi -f $(docker images -aq);
-docker build --tag=mariadb-test .;
-docker run -d --name mariadb-test -p 3306:3306 mariadb-test;
-docker exec -it mariadb-test mysql -u root -p;
-
-SELECT Host, User, authentication_string FROM mysql.user;

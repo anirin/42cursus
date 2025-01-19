@@ -7,13 +7,12 @@ ENV NGINX_DIR=/etc/nginx
 
 COPY ./conf/nginx.conf $NGINX_DIR/nginx.conf
 COPY ./conf/conf.d/virtual.conf $NGINX_DIR/conf.d/virtual.conf
-COPY ./conf/conf.d/common.conf $NGINX_DIR/conf.d/common.conf
 COPY ./conf/conf.d/wordpress.conf $NGINX_DIR/conf.d/wordpress.conf
 
 # openssl
-COPY ./ssl/passwd $NGINX_DIR/ssl/passwd
 RUN apk add openssl;
 RUN set -eux;
+RUN mkdir -p $NGINX_DIR/ssl;
 RUN openssl genrsa -out $NGINX_DIR/ssl/key.pem 2048;
 RUN openssl req -batch -new -key $NGINX_DIR/ssl/key.pem -out $NGINX_DIR/ssl/csr.pem
 RUN openssl x509 -req -days 3650 -signkey $NGINX_DIR/ssl/key.pem -in $NGINX_DIR/ssl/csr.pem -out $NGINX_DIR/ssl/crt.pem
