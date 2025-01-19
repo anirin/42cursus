@@ -2,7 +2,7 @@ services:
   mariadb:
     container_name: mariadb
     build:
-      context: ./srcs/mariadb
+      context: ./requirements/mariadb
     ports:
       - 3306:3306
     # volumes:
@@ -23,14 +23,14 @@ services:
   wordpress:
     container_name: wordpress
     build:
-      context: ./srcs/wordpress
+      context: ./requirements/wordpress
     ports:
       - 9000:9000
     depends_on:
       - mariadb
     restart: always
-    # volumes:
-    #   - wordpress-data:/var/www/html
+    volumes:
+      - wordpress-data:/var/www/html
       # - /home/atokamot/wordpress-data:/var/www/html
     networks:
       - inception
@@ -47,13 +47,13 @@ services:
   nginx:
     container_name: nginx
     build:
-      context: ./srcs/nginx
+      context: ./requirements/nginx
     ports:
       - 443:443
     depends_on:
       - wordpress
-    # volumes:
-    #   - wordpress-data:/var/www/html
+    volumes:
+      - wordpress-data:/var/www/html
       # - /home/atokamot/wordpress-data:/var/www/html
     restart: always
     networks:
@@ -71,6 +71,6 @@ networks:
   inception:
     driver: bridge
 
-# volumes:
-#   mysql-data:
-#   wordpress-data:
+volumes:
+  mysql-data:
+  wordpress-data:

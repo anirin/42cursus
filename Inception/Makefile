@@ -1,9 +1,12 @@
 up: ## コンテナ起動
-	docker compose up -d --build
+	cd srcs && docker compose up -d
 
-down: ## コンテナ停止
-	docker compose down
+stop: ## コンテナ停止
+	cd srcs && docker stop mariadb wordpress nginx
 
-clean: ## コンテナ削除
-	docker compose down --rmi all --volumes --remove-orphans
-	docker system prune -af --volumes
+down: ## コンテナ削除
+	cd srcs && docker compose down
+
+clean:
+	cd srcs && docker compose down --rmi all --volumes --remove-orphans
+	cd srcs && docker system prune -af --volumes
