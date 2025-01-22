@@ -12,5 +12,6 @@ wp user create $USER $EMAIL --user_pass=$PASSWORD --role=author --path=/var/www/
 
 adduser -u 82 -D -S -G www-data www-data;
 chown -R www-data:www-data /var/www/html;
+chmod -R 777 /var/www/html/wp-content/uploads;
 
 exec php-fpm --nodaemonize;

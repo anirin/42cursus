@@ -5,8 +5,8 @@ services:
       context: ./requirements/mariadb
     ports:
       - 3306:3306
-    # volumes:
-    #   - mysql-data:/var/lib/mysql
+    volumes:
+      - mysql-data:/var/lib/mysql
       # - /home/atokamot/mysql-data:/var/lib/mysql
     restart: always
     networks:
@@ -74,3 +74,19 @@ networks:
 volumes:
   mysql-data:
   wordpress-data:
+
+# volume mount先も明記
+# volumes:
+#   mariadb-data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /home/data/mariadb
+#   wordpress-data:
+#     driver: local
+#     driver_opts:
+#       type: none
+#       o: bind
+#       device: /home/data/wordpress
+
