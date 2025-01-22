@@ -12,10 +12,12 @@ public:
 
 	size_t size() const;
 
-	Array& operator=(Array const& rhs);
-	T& operator[](size_t index);
+	Array& operator=(Array const& rhs) const;
+	T& operator[](size_t index) const;
 
 private:
 	T* _array;
 	size_t _size;
 };
+
+#include "Array.tpp"

@@ -1,67 +1,55 @@
 #include "Array.hpp"
-#include "Array.tpp"
+#include <iostream>
 
-int main() {
-	std::cout << "\n=== Int Array Test ===" << std::endl;
-	const Array<int> intArray(5);
-	std::cout << "Size: " << intArray.size() << std::endl;
-
-	// 値を設定
-	for (size_t i = 0; i < intArray.size(); i++) {
-		intArray[i] = i * 100;
+#define MAX_VAL 750
+int main(int, char**) {
+	Array<int> numbers(MAX_VAL);
+	int* mirror = new int[MAX_VAL];
+	srand(time(NULL));
+	for (int i = 0; i < MAX_VAL; i++) {
+		const int value = rand();
+		numbers[i] = value;
+		mirror[i] = value;
+	}
+	// SCOPE
+	{
+		Array<int> tmp = numbers;
+		Array<int> test(tmp);
 	}
 
-	// 値を表示
-	std::cout << "Values: ";
-	for (size_t i = 0; i < intArray.size() + 1; i++) {
-		try {
-			std::cout << intArray[i] << " ";
-		} catch (const char* e) {
-			std::cout << e << std::endl;
+	for (int i = 0; i < MAX_VAL; i++) {
+		if (mirror[i] != numbers[i]) {
+			std::cerr << "didn't save the same value!!" << std::endl;
+			return 1;
 		}
 	}
-	std::cout << "\n\n";
-
-	std::cout << "=== Double Array Test ===" << std::endl;
-	Array<double> doubleArray(4);
-	std::cout << "Size: " << doubleArray.size() << std::endl;
-
-	// 値を設定
-	for (size_t i = 0; i < doubleArray.size(); i++) {
-		doubleArray[i] = i * 1.5;
-	}
-
-	// 値を表示
-	std::cout << "Values: ";
-	for (size_t i = 0; i < doubleArray.size(); i++) {
-		std::cout << doubleArray[i] << " ";
-	}
-	std::cout << "\n\n";
-
-	std::cout << "=== String Array Test ===" << std::endl;
-	Array<std::string> stringArray(3);
-	std::cout << "Size: " << stringArray.size() << std::endl;
-
-	// 値を設定
-	stringArray[0] = "Hello";
-	stringArray[1] = "World";
-	stringArray[2] = "!";
-
-	// 値を表示
-	std::cout << "Values: ";
-	for (size_t i = 0; i < stringArray.size(); i++) {
-		std::cout << stringArray[i] << " ";
-	}
-	std::cout << "\n\n";
-
-	// 範囲外アクセスのテスト
-	std::cout << "=== Exception Test ===" << std::endl;
 	try {
-		std::cout << "Attempting to access index 5 of intArray..." << std::endl;
-		std::cout << intArray[5] << std::endl;
-	} catch (const char* e) {
-		std::cout << "Exception caught: " << e << std::endl;
+		numbers[-2] = 0;
+	} catch (const std::exception& e) {
+		std::cerr << e.what() << '\n';
 	}
+	try {
+		numbers[MAX_VAL] = 0;
+	} catch (const std::exception& e) {
+		std::cerr << e.what() << '\n';
+	}
+
+	for (int i = 0; i < MAX_VAL; i++) {
+		numbers[i] = rand();
+	}
+
+	// access sample
+	std::cout << "First value: " << numbers[0] << std::endl;
+
+	// const Array test
+	const Array<int> constNumbers(numbers);
+	std::cout << "First value: " << constNumbers[0] << std::endl;
+
+	// Array member const test
+	Array<const int> constArray(5);
+	std::cout << "First value: " << constArray[0] << std::endl;
+
+	delete[] mirror;
 
 	return 0;
 }

@@ -1,10 +1,8 @@
-#include "Array.hpp"
-
 /*
 ** ------------------------------- CONSTRUCTOR --------------------------------
 */
 
-template <typename T> Array<T>::Array() : _array(new T[0]()), _size(0) {}
+template <typename T> Array<T>::Array() : _array(NULL), _size(0) {}
 
 template <typename T> Array<T>::Array(size_t n) : _array(new T[n]()), _size(n) {}
 
@@ -26,7 +24,7 @@ template <typename T> Array<T>::~Array() {
 ** --------------------------------- OVERLOAD ---------------------------------
 */
 
-template <typename T> Array<T>& Array<T>::operator=(Array const& rhs) {
+template <typename T> Array<T>& Array<T>::operator=(Array const& rhs) const {
 	if (this != &rhs) {
 		delete[] _array;
 		_array = new T[rhs._size]();
@@ -46,9 +44,9 @@ template <typename T> Array<T>& Array<T>::operator=(Array const& rhs) {
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
-template <typename T> T& Array<T>::operator[](size_t index) {
+template <typename T> T& Array<T>::operator[](size_t index) const {
 	if (index >= _size) {
-		throw "Index out of range";
+		throw std::out_of_range("Index out of range");
 	}
 	return _array[index];
 }

@@ -12,7 +12,7 @@ int main(void) {
 	int array[] = {1, 2, 3, 4, 5};
 	std::string array2[] = {"Hello", "World", "!"};
 
-	iter(array, 5, print);
-	iter(array2, 3, print);
+	iter<int, void (*)(int&)>(array, 5, print);
+	iter<std::string, void (*)(std::string&)>(array2, 3, print);
 	return 0;
 }

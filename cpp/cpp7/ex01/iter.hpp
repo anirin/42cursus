@@ -1,20 +1,8 @@
-#ifndef ITER_HPP
-#define ITER_HPP
-
+#pragma once
 #include <iostream>
 
-// comment typenameで関数を受け取るのがよいのではないのか　？
-
-template <typename T> void iter(T* array, size_t length, void (*f)(T&)) {
+template <typename T, typename Func> void iter(T *array, size_t length, Func f) {
 	for (size_t i = 0; i < length; i++) {
 		f(array[i]);
 	}
 }
-
-template <typename T> void iter(const T* array, size_t length, void (*f)(const T&)) {
-	for (size_t i = 0; i < length; i++) {
-		f(array[i]);
-	}
-}
-
-#endif
