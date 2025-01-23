@@ -1,30 +1,26 @@
-#ifndef SPAN_HPP
-# define SPAN_HPP
+#pragma once
 
-# include <iostream>
-# include <string>
+#include <iostream>
+#include <string>
+#include <ranges>
 
-class Span
-{
+class Span {
+public:
+	Span();
+	Span(unsigned int max);
+	Span(Span const& src);
+	~Span();
 
-	public:
+	Span& operator=(Span const& rhs);
 
-		Span();
-		Span(unsigned int max);
-		Span( Span const & src );
-		~Span();
+	void addNumber(unsigned int num);
+	void shortestSpan();
+	void longestSpan();
+	void randomFill();
 
-		Span &		operator=( Span const & rhs );
-
-		void addNumber(unsigned int num);
-		void shortestSpan();
-		void longestSpan();
-
-	private:
-		std::vector<unsigned int> _numbers;
-		unsigned int _max;
+private:
+	std::vector<unsigned int> _numbers;
+	unsigned int _max;
 };
 
-std::ostream &			operator<<( std::ostream & o, Span const & i );
-
-#endif /* ************************************************************ SPAN_H */
+std::ostream& operator<<(std::ostream& o, Span const& i);

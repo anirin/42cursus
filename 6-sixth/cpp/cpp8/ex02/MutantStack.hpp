@@ -1,30 +1,26 @@
-#ifndef MUTANTSTACK_HPP
-# define MUTANTSTACK_HPP
+#pragma once
 
-# include <iostream>
-# include <string>
-# include <stack>
-# include <deque>
+#include <deque>
+#include <iostream>
+#include <stack>
+#include <string>
 
-template <typename T>
-class MutantStack : public std::stack<T, std::deque<T> >
-{
+template <typename T> class MutantStack : public std::stack<T> {
+public:
+	MutantStack();
+	MutantStack(MutantStack const& src);
+	~MutantStack();
 
-	public:
+	MutantStack& operator=(MutantStack const& rhs);
 
-		MutantStack();
-		MutantStack( MutantStack const & src );
-		~MutantStack();
+	// iterator型宣言
+	typedef typename std::deque<T>::iterator iterator;
 
-		MutantStack &		operator=( MutantStack const & rhs );
+	// iteratorを返すbegin, endメンバ関数
+	iterator begin();
+	iterator end();
 
-		typedef typename std::deque<T>::iterator iterator;
-		iterator begin();
-		iterator end();
-
-	private:
-
+private:
 };
 
-
-#endif /* ***************************************************** MUTANTSTACK_H */
+#include "MutantStack.tpp"

@@ -46,15 +46,13 @@ Span &				Span::operator=( Span const & rhs )
 	return *this;
 }
 
-
-
 /*
 ** --------------------------------- METHODS ----------------------------------
 */
 
 void Span::addNumber(unsigned int num) {
-	if (_numbers.size() > _max) {
-		throw "size out of range";
+	if (_numbers.size() >= _max) {
+		throw std::length_error("[error] add number: size is over max");
 	}
 
 	_numbers.push_back(num);
@@ -63,7 +61,7 @@ void Span::addNumber(unsigned int num) {
 
 void Span::shortestSpan() {
 	if (_numbers.size() < 2) {
-		throw "size is less than 2";
+		throw std::length_error("[error] shortest span: size is less than 2");
 	}
 
 	unsigned int ret = 0;
@@ -80,7 +78,7 @@ void Span::shortestSpan() {
 
 void Span::longestSpan() {
 	if (_numbers.size() < 2) {
-		throw "size is less than 2";
+		throw std::length_error("[error] longest span: size is less than 2");
 	}
 
 	unsigned int ret = 0;
@@ -94,5 +92,17 @@ void Span::longestSpan() {
 ** --------------------------------- ACCESSOR ---------------------------------
 */
 
+/*
+** --------------------------------- SETTER --------------------------------
+*/
+
+void Span::randomFill() {
+	srand(time(NULL));
+
+	for (unsigned int i = 0; i < _max; i++) {
+		_numbers.push_back(rand());
+	}
+	return ;
+}
 
 /* ************************************************************************** */

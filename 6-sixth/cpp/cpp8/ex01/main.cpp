@@ -1,5 +1,4 @@
 #include "Span.hpp"
-#include <ranges>
 
 
 int main() {
@@ -12,26 +11,43 @@ int main() {
 		sp1.addNumber(11);
 		sp1.shortestSpan();
 		sp1.longestSpan();
-	} catch (const char *e) {
-		std::cout << e << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
 
 	Span sp2 = Span(10000);
+	sp2.randomFill();
 	try {
-		for (unsigned int i = 0; i < 10000; i++) {
-			sp2.addNumber(rand() % 1000);
-		}
 		sp2.shortestSpan();
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	try {
 		sp2.longestSpan();
-	} catch (const char *e) {
-		std::cout << e << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
 
-	// error
+	// error case
 	Span sp3 = Span(1);
 	try {
+		sp3.addNumber(1);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	try {
 		sp3.shortestSpan();
-	} catch (const char *e) {
-		std::cout << e << std::endl;
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	try {
+		sp3.longestSpan();
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	try {
+		sp3.addNumber(2);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
 	}
 }

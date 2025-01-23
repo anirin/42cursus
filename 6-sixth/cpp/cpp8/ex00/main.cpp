@@ -20,16 +20,40 @@ int main() {
 	ls.push_front(1111);
 
 	std::cout << " ============ array ============ " << std::endl;
-	easyfind(a, 1);
-	easyfind(a, 2);
+	try {
+		easyfind(a, 1111);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	try {
+		easyfind(a, 12);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 
-	std::cout << "vector" << std::endl;
-	easyfind(v, 1);
-	easyfind(v, 2);
+	std::cout << " =========== vector =========== " << std::endl;
+	try {
+		easyfind(v, 1111);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	try {
+		easyfind(v, 12);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 
-	std::cout << "list" << std::endl;
-	easyfind(ls, 1);
-	easyfind(ls, 2);
+	std::cout << " ============ list ============ " << std::endl;
+	try {
+		easyfind(ls, 1111);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
+	try {
+		easyfind(ls, 12);
+	} catch (std::exception &e) {
+		std::cout << e.what() << std::endl;
+	}
 
 	return 0;
 }
