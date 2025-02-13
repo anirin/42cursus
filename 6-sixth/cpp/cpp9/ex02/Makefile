@@ -1,8 +1,7 @@
 CXX = c++
-CXXFLAG = -std=c++98 -Wall -Wextra -Werror
-NAME = span
-SRC = main.cpp Span.cpp
-HEAD = Span.hpp
+CXXFLAG = -std=c++98 -Wall -Wextra -Werror -I ./includes
+NAME = mergeInsertionSort
+SRC = main.cpp Chain.cpp mergePart.cpp sort.cpp insertPart.cpp makeLayer.cpp print.cpp
 OBJ = $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re format
