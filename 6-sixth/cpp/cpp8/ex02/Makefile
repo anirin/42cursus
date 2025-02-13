@@ -1,9 +1,12 @@
 CXX = c++
-CXXFLAG = -std=c++98 -Wall -Wextra -Werror
+CXXFLAG = -std=c++98 -Wall -Wextra -Werror -MMD -MP
 NAME = mutantstack
 SRC = main.cpp
 HEAD = MutantStack.hpp  MutantStack.tpp
 OBJ = $(SRC:.cpp=.o)
+DEP = $(SRC:.cpp=.d)
+
+-include $(DEP)
 
 .PHONY: all clean fclean re format
 
