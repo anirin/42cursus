@@ -15,8 +15,8 @@ struct Layer {
 };
 
 // insertPart.cpp
-void insertPart(std::vector<Chain*>& array, Chain* chain, size_t index);
-size_t binarySearch(std::vector<Chain*> array, size_t start_index, size_t end_index, Chain* node);
+void insertChain(std::vector<Chain*>& array, Chain* chain, size_t index);
+void insertPart(std::vector<Chain*>& small_array, size_t insert_size, size_t base, std::vector<Chain*>& array, size_t end);
 
 // makeLayer.cpp
 void makeLayer(std::vector<Chain*>& array, std::vector<Layer>& layers);

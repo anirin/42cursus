@@ -59,7 +59,7 @@ void mergePart(std::vector<Chain*>& array, std::vector<Layer> layers, size_t lay
 	// std::cout << "[small array] : "; // debug
 	// printChainArray(small_array); // debug
 
-	insertPart(array, small_array[0], 0);
+	insertChain(array, small_array[0], 0);
 	s_size--;
 
 	for (;;) {
@@ -69,14 +69,9 @@ void mergePart(std::vector<Chain*>& array, std::vector<Layer> layers, size_t lay
 		size_t end = getEnd(count, array);
 		size_t insert_size = getInsertSize(s_size, count);
 
-		for (size_t i = 0; i < insert_size; i++) {
-			Chain* node = small_array[insert_size - i + base];
-			size_t insert_index = binarySearch(array, 0, end, node);
+		insertPart(small_array, insert_size, base, array, end);
 
-			insertPart(array, node, insert_index);
-			s_size--;
-		}
-
+		s_size -= insert_size;
 		base += insert_size;
 		count++;
 	}

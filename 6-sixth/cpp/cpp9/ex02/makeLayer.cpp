@@ -1,6 +1,8 @@
 #include "Chain.hpp"
 #include "util.hpp"
 
+size_t c_count = 0;
+
 void makeLayer(std::vector<Chain*>& array, std::vector<Layer>& layers) {
 	// printChainArray(array); // debug
 
@@ -27,6 +29,9 @@ void makeLayer(std::vector<Chain*>& array, std::vector<Layer>& layers) {
 			break;
 
 		Chain* big_chain;
+
+		c_count++;
+
 		if (*array[i] > *array[i + 1]) {
 			array[i]->getHead().push_back(array[i + 1]);
 			big_chain = array[i];
@@ -38,4 +43,6 @@ void makeLayer(std::vector<Chain*>& array, std::vector<Layer>& layers) {
 		i += 2;
 	}
 	makeLayer(new_array, layers);
+
+	// std::cout << "c_count: " << c_count << std::endl; // debug
 }

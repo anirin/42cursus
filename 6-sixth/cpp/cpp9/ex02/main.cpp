@@ -23,8 +23,8 @@ bool isSorted(std::vector<Chain*> array) {
 
 int main() {
 	size_t size = 1;
-	size_t length = 5000;
-	size_t range = 10000;
+	size_t length = 21;
+	size_t range = 1;
 
 	for (size_t i = 0; i < size; i++) {
 		std::vector<Chain*> chains;
@@ -32,7 +32,10 @@ int main() {
 
 		chains = initChain(length - i, range);
 
-		sort(chains, sorted_array);
+		clock_t start = std::clock();
+		sort(chains, sorted_array); // vector
+		clock_t end = std::clock();
+		std::cout << "Time: " << (double)(end - start) / CLOCKS_PER_SEC << "s" << std::endl;
 
 		if (!isSorted(sorted_array)) {
 			std::cout << "Not Sorted!" << std::endl;
