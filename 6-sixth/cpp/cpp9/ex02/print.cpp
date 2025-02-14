@@ -24,6 +24,21 @@ void printChainArray(std::vector<Chain*> array) {
 	std::cout << std::endl;
 }
 
+void printChainList(std::list<Chain*> array) {
+	std::cout << "Chain List: ";
+	for (std::list<Chain*>::iterator i = array.begin(); i != array.end(); i++) {
+		std::cout << (*i)->getNum() << " ";
+	}
+	std::cout << std::endl;
+}
+
+void printNums(std::vector<int> array) {
+	for (std::vector<int>::iterator i = array.begin(); i != array.end(); i++) {
+		std::cout << *i << " ";
+	}
+	std::cout << std::endl;
+}
+
 void printLayer(std::vector<Layer> layers) {
 	for (size_t i = 0; i < layers.size(); i++) {
 		std::cout << " ======== Layer: " << i << std::endl;

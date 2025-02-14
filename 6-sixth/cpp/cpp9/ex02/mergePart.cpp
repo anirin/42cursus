@@ -20,13 +20,25 @@ void getSmallArrays(std::vector<Chain*> array, std::vector<Chain*>& small_chains
 	}
 }
 
-size_t getEnd(size_t count, std::vector<Chain*> array) {
+void getSmallLists(std::list<Chain*> array, std::list<Chain*>& small_chains, std::vector<Layer> layers,
+					size_t layer_index) {
+	for (std::list<Chain*>::iterator it = array.begin(); it != array.end(); ++it) {
+		Chain* pair;
+		pair = (*it)->getPair(layer_index);
+		small_chains.push_back(pair);
+	}
+	if (layers[layer_index - 1].hasRest) {
+		small_chains.push_back(layers[layer_index - 1].rest);
+	}
+}
+
+size_t getEnd(size_t count, size_t array_size) {
 	size_t end;
 
-	if (node_num[count + 2] < array.size())	 // node_num[1] = 3, 7 ....
+	if (node_num[count + 2] < array_size)	 // node_num[1] = 3, 7 ....
 		end = node_num[count + 2] - 1;
 	else
-		end = array.size() - 1;
+		end = array_size - 1;
 
 	return end;
 }
@@ -66,7 +78,42 @@ void mergePart(std::vector<Chain*>& array, std::vector<Layer> layers, size_t lay
 		if (s_size == 0)
 			break;
 
-		size_t end = getEnd(count, array);
+		size_t end = getEnd(count, array.size());
+		size_t insert_size = getInsertSize(s_size, count);
+
+		insertPart(small_array, insert_size, base, array, end);
+
+		s_size -= insert_size;
+		base += insert_size;
+		count++;
+	}
+}
+
+void mergePart(std::list<Chain*>& array, std::vector<Layer> layers, size_t layer_index) {
+	if (layer_index == 0)
+		return;
+
+	std::list<Chain*> small_array;
+	size_t s_size;
+	size_t count = 0;
+	size_t base = 0;
+
+	getSmallLists(array, small_array, layers, layer_index);
+	s_size = small_array.size();
+
+	// std::cout << "[big array] : "; // debug
+	// printChainList(array); // debug
+	// std::cout << "[small array] : "; // debug
+	// printChainList(small_array); // debug
+
+	array.push_front(getListNode(small_array, 0));
+	s_size--;
+
+	for (;;) {
+		if (s_size == 0)
+			break;
+
+		size_t end = getEnd(count, array.size());
 		size_t insert_size = getInsertSize(s_size, count);
 
 		insertPart(small_array, insert_size, base, array, end);
