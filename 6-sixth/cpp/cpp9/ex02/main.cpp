@@ -86,6 +86,19 @@ std::vector<int> convertToVector(int argc, char* argv[]) {
 	return array;
 }
 
+void cleanUp(std::vector<Chain*> chains) {
+	for (size_t i = 0; i < chains.size(); i++) {
+		delete chains[i];
+	}
+}
+
+void cleanUp(std::list<Chain*> chains) {
+	std::list<Chain*>::iterator it = chains.begin();
+	for (; it != chains.end(); it++) {
+		delete *it;
+	}
+}
+
 int main(int argc, char* argv[]) {
 	// size_t size = 1;
 	// size_t length = 21;
@@ -138,6 +151,9 @@ int main(int argc, char* argv[]) {
 	// if (i == size - 1) {
 	// 	std::cout << "List All Sorted!" << std::endl;
 	// }
+
+	cleanUp(chains);
+	// cleanUp(list_chains);
 
 	return 0;
 }
