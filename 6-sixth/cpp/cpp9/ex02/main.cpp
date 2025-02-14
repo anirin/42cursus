@@ -13,26 +13,18 @@ std::vector<int> initArray(size_t size, size_t range) {
 	return array;
 }
 
-std::vector<Chain*> initChainVector(std::vector<int> array) {
-	std::vector<Chain*> chains;
-
+void initChainVector(std::vector<int> array, std::vector<Chain*> chains) {
 	for (size_t i = 0; i < array.size(); i++) {
 		Chain* chain = new Chain(array[i], NULL);
 		chains.push_back(chain);
 	}
-
-	return chains;
 }
 
-std::list<Chain*> initChainList(std::vector<int> array) {
-	std::list<Chain*> chains;
-
+void initChainList(std::vector<int> array, std::list<Chain*> chains) {
 	for (size_t i = 0; i < array.size(); i++) {
 		Chain* chain = new Chain(array[i], NULL);
 		chains.push_back(chain);
 	}
-
-	return chains;
 }
 
 bool isSorted(std::vector<Chain*> array) {
@@ -100,11 +92,11 @@ int main(int argc, char* argv[]) {
 	// std::vector<int> array = initArray(length, range);
 	std::vector<int> array = convertToVector(argc, argv);
 
-	chains = initChainVector(array);
-	list_chains = initChainList(array);
+	initChainVector(array, chains);
+	// initChainList(array, list_chains);
 
-	std::cout << "before :";
-	printNums(array);
+	// std::cout << "before :";
+	// printNums(array);
 
 	clock_t v_start = std::clock();
 	sort(chains, sorted_array);	 // vector
@@ -121,15 +113,15 @@ int main(int argc, char* argv[]) {
 	// 	std::cout << "Vector All Sorted!" << std::endl;
 	// }
 
-	clock_t l_start = std::clock();
-	sort(list_chains, list_sorted_array);  // list
-	clock_t l_end = std::clock();
+	// clock_t l_start = std::clock();
+	// sort(list_chains, list_sorted_array);  // list
+	// clock_t l_end = std::clock();
 
 	// std::cout << "after  :";
 	// printChainList(list_sorted_array);
 
 	std::cout << "Vector Time : " << (double)(v_end - v_start) / CLOCKS_PER_SEC << "s" << std::endl;
-	std::cout << "List   Time : " << (double)(l_end - l_start) / CLOCKS_PER_SEC << "s" << std::endl;
+	// std::cout << "List   Time : " << (double)(l_end - l_start) / CLOCKS_PER_SEC << "s" << std::endl;
 
 	// if (!isSorted(list_sorted_array)) {
 	// 	std::cout << "List Not Sorted!" << std::endl;
