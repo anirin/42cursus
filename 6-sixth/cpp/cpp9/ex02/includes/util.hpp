@@ -15,7 +15,6 @@ struct Layer {
 };
 
 // insertPart.cpp
-void insertChain(std::vector<Chain*>& array, Chain* chain, size_t index);
 void insertPart(std::vector<Chain*>& small_array, size_t insert_size, size_t base, std::vector<Chain*>& array, size_t end);
 
 // makeLayer.cpp

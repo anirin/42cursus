@@ -59,7 +59,7 @@ void mergePart(std::vector<Chain*>& array, std::vector<Layer> layers, size_t lay
 	// std::cout << "[small array] : "; // debug
 	// printChainArray(small_array); // debug
 
-	insertChain(array, small_array[0], 0);
+	array.insert(array.begin(), small_array[0]);
 	s_size--;
 
 	for (;;) {
