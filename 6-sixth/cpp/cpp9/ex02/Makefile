@@ -1,7 +1,7 @@
 CXX = c++
-CXXFLAG = -std=c++98 -Wall -Wextra -Werror -I ./includes
-NAME = mergeInsertionSort
-SRC = main.cpp Chain.cpp mergePart.cpp sort.cpp insertPart.cpp makeLayer.cpp print.cpp
+CXXFLAG = -std=c++98 -Wall -Wextra -Werror
+NAME = PmergeMe
+SRC = main.cpp PmergeMe.cpp
 OBJ = $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re format
