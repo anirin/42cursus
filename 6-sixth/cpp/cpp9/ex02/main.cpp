@@ -13,18 +13,26 @@ std::vector<int> initArray(size_t size, size_t range) {
 	return array;
 }
 
-void initChainVector(std::vector<int> array, std::vector<Chain*> chains) {
+std::vector<Chain*> initChainVector(std::vector<int> array) {
+	std::vector<Chain*> chains;
+
 	for (size_t i = 0; i < array.size(); i++) {
 		Chain* chain = new Chain(array[i], NULL);
 		chains.push_back(chain);
 	}
+
+	return chains;
 }
 
-void initChainList(std::vector<int> array, std::list<Chain*> chains) {
+std::list<Chain*> initChainList(std::vector<int> array) {
+	std::list<Chain*> chains;
+
 	for (size_t i = 0; i < array.size(); i++) {
 		Chain* chain = new Chain(array[i], NULL);
 		chains.push_back(chain);
 	}
+
+	return chains;
 }
 
 bool isSorted(std::vector<Chain*> array) {
@@ -92,8 +100,8 @@ int main(int argc, char* argv[]) {
 	// std::vector<int> array = initArray(length, range);
 	std::vector<int> array = convertToVector(argc, argv);
 
-	initChainVector(array, chains);
-	// initChainList(array, list_chains);
+	chains = initChainVector(array);
+	// list_chains = initChainList(array);
 
 	// std::cout << "before :";
 	// printNums(array);
