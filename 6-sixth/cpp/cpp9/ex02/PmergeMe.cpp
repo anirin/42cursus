@@ -7,7 +7,7 @@ int max_count = 0;
 // ======================================= Print =======================================
 
 void printChain(Chain* chain, size_t indent) {
-	if (chain == nullptr)
+	if (chain == NULL)
 		return;
 
 	for (size_t i = 0; i < indent; i++)
