@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
 	std::vector<int> array = convertToVector(argc, argv);
 
 	chains = initChainVector(array);
-	// list_chains = initChainList(array);
+	list_chains = initChainList(array);
 
 	// std::cout << "before :";
 	// printNums(array);
@@ -123,8 +123,8 @@ int main(int argc, char* argv[]) {
 	sort(chains, sorted_array);	 // vector
 	clock_t v_end = std::clock();
 
-	std::cout << "after  :";
-	printChainArray(sorted_array);
+	// std::cout << "after  :";
+	// printChainArray(sorted_array);
 
 	// if (!isSorted(sorted_array)) {
 	// 	std::cout << "Vector Not Sorted!" << std::endl;
@@ -134,15 +134,15 @@ int main(int argc, char* argv[]) {
 	// 	std::cout << "Vector All Sorted!" << std::endl;
 	// }
 
-	// clock_t l_start = std::clock();
-	// sort(list_chains, list_sorted_array);  // list
-	// clock_t l_end = std::clock();
+	clock_t l_start = std::clock();
+	sort(list_chains, list_sorted_array);  // list
+	clock_t l_end = std::clock();
 
 	// std::cout << "after  :";
 	// printChainList(list_sorted_array);
 
 	std::cout << "Vector Time : " << (double)(v_end - v_start) / CLOCKS_PER_SEC << "s" << std::endl;
-	// std::cout << "List   Time : " << (double)(l_end - l_start) / CLOCKS_PER_SEC << "s" << std::endl;
+	std::cout << "List   Time : " << (double)(l_end - l_start) / CLOCKS_PER_SEC << "s" << std::endl;
 
 	// if (!isSorted(list_sorted_array)) {
 	// 	std::cout << "List Not Sorted!" << std::endl;
@@ -153,7 +153,7 @@ int main(int argc, char* argv[]) {
 	// }
 
 	cleanUp(chains);
-	// cleanUp(list_chains);
+	cleanUp(list_chains);
 
 	return 0;
 }
