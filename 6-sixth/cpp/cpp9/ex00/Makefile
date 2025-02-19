@@ -1,5 +1,5 @@
 CXX = c++
-# CXXFLAG = -std=c++98 -Wall -Wextra -Werror -fsanitize=address -g
+CXXFLAG = -std=c++98 -Wall -Wextra -Werror
 NAME = btc
 SRC = main.cpp BitcoinExchange.cpp
 OBJ = $(SRC:.cpp=.o)
