@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 			get_data(line, data);
 		} catch (std::exception& e) {
 			std::cout << "line : " << count << " "<< e.what() << std::endl;
-			exit(1);
+			return 1;
 		}
 	}
 	logic(data, input_file);
