@@ -1,7 +1,7 @@
 CXX = c++
-CXXFLAG = -std=c++98 -Wall -Wextra -Werror -g
-NAME = RPN
-SRC = main.cpp 
+# CXXFLAG = -std=c++98 -Wall -Wextra -Werror -fsanitize=address -g
+NAME = btc
+SRC = main.cpp BitcoinExchange.cpp
 OBJ = $(SRC:.cpp=.o)
 
 .PHONY: all clean fclean re format
@@ -10,7 +10,7 @@ OBJ = $(SRC:.cpp=.o)
 	$(CXX) $(CXXFLAG) -c $< -o $@
 
 $(NAME): $(OBJ)
-	$(CXX) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAG) $(OBJ) -o $(NAME)
 
 all: $(NAME)
 

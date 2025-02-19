@@ -68,11 +68,26 @@ Chain::Chain(size_t _num, Chain* chain) : _num(_num) {
 	_pairs.push_back(chain);
 }
 
+Chain::Chain(const Chain& other) {
+	if (this == &other)
+		return;
+	_num = other._num;
+	_pairs = other._pairs;
+}
+
 Chain::~Chain() {
 	_pairs.clear();	 // new したものを delete する必要あり
 }
 
 // operator
+
+Chain& Chain::operator=(const Chain& other) {
+	if (this == &other)
+		return *this;
+	_num = other._num;
+	_pairs = other._pairs;
+	return *this;
+}
 
 bool Chain::operator>(Chain& other) const {
 	return _num > other.getNum();

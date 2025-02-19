@@ -16,7 +16,10 @@ public:
 	// constructor
 	Chain();
 	Chain(size_t num, Chain* chain);
+	Chain(const Chain& other);
 	~Chain();
+
+	Chain &operator=(const Chain &other);
 
 	// operator
 	bool operator>(Chain& other) const;

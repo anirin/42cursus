@@ -4,8 +4,24 @@ RPN::RPN()
 {
 }
 
+RPN::RPN(const RPN &other)
+{
+	if (this == &other)
+		return;
+	_stack = other._stack;
+	return ;
+}
+
 RPN::~RPN()
 {
+}
+
+RPN &RPN::operator=(const RPN &other)
+{
+	if (this == &other)
+		return *this;
+	_stack = other._stack;
+	return *this;
 }
 
 bool isValid(std::string string)

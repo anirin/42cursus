@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
-	std::cout << "Result:" << ret << std::endl;
+	std::cout << "Result: " << ret << std::endl;
 
 	return 0;
 }
