@@ -24,3 +24,9 @@ re: fclean all
 
 format:
 	clang-format -i $(SRC) $(HEAD)
+
+leaks:
+	valgrind --leak-check=full ./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "`
+
+test:
+	./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "`
