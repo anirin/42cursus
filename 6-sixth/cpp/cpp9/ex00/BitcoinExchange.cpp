@@ -1,5 +1,8 @@
 #include "BitcoinExchange.hpp"
 
+const size_t month_days_common[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
+const size_t month_days_leap[12] = { 31,29,31,30,31,30,31,31,30,31,30,31 };
+
 Data::Data() {
 	_year = 0;
 	_month = 0;
@@ -16,6 +19,9 @@ Data::Data(std::string data) {
 	// year
 	pos = data.find(separator);
 	yearStr = data.substr(0, pos);
+	if (yearStr.size() != 4) {
+		throw std::invalid_argument("Invalid year yyyy format");
+	}
 	ss << yearStr;
 	ss >> _year;
 	if (ss.fail()) {
@@ -26,20 +32,41 @@ Data::Data(std::string data) {
 	data = data.substr(pos + separator.size());
 	pos = data.find(separator);
 	monthStr = data.substr(0, pos);
+	if (monthStr.size() != 2) {
+		throw std::invalid_argument("Invalid month mm format");
+	}
 	ss.clear();
 	ss << monthStr;
 	ss >> _month;
 	if (ss.fail()) {
 		throw std::invalid_argument("Invalid month");
 	}
+	if (_month < 1 || _month > 12) {
+		throw std::invalid_argument("Invalid month 01-12");
+	}
 
 	// day
 	dateStr = data.substr(pos + separator.size());
+	if (dateStr.size() != 2) {
+		throw std::invalid_argument("Invalid day dd format");
+	}
 	ss.clear();
 	ss << dateStr;
 	ss >> _day;
 	if (ss.fail()) {
 		throw std::invalid_argument("Invalid day");
+	}
+	if (_day < 1) {
+		throw std::invalid_argument("Invalid day is positive number");
+	}
+	if (_year % 4 == 0) {
+		if (_day > month_days_leap[_month - 1]) {
+			throw std::invalid_argument("Invalid day for leap year");
+		}
+	} else {
+		if (_day > month_days_common[_month - 1]) {
+			throw std::invalid_argument("Invalid day for common year");
+		}
 	}
 }
 
@@ -130,6 +157,7 @@ void get_data(std::string data, std::map<Data, double>& dataMap) {
 		Data date(str_date);
 		dataMap.insert(std::pair<Data, double>(date, value));
 	} catch (std::exception& e) {
+		std::cerr << e.what() << std::endl;
 		throw std::invalid_argument("[data.csv] Invalid date");
 		return;
 	}
@@ -184,7 +212,7 @@ void logic(std::map<Data, double>& dataMap, std::ifstream& input_file) {
 			Data date(str_date);
 			input_data = date;
 		} catch (std::exception& e) {
-			std::cerr << "Error: invalid date" << std::endl;
+			std::cerr << "Error: " << e.what() << std::endl;
 			continue;
 		}
 

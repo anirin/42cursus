@@ -182,11 +182,17 @@ void insertPart(std::list<Chain*>& small_array, size_t insert_size, size_t base,
 
 // ======================================= mergePart =======================================
 
-size_t d_jacob[] = {0,	  2,	 2,		6,	   10,	  22,	  42,	  86,	  170,	   342,		682,	 1366,	  2730,
-					5462, 10922, 21846, 43690, 87382, 174762, 349526, 699050, 1398102, 2796202, 5592406, 11184810};
-size_t node_num[] = {0,		 1,		 3,		  7,	   15,		31,		 63,	  127,	 255,
-					 511,	 1023,	 2047,	  4095,	   8191,	16383,	 32767,	  65535, 131071,
-					 262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215};
+size_t doubleJacobsthal(size_t n) {
+	if (n == 0)
+		return 0;
+	if (n == 1)
+		return 2 * 1;
+	return 2 * doubleJacobsthal(n - 1) + doubleJacobsthal(n - 2);
+}
+
+size_t powerOfTwoMinusOne(size_t n) {
+	return (static_cast<size_t>(1) << n) - 1;
+}
 // node_num の index がそのまま最大の比較回数となる
 
 void getSmallArrays(std::vector<Chain*> array, std::vector<Chain*>& small_chains, std::vector<Layer> layers,
@@ -216,8 +222,8 @@ void getSmallLists(std::list<Chain*> array, std::list<Chain*>& small_chains, std
 size_t getEnd(size_t count, size_t array_size) {
 	size_t end;
 
-	if (node_num[count + 2] < array_size)	 // node_num[1] = 3, 7 ....
-		end = node_num[count + 2] - 1;
+	if (powerOfTwoMinusOne(count + 2) < array_size)	 // node_num[1] = 3, 7 ....
+		end = powerOfTwoMinusOne(count + 2) - 1;
 	else
 		end = array_size - 1;
 
@@ -227,8 +233,8 @@ size_t getEnd(size_t count, size_t array_size) {
 size_t getInsertSize(size_t s_size, size_t count) {
 	size_t insert_size;
 
-	if (d_jacob[count + 1] < s_size)  // d_jacob[1] = 2, 2, 6 ....
-		insert_size = d_jacob[count + 1];
+	if (doubleJacobsthal(count + 1) < s_size)  // d_jacob[1] = 2, 2, 6 ....
+		insert_size = doubleJacobsthal(count + 1);
 	else
 		insert_size = s_size;
 
@@ -459,6 +465,6 @@ void sort(std::list<Chain*> array, std::list<Chain*>& sorted) {
 			break;
 	}
 
-	// std::cout << "Max    Count : " << max_count << std::endl;
-	// std::cout << "List   Count : " << list_count << std::endl << std::endl;
+	std::cout << "Max    Count : " << max_count << std::endl;
+	std::cout << "List   Count : " << list_count << std::endl << std::endl;
 }
