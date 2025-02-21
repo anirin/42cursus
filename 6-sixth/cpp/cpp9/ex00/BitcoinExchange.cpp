@@ -36,6 +36,7 @@ Data::Data(std::string data) {
 		throw std::invalid_argument("Invalid month mm format");
 	}
 	ss.clear();
+	ss.str("");
 	ss << monthStr;
 	ss >> _month;
 	if (ss.fail()) {
@@ -51,6 +52,7 @@ Data::Data(std::string data) {
 		throw std::invalid_argument("Invalid day dd format");
 	}
 	ss.clear();
+	ss.str("");
 	ss << dateStr;
 	ss >> _day;
 	if (ss.fail()) {
@@ -172,9 +174,12 @@ void logic(std::map<Data, double>& dataMap, std::ifstream& input_file) {
 	std::stringstream ss;
 	size_t pos;
 	double value;
+	int count = 1;
 
 	std::getline(input_file, line);	 // skip header
 	while (std::getline(input_file, line)) {
+		count++;
+		std::cout << "[" << count << "] : ";
 		pos = line.find(separator);
 		if (pos == std::string::npos) {
 			std::cerr << "Error: invalid data" << std::endl;
@@ -182,17 +187,30 @@ void logic(std::map<Data, double>& dataMap, std::ifstream& input_file) {
 		}
 		str_date = line.substr(0, pos);
 
-		if (str_date[str_date.size() - 1] == ' ')
-			str_date = str_date.substr(0, str_date.size() - 1);
+		if (str_date[str_date.size() - 1] != ' ')
+		{
+			std::cerr << "Error: space required after date" << std::endl;
+			continue;
+		}
+		str_date = str_date.substr(0, str_date.size() - 1);
 
 		str_value = line.substr(pos + separator.size());
-		if (str_value[0] == ' ')
-			str_value = str_value.substr(1);
+		if (str_value[0] != ' ')
+		{
+			std::cerr << "Error: space required before value" << std::endl;
+			continue;
+		}
+		str_value = str_value.substr(1);
 
 		// ========== value part ==========
 		ss.clear();
+		ss.str("");
 		ss << str_value;
 		ss >> value;
+		if (ss.eof() == false) {
+			std::cerr << "Error: bad input value" << std::endl;
+			continue;
+		}
 		if (ss.fail()) {
 			std::cerr << "Error: bad input value" << std::endl;
 			continue;

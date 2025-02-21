@@ -32,4 +32,4 @@ test:
 	./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "`
 
 mac:
-	./$(NAME) `jot -r 30000 1 100000 | tr "\n" " "`
+	./$(NAME) `jot -r 3000 1 100000 | tr "\n" " "`

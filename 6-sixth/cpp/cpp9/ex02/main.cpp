@@ -116,14 +116,14 @@ int main(int argc, char* argv[]) {
 	chains = initChainVector(array);
 	list_chains = initChainList(array);
 
-	std::cout << "before :";
+	std::cout << "[before] : ";
 	printNums(array);
 
 	clock_t v_start = std::clock();
 	sort(chains, sorted_array);	 // vector
 	clock_t v_end = std::clock();
 
-	std::cout << "after  :";
+	std::cout << "[after]  : ";
 	printChainArray(sorted_array);
 
 	// if (!isSorted(sorted_array)) {
