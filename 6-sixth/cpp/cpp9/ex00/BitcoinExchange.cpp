@@ -51,6 +51,7 @@ Data::Data(std::string data) {
 		throw std::invalid_argument("Invalid day dd format");
 	}
 	ss.clear();
+	ss.str("");
 	ss << dateStr;
 	ss >> _day;
 	if (ss.fail()) {
