@@ -60,6 +60,7 @@ double RPN::rpn(std::string target)
 	{
 		// printStack(stack);
 
+
 		pos = target.find(separator);
 		string = target.substr(0, pos);
 		target = target.substr(pos + separator.size());
@@ -119,6 +120,9 @@ double RPN::rpn(std::string target)
 			throw std::invalid_argument("Invalid RPN expression (invalid operator)");
 		}
 	}
+
+	if (stack.size() != 1)
+		throw std::invalid_argument("Invalid RPN expression (too many numbers)");
 
 	return stack.top();
 }

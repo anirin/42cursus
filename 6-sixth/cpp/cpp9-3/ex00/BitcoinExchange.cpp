@@ -168,7 +168,6 @@ void get_data(std::string data, std::map<Data, double>& dataMap) {
 
 	try {
 		value = my_stod(str_value, &d_pos);
-		std::cout << "str_value: " << str_value << ", Value: " << value << std::endl;
 	} catch (std::exception& e) {
 		std::cerr << e.what() << std::endl;
 		throw std::invalid_argument("[data.csv] Invalid value");
