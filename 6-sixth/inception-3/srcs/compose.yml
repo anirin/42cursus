@@ -1,0 +1,79 @@
+services:
+  mariadb:
+    container_name: mariadb
+    build:
+      context: ./requirements/mariadb
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    restart: always
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "mysqladmin", "-h", "mariadb", "-u", "user", "-p", "password"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    env_file:
+      - .env
+
+  wordpress:
+    container_name: wordpress
+    build:
+      context: ./requirements/wordpress
+    depends_on:
+      - mariadb
+    restart: always
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "cgi-fcgi", "-bind", "-connect", "localhost:9000"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    env_file:
+      - .env
+
+
+  nginx:
+    container_name: nginx
+    build:
+      context: ./requirements/nginx
+    ports:
+      - 443:443
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress-data:/var/www/html
+    restart: always
+    networks:
+      - inception
+    healthcheck:
+      test: ["CMD", "curl", "-f", "https://localhost:443"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    env_file:
+      - .env
+
+networks:
+  inception:
+    driver: bridge
+
+volumes:
+  mariadb-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/atokamot/data/mariadb
+  wordpress-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/atokamot/data/wordpress
